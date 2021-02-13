@@ -1,2 +1,2 @@
-# CSE140
+# CSE120
 the volunteer app
