@@ -154,4 +154,4 @@ UPDATE User SET useremail= "new value" WHERE userID = VALUE
 
 --Might need an extra attribute to represent 'interested/not interested' from UI design.
 
--- To represent a messaging system in regards to databases, we are missing an entire message table.
+-- To represent a messaging system in regards to databases, we are missing an entire message table
