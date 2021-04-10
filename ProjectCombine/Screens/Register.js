@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     paddingTop: 40,
   },
   appButtonContainer: {
-    backgroundColor: "#ef4638",
+    backgroundColor: "#ffb4b0",
     borderRadius: 10,
     paddingVertical: 10,
     paddingHorizontal: 12,
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
   },
   appButtonText: {
     fontSize: 20,
-    color: "white",
+    color: "#ff5d55",
     fontWeight: "800",
     alignSelf: "center",
   },
