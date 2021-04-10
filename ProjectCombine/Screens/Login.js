@@ -6,6 +6,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  Button,
 } from "react-native";
 
 import firebase from "firebase";
@@ -17,10 +18,10 @@ export class Login extends Component {
       email: "",
       password: "",
     };
-    this.onSignUp = this.onSignUp.bind(this);
+    this.onSignIn = this.onSignIn.bind(this);
   }
 
-  onSignUp() {
+  onSignIn() {
     const { email, password } = this.state;
     firebase
       .auth()
@@ -56,11 +57,11 @@ export class Login extends Component {
           <TouchableOpacity
             style={styles.appButtonContainer}
             activeOpacity={0.5}
-            onPress={() => this.onLogin()}
+            onPress={() => this.onSignIn()}
           >
             <Text style={styles.appButtonText}>Login</Text>
           </TouchableOpacity>
-          {/* <Button onPress={() => this.onSignUp()} title="Sign Up" /> */}
+          {/* <Button onPress={() => this.onSignIn()} title="Sign In" /> */}
         </SafeAreaView>
       </ImageBackground>
     );
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
     paddingTop: 40,
   },
   appButtonContainer: {
-    backgroundColor: "#ef4638",
+    backgroundColor: "#ffb4b0",
     borderRadius: 10,
     paddingVertical: 10,
     paddingHorizontal: 12,
@@ -103,7 +104,7 @@ const styles = StyleSheet.create({
   },
   appButtonText: {
     fontSize: 20,
-    color: "white",
+    color: "#ff5d55",
     fontWeight: "800",
     alignSelf: "center",
   },
