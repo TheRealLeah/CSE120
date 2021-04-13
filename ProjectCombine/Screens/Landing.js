@@ -7,6 +7,9 @@ import {
 } from "react-native";
 import Logo from "../Components/Logo.js";
 
+import Login from './Login';
+import Register from './Register';
+
 export default function Landing({ navigation }) {
   return (
     <ImageBackground
@@ -17,7 +20,7 @@ export default function Landing({ navigation }) {
       <TouchableOpacity
         style={styles.appButtonContainer}
         activeOpacity={0.5}
-        onPress={() => navigation.navigate("Login")}
+        onPress={() => navigation.navigate(Login)}
       >
         <Text style={styles.appButtonText}>Login</Text>
       </TouchableOpacity>
@@ -25,7 +28,7 @@ export default function Landing({ navigation }) {
       <TouchableOpacity
         style={styles.appButtonContainer}
         activeOpacity={0.5}
-        onPress={() => navigation.navigate("Register")}
+        onPress={() => navigation.navigate(Register)}
       >
         <Text style={styles.appButtonText}>Sign Up</Text>
       </TouchableOpacity>
