@@ -7,10 +7,17 @@ import {
   TextInput,
   TouchableOpacity,
   Button,
+  TouchableWithoutFeedback,
+  Keyboard
 } from "react-native";
 
 import firebase from "firebase";
 
+const DismissKeyboard = ({ children }) => (
+  <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    {children}
+  </TouchableWithoutFeedback>
+);
 export class Login extends Component {
   constructor(props) {
     super(props);
@@ -40,6 +47,7 @@ export class Login extends Component {
         source={require("../assets/background.png")}
         style={{ flex: 1 }}
       >
+        <DismissKeyboard>
         <SafeAreaView>
           <Text style={styles.signupTextContainer}>Sign In</Text>
           <Text style={styles.textContainer}>Email</Text>
@@ -63,6 +71,7 @@ export class Login extends Component {
           </TouchableOpacity>
           {/* <Button onPress={() => this.onSignIn()} title="Sign In" /> */}
         </SafeAreaView>
+        </DismissKeyboard>
       </ImageBackground>
     );
   }

@@ -9,6 +9,7 @@ import NotificationScreen from '../Screens/NotificationScreen';
 import EventScreen from '../Screens/EventScreen';
 import HelpScreen from '../Screens/HelpScreen';
 import LogoutScreen from '../Screens/LogoutScreen';
+import Landing from '../Screens/Landing';
 
 import { DrawerParamList, EventParamList, HelpParamList, HomeParamList, LogoutParamList, NotificationParamList, ProfileParamList } from '../types';
 import { View, Text, Button, Image, TouchableOpacity, Dimensions } from 'react-native';
@@ -16,6 +17,8 @@ import { View, Text, Button, Image, TouchableOpacity, Dimensions } from 'react-n
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Icon } from 'expo';
 
+import firebase from 'firebase'
+require('firebase/firestore')
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
 
@@ -227,34 +230,36 @@ function HelpNavigator(props) { // if there is an error on 'props' it is fine an
 }
 const LogoutStack = createStackNavigator<LogoutParamList>();
 function LogoutNavigator(props) { // if there is an error on 'props' it is fine and working correctly
+  firebase.auth().signOut();
   return (
     
     <LogoutStack.Navigator>
       <LogoutStack.Screen
         name="LogoutScreen"
-        component={LogoutScreen}
-        options={{ 
-          headerTitle: 'Logout',
-          headerLeft: () => (
-	          <View>
-	          	<TouchableOpacity onPress={() => props.navigation.toggleDrawer() }> 
-                <Image 
-                  source = {require('../assets/menu-outline.png')} //.svg is invisable in ios
-                  style={{
-                    flex: 1,
-                    width: Dimensions.get('window').width*0.06,
-                    height: Dimensions.get('window').height*0.06,
-                    marginLeft: 10,
-                    resizeMode: 'contain'
-                  }}
-                />
-	          	</TouchableOpacity>
-	          </View>
-          ),
-          headerTitleStyle: {
-            textAlign: 'center'
-          }
-        }}
+        component={Landing}
+        options={{ headerShown: false}} 
+        // options={{ 
+        //   headerTitle: 'Logout',
+        //   headerLeft: () => (
+	      //     <View>
+	      //     	<TouchableOpacity onPress={() => props.navigation.toggleDrawer() }> 
+        //         <Image 
+        //           source = {require('../assets/menu-outline.png')} //.svg is invisable in ios
+        //           style={{
+        //             flex: 1,
+        //             width: Dimensions.get('window').width*0.06,
+        //             height: Dimensions.get('window').height*0.06,
+        //             marginLeft: 10,
+        //             resizeMode: 'contain'
+        //           }}
+        //         />
+	      //     	</TouchableOpacity>
+	      //     </View>
+        //   ),
+        //   headerTitleStyle: {
+        //     textAlign: 'center'
+        //   }
+        // }}
       />
     </LogoutStack.Navigator>
   )
