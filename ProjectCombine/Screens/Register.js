@@ -22,7 +22,7 @@ export class Register extends Component {
   }
 
   onSignUp() {
-    const { email, password, name } = this.state;
+    const { email, password, name, age } = this.state;
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -31,7 +31,7 @@ export class Register extends Component {
           .firestore()
           .collection("users")
           .doc(firebase.auth().currentUser.uid)
-          .set({ email: email, password: password, name: name })
+          .set({ email: email, password: password, name: name, age: age })
           .then()
           .catch((err) => console.log(err));
       })
@@ -65,6 +65,12 @@ export class Register extends Component {
           <TextInput
             style={styles.textInputContainer}
             onChangeText={(name) => this.setState({ name })}
+          ></TextInput>
+
+          <Text style={styles.textContainer}>Age</Text>
+          <TextInput
+            style={styles.textInputContainer}
+            onChangeText={(age) => this.setState({ age })}
           ></TextInput>
 
           <Text style={styles.textContainer}>Account Type</Text>
