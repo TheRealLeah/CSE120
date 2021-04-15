@@ -1,35 +1,84 @@
-import * as React from 'react';
-import { StyleSheet, Image } from 'react-native';
+import React from "react";
+import {
+  ImageBackground,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  } from 'react-native';
 
 import EditScreenInfo from '../Components/EditScreenInfo';
-import { Text, View } from '../Components/Themed';
+import { View } from '../Components/Themed';
 
-export default function EventScreen() {
+import EventCreation from './EventCreation';
+
+export default function EventScreen({ navigation }) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Event</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+    <ImageBackground source={require("../assets/background.png")}
+      style={{ flex: 1 }}
+    >
+      <TouchableOpacity
+        style={styles.appButtonContainer}
+        activeOpacity={0.5}
+        onPress={() => navigation.navigate(EventCreation)}
+      >
+        <Text style={styles.appButtonText}>Create Event</Text>
+      </TouchableOpacity>
       
-      {/* <EditScreenInfo path="/screens/EventScreen.tsx" /> */}
-      <Text style={styles.title}>THIS IS THE EVENT SCREEN</Text>
-      
-    </View>
+      {/* <Stack.Navigator initialRouteName="root">
+        <Stack.Screen 
+          name="Root" 
+          component={EventCreation}
+          options={{ headerShown: false }} 
+        />
+      </Stack.Navigator> */}
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
+  textInputContainer: {
+    width: 300,
+    height: 35,
     fontSize: 20,
-    fontWeight: 'bold',
+    color: "#02448d",
+    borderBottomWidth: 3,
+    borderColor: "rgba(255, 255, 255, 0.5)",
+    backgroundColor: "rgba(0, 0, 255, 0)",
+    marginLeft: 50,
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+  textContainer: {
+    color: "#02448d",
+    fontSize: 13,
+    fontWeight: "500",
+    marginLeft: 50,
+    paddingTop: 40,
+  },
+  signupTextContainer: {
+    color: "#02448d",
+    fontSize: 30,
+    fontWeight: "900",
+    marginLeft: 50,
+    paddingTop: 40,
+  },
+  appButtonContainer: {
+    backgroundColor: "#ffb4b0",
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    marginLeft: 50,
+    width: 300,
+    marginTop: 80,
+  },
+  appButtonText: {
+    fontSize: 20,
+    color: "#ff5d55",
+    fontWeight: "800",
+    alignSelf: "center",
+  },
+  button: {
+    ...StyleSheet.absoluteFillObject,
+    alignSelf: 'flex-end',
+    marginTop: -5,
+    //position: 'absolute', // add if dont work with above
   },
 });

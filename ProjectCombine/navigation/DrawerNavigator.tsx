@@ -10,6 +10,7 @@ import EventScreen from '../Screens/EventScreen';
 import HelpScreen from '../Screens/HelpScreen';
 import LogoutScreen from '../Screens/LogoutScreen';
 import Landing from '../Screens/Landing';
+import EventCreation from '../Screens/EventCreation';
 
 import { DrawerParamList, EventParamList, HelpParamList, HomeParamList, LogoutParamList, NotificationParamList, ProfileParamList } from '../types';
 import { View, Text, Button, Image, TouchableOpacity, Dimensions } from 'react-native';
@@ -18,6 +19,8 @@ import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Icon } from 'expo';
 
 import firebase from 'firebase'
+import Navigation from '.';
+
 require('firebase/firestore')
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
@@ -185,6 +188,12 @@ function EventNavigator(props) { // if there is an error on 'props' it is fine a
 	          	</TouchableOpacity>
 	          </View>
           ),
+          headerRight: () => (
+            <Button
+              onPress={() => props.navigation.navigate(EventCreation)}
+              title="+"
+              color="black"
+            />),
           headerTitleStyle: {
             textAlign: 'center'
           }
