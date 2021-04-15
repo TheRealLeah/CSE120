@@ -1,4 +1,4 @@
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { useNavigation, NavigationContainer, DrawerActions } from '@react-navigation/native';
 import * as React from 'react';
@@ -57,6 +57,7 @@ export default function DrawerNavigator() {
 
 const HomeStack = createStackNavigator<HomeParamList>();
 function HomeNavigator(props) { // if there is an error on 'props' it is fine and working correctly
+  console.log(firebase.auth().currentUser)
   return (
     
     <HomeStack.Navigator>
@@ -64,7 +65,7 @@ function HomeNavigator(props) { // if there is an error on 'props' it is fine an
         name="HomeScreen"
         component={HomeScreen}
         options={{ 
-          headerTitle: 'Home',
+          headerTitle: ' ',
           headerLeft: () => (
 	          <View>
 	          	<TouchableOpacity onPress={() => props.navigation.toggleDrawer() }> 
@@ -98,7 +99,7 @@ function ProfileNavigator(props) { // if there is an error on 'props' it is fine
         name="ProfileScreen"
         component={ProfileScreen}
         options={{ 
-          headerTitle: 'Profile',
+          headerTitle: ' ',
           headerLeft: () => (
 	          <View>
 	          	<TouchableOpacity onPress={() => props.navigation.toggleDrawer() }> 
@@ -133,7 +134,7 @@ function NotificationNavigator(props) { // if there is an error on 'props' it is
         name="NotificationScreen"
         component={NotificationScreen}
         options={{ 
-          headerTitle: 'Notification',
+          headerTitle: ' ',
           headerLeft: () => (
 	          <View>
 	          	<TouchableOpacity onPress={() => props.navigation.toggleDrawer() }> 
@@ -168,7 +169,7 @@ function EventNavigator(props) { // if there is an error on 'props' it is fine a
         name="EventScreen"
         component={EventScreen}
         options={{ 
-          headerTitle: 'Event',
+          headerTitle: ' ',
           headerLeft: () => (
 	          <View>
 	          	<TouchableOpacity onPress={() => props.navigation.toggleDrawer() }> 
@@ -203,7 +204,7 @@ function HelpNavigator(props) { // if there is an error on 'props' it is fine an
         name="HelpScreen"
         component={HelpScreen}
         options={{ 
-          headerTitle: 'Help',
+          headerTitle: ' ',
           headerLeft: () => (
 	          <View>
 	          	<TouchableOpacity onPress={() => props.navigation.toggleDrawer() }> 
@@ -236,30 +237,8 @@ function LogoutNavigator(props) { // if there is an error on 'props' it is fine 
     <LogoutStack.Navigator>
       <LogoutStack.Screen
         name="LogoutScreen"
-        component={Landing}
+        component={LogoutScreen}
         options={{ headerShown: false}} 
-        // options={{ 
-        //   headerTitle: 'Logout',
-        //   headerLeft: () => (
-	      //     <View>
-	      //     	<TouchableOpacity onPress={() => props.navigation.toggleDrawer() }> 
-        //         <Image 
-        //           source = {require('../assets/menu-outline.png')} //.svg is invisable in ios
-        //           style={{
-        //             flex: 1,
-        //             width: Dimensions.get('window').width*0.06,
-        //             height: Dimensions.get('window').height*0.06,
-        //             marginLeft: 10,
-        //             resizeMode: 'contain'
-        //           }}
-        //         />
-	      //     	</TouchableOpacity>
-	      //     </View>
-        //   ),
-        //   headerTitleStyle: {
-        //     textAlign: 'center'
-        //   }
-        // }}
       />
     </LogoutStack.Navigator>
   )

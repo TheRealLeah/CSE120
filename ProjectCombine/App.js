@@ -97,19 +97,17 @@ export class App extends Component {
     } 
 
     return ( // if user is already logined in then load home page
-      // <Provider store={store}>
-      //   <MainScreen></MainScreen>
-      // </Provider>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="root">
-          <Stack.Screen 
-            name="Root" 
-            component={DrawerNavigator}
-            options={{ headerShown: false }} 
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-
+      <Provider store={store}>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="root">
+            <Stack.Screen 
+              name="Root" 
+              component={MainScreen}
+              options={{ headerShown: false }} 
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
     );
   }
 }

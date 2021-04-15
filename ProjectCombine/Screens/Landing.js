@@ -39,10 +39,12 @@ export default function Landing({ navigation }) {
 const styles = StyleSheet.create({
   styleContainer: {
     flex: 1,
+    alignItems: "center"
   },
   imageContainer: {
     width: 200,
     height: 200,
+    alignItems: "center"
   },
   appButtonContainer: {
     backgroundColor: "#ffb4b0",
@@ -53,6 +55,7 @@ const styles = StyleSheet.create({
     marginLeft: 50,
     width: 300,
     marginTop: 80,
+    alignSelf: "center",
   },
   appButtonText: {
     fontSize: 20,
