@@ -8,6 +8,7 @@ import MainScreen from "./Components/main.js";
 import Register from "./Screens/Register.js";
 import LandingScreen from "./Screens/Landing.js";
 import Login from "./Screens/Login.js";
+import EventCreation from "./Screens/EventCreation.js";
 
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
