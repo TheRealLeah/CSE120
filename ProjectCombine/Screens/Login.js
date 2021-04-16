@@ -50,15 +50,12 @@ export class Login extends Component {
       >
         <DismissKeyboard>
           <SafeAreaView>
-<<<<<<< Updated upstream
-            <Text style={styles.signupTextContainer}>Sign In</Text>
-=======
             <Logo></Logo>
             <Text style={styles.signupTextContainer}>Sign In</Text>
             <Text style={styles.signupTextContainer1}>
               Hi there! Nice to see you again.
             </Text>
->>>>>>> Stashed changes
+
             <Text style={styles.textContainer}>Email</Text>
             <TextInput
               style={styles.textInputContainer}
@@ -70,10 +67,7 @@ export class Login extends Component {
               secureTextEntry={true}
               onChangeText={(password) => this.setState({ password })}
             ></TextInput>
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
             <TouchableOpacity
               style={styles.appButtonContainer}
               activeOpacity={0.5}
@@ -81,16 +75,15 @@ export class Login extends Component {
             >
               <Text style={styles.appButtonText}>Login</Text>
             </TouchableOpacity>
-<<<<<<< Updated upstream
+
             {/* <Button onPress={() => this.onSignIn()} title="Sign In" /> */}
-=======
+
             <SafeAreaView style={{ marginTop: 40 }} />
             <Button
               title="Forgot Password?"
               color="cornflowerblue"
               style={{ paddingHorizontal: 20 }}
             />
->>>>>>> Stashed changes
           </SafeAreaView>
         </DismissKeyboard>
       </ImageBackground>
