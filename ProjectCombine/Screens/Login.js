@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   Button,
   TouchableWithoutFeedback,
-  Keyboard
+  Keyboard,
 } from "react-native";
 
 import firebase from "firebase";
@@ -48,29 +48,29 @@ export class Login extends Component {
         style={{ flex: 1 }}
       >
         <DismissKeyboard>
-        <SafeAreaView>
-          <Text style={styles.signupTextContainer}>Sign In</Text>
-          <Text style={styles.textContainer}>Email</Text>
-          <TextInput
-            style={styles.textInputContainer}
-            onChangeText={(email) => this.setState({ email })}
-          ></TextInput>
-          <Text style={styles.textContainer}>Password</Text>
-          <TextInput
-            style={styles.textInputContainer}
-            secureTextEntry={true}
-            onChangeText={(password) => this.setState({ password })}
-          ></TextInput>
+          <SafeAreaView>
+            <Text style={styles.signupTextContainer}>Sign In</Text>
+            <Text style={styles.textContainer}>Email</Text>
+            <TextInput
+              style={styles.textInputContainer}
+              onChangeText={(email) => this.setState({ email })}
+            ></TextInput>
+            <Text style={styles.textContainer}>Password</Text>
+            <TextInput
+              style={styles.textInputContainer}
+              secureTextEntry={true}
+              onChangeText={(password) => this.setState({ password })}
+            ></TextInput>
 
-          <TouchableOpacity
-            style={styles.appButtonContainer}
-            activeOpacity={0.5}
-            onPress={() => this.onSignIn()}
-          >
-            <Text style={styles.appButtonText}>Login</Text>
-          </TouchableOpacity>
-          {/* <Button onPress={() => this.onSignIn()} title="Sign In" /> */}
-        </SafeAreaView>
+            <TouchableOpacity
+              style={styles.appButtonContainer}
+              activeOpacity={0.5}
+              onPress={() => this.onSignIn()}
+            >
+              <Text style={styles.appButtonText}>Login</Text>
+            </TouchableOpacity>
+            {/* <Button onPress={() => this.onSignIn()} title="Sign In" /> */}
+          </SafeAreaView>
         </DismissKeyboard>
       </ImageBackground>
     );
