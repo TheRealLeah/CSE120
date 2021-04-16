@@ -12,6 +12,7 @@ import {
 } from "react-native";
 
 import firebase from "firebase";
+import Logo from "../Components/Logo";
 
 const DismissKeyboard = ({ children }) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -44,12 +45,20 @@ export class Login extends Component {
   render() {
     return (
       <ImageBackground
-        source={require("../assets/background.png")}
+        source={require("../assets/background2.png")}
         style={{ flex: 1 }}
       >
         <DismissKeyboard>
           <SafeAreaView>
+<<<<<<< Updated upstream
             <Text style={styles.signupTextContainer}>Sign In</Text>
+=======
+            <Logo></Logo>
+            <Text style={styles.signupTextContainer}>Sign In</Text>
+            <Text style={styles.signupTextContainer1}>
+              Hi there! Nice to see you again.
+            </Text>
+>>>>>>> Stashed changes
             <Text style={styles.textContainer}>Email</Text>
             <TextInput
               style={styles.textInputContainer}
@@ -61,7 +70,10 @@ export class Login extends Component {
               secureTextEntry={true}
               onChangeText={(password) => this.setState({ password })}
             ></TextInput>
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
             <TouchableOpacity
               style={styles.appButtonContainer}
               activeOpacity={0.5}
@@ -69,7 +81,16 @@ export class Login extends Component {
             >
               <Text style={styles.appButtonText}>Login</Text>
             </TouchableOpacity>
+<<<<<<< Updated upstream
             {/* <Button onPress={() => this.onSignIn()} title="Sign In" /> */}
+=======
+            <SafeAreaView style={{ marginTop: 40 }} />
+            <Button
+              title="Forgot Password?"
+              color="cornflowerblue"
+              style={{ paddingHorizontal: 20 }}
+            />
+>>>>>>> Stashed changes
           </SafeAreaView>
         </DismissKeyboard>
       </ImageBackground>
@@ -89,18 +110,26 @@ const styles = StyleSheet.create({
     marginLeft: 50,
   },
   textContainer: {
-    color: "#02448d",
+    color: "cornflowerblue",
     fontSize: 13,
     fontWeight: "500",
     marginLeft: 50,
     paddingTop: 40,
   },
   signupTextContainer: {
-    color: "#02448d",
+    color: "cornflowerblue",
     fontSize: 30,
+    fontFamily: "Verdana",
     fontWeight: "900",
     marginLeft: 50,
     paddingTop: 40,
+  },
+  signupTextContainer1: {
+    color: "cornflowerblue",
+    fontSize: 15,
+    fontWeight: "500",
+    marginLeft: 50,
+    paddingTop: 20,
   },
   appButtonContainer: {
     backgroundColor: "#ffb4b0",

@@ -7,13 +7,13 @@ import {
 } from "react-native";
 import Logo from "../Components/Logo.js";
 
-import Login from './Login';
-import Register from './Register';
+import Login from "./Login";
+import Register from "./Register";
 
 export default function Landing({ navigation }) {
   return (
     <ImageBackground
-      source={require("../assets/background.png")}
+      source={require("../assets/background2.png")}
       style={styles.styleContainer}
     >
       <Logo />
@@ -39,20 +39,18 @@ export default function Landing({ navigation }) {
 const styles = StyleSheet.create({
   styleContainer: {
     flex: 1,
-    alignItems: "center"
+    alignItems: "center",
   },
   imageContainer: {
     width: 200,
     height: 200,
-    alignItems: "center"
+    alignItems: "center",
   },
   appButtonContainer: {
     backgroundColor: "#ffb4b0",
     shadowOpacity: 0.25,
     borderRadius: 10,
     paddingVertical: 10,
-    paddingHorizontal: 12,
-    marginLeft: 50,
     width: 300,
     marginTop: 80,
     alignSelf: "center",
