@@ -11,7 +11,7 @@ export default function Logo({ navigation }) {
   return (
     <SafeAreaView style={{ alignItems: "center" }}>
       <Image
-        source={require("../assets/UWMClogo.png")}
+        source={require("../assets/UWMClogo.jpeg")}
         style={styles.logoContainer}
       ></Image>
       <Text style={styles.textContainer}>Volunteer Here</Text>
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   textContainer: {
-    color: "cornflowerblue",
+    color: "#02448d",
     fontSize: 20,
     fontWeight: "500",
   },
