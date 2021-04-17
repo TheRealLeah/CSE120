@@ -1,30 +1,27 @@
 // import * as React from 'react';
-import React, { useState, useEffect } from "react";
-import { StyleSheet, Image, ImageBackground } from "react-native";
-import { fetchUser } from "../redux/actions/index";
+import React, { useState, useEffect } from 'react'
+import { StyleSheet, Image, ImageBackground } from 'react-native';
+import { fetchUser } from '../redux/actions/index'
 
-import EditScreenInfo from "../Components/EditScreenInfo";
-import { Text, View } from "../Components/Themed";
+import EditScreenInfo from '../Components/EditScreenInfo';
+import { Text, View } from '../Components/Themed';
 
-import firebase from "firebase";
-require("firebase/firestore");
-import { connect } from "react-redux";
-import { user } from "../redux/reducer/user";
+import firebase from 'firebase'
+require('firebase/firestore')
+import { connect } from 'react-redux'
+import { user } from '../redux/reducer/user';
 
 function ProfileScreen(props) {
   const { currentUser } = props;
-  console.log({ currentUser });
+  console.log({currentUser})
 
   return (
-    <ImageBackground
-      source={require("../assets/background2.png")}
-      style={styles.container}
-    >
+    <ImageBackground source={require("../assets/background.png")} style={styles.container} >
       {/* <Text style={styles.containerInfo}>{currentUser.name}</Text>
       <Text style={styles.containerInfo}>{currentUser.email}</Text> */}
-      <Text style={styles.box}>Name: {currentUser.name} </Text>
-      <Text style={styles.box}>Email: {currentUser.email} </Text>
-      <Text style={styles.box}>Bio: {currentUser.bio} </Text>
+      <Text style={styles.box} >Name: {currentUser.name} </Text> 
+      <Text style={styles.box} >Email: {currentUser.email} </Text>
+      <Text style={styles.box} >Bio: {currentUser.bio} </Text>
     </ImageBackground>
 
     // <View style={styles.container}>
@@ -38,18 +35,19 @@ function ProfileScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
   containerInfo: {
-    marginTop: 10,
+    marginTop: 10
   },
   box: {
     backgroundColor: "#ffb4b0",
     shadowOpacity: 0.25,
     borderRadius: 10,
     paddingVertical: 10,
-
+    paddingHorizontal: 12,
+    marginLeft: 50,
     width: 300,
     height: 70,
     marginTop: 40,
@@ -57,16 +55,16 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   separator: {
     marginVertical: 30,
     height: 1,
-    width: "80%",
+    width: '80%',
   },
 });
 
 const mapStateToProps = (store) => ({
   currentUser: store.userState.currentUser,
-});
+})
 export default connect(mapStateToProps, null)(ProfileScreen);
