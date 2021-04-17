@@ -1,10 +1,6 @@
 import { createStackNavigator, HeaderTitle } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import {
-  useNavigation,
-  NavigationContainer,
-  DrawerActions,
-} from "@react-navigation/native";
+
 import * as React from "react";
 
 import HomeScreen from "../Screens/HomeScreen";
@@ -13,7 +9,6 @@ import NotificationScreen from "../Screens/NotificationScreen";
 import EventScreen from "../Screens/EventScreen";
 import HelpScreen from "../Screens/HelpScreen";
 import LogoutScreen from "../Screens/LogoutScreen";
-import Landing from "../Screens/Landing";
 
 import {
   DrawerParamList,
@@ -24,22 +19,12 @@ import {
   NotificationParamList,
   ProfileParamList,
 } from "../types";
-import {
-  View,
-  Text,
-  Button,
-  Image,
-  TouchableOpacity,
-  Dimensions,
-  SafeAreaView,
-} from "react-native";
+import { View, Image, TouchableOpacity, Dimensions } from "react-native";
 
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import { Icon } from "expo";
+import { Ionicons } from "@expo/vector-icons";
 
 import firebase from "firebase";
-import { Colors } from "react-native/Libraries/NewAppScreen";
-import { setStatusBarBackgroundColor } from "expo-status-bar";
+
 require("firebase/firestore");
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
@@ -54,15 +39,88 @@ export default function DrawerNavigator() {
       }}
       drawerStyle={{ backgroundColor: "#fbc956" }}
     >
-      <Drawer.Screen name="Home" component={HomeNavigator} />
-      <Drawer.Screen name="Profile" component={ProfileNavigator} />
-      <Drawer.Screen name="Notification" component={NotificationNavigator} />
-      <Drawer.Screen name="Event" component={EventNavigator} />
-      <Drawer.Screen name="Help" component={HelpNavigator} />
-      <Drawer.Screen name="Logout" component={LogoutNavigator} />
+      <Drawer.Screen
+        name="Home"
+        component={HomeNavigator}
+        options={iconContainer.homeIcon}
+      />
+      <Drawer.Screen
+        name="Profile"
+        component={ProfileNavigator}
+        options={iconContainer.profileIcon}
+      />
+      <Drawer.Screen
+        name="Notification"
+        component={NotificationNavigator}
+        options={iconContainer.notificationIcon}
+      />
+      <Drawer.Screen
+        name="Event"
+        component={EventNavigator}
+        options={iconContainer.eventIcon}
+      />
+      <Drawer.Screen
+        name="Help"
+        component={HelpNavigator}
+        options={iconContainer.helpIcon}
+      />
+      <Drawer.Screen
+        name="Logout"
+        component={LogoutNavigator}
+        options={iconContainer.logoutIcon}
+      />
     </Drawer.Navigator>
   );
 }
+
+const iconContainer = {
+  homeIcon: {
+    drawerIcon: ({ focused, size }) => (
+      <Ionicons name="md-home" size={size} color={focused ? "red" : "tomato"} />
+    ),
+  },
+  profileIcon: {
+    drawerIcon: ({ focused, size }) => (
+      <Ionicons
+        name="person-sharp"
+        size={size}
+        color={focused ? "red" : "tomato"}
+      />
+    ),
+  },
+  notificationIcon: {
+    drawerIcon: ({ focused, size }) => (
+      <Ionicons
+        name="notifications"
+        size={size}
+        color={focused ? "red" : "tomato"}
+      />
+    ),
+  },
+  eventIcon: {
+    drawerIcon: ({ focused, size }) => (
+      <Ionicons
+        name="calendar"
+        size={size}
+        color={focused ? "red" : "tomato"}
+      />
+    ),
+  },
+  helpIcon: {
+    drawerIcon: ({ focused, size }) => (
+      <Ionicons
+        name="help-circle"
+        size={size}
+        color={focused ? "red" : "tomato"}
+      />
+    ),
+  },
+  logoutIcon: {
+    drawerIcon: ({ focused, size }) => (
+      <Ionicons name="log-out" size={size} color={focused ? "red" : "tomato"} />
+    ),
+  },
+};
 
 const HomeStack = createStackNavigator<HomeParamList>();
 function HomeNavigator(props) {
@@ -74,10 +132,11 @@ function HomeNavigator(props) {
         name="HomeScreen"
         component={HomeScreen}
         options={{
+          headerTintColor: "blue",
           headerStyle: {
             backgroundColor: "#8ebaff",
           },
-          headerTitle: " ",
+          headerTitle: "Home",
           headerLeft: () => (
             <View>
               <TouchableOpacity onPress={() => props.navigation.toggleDrawer()}>
@@ -112,10 +171,11 @@ function ProfileNavigator(props) {
         name="ProfileScreen"
         component={ProfileScreen}
         options={{
+          headerTintColor: "blue",
           headerStyle: {
             backgroundColor: "#8ebaff",
           },
-          headerTitle: " ",
+          headerTitle: "Profile",
           headerLeft: () => (
             <View>
               <TouchableOpacity onPress={() => props.navigation.toggleDrawer()}>
@@ -150,10 +210,11 @@ function NotificationNavigator(props) {
         name="NotificationScreen"
         component={NotificationScreen}
         options={{
+          headerTintColor: "blue",
           headerStyle: {
             backgroundColor: "#8ebaff",
           },
-          headerTitle: " ",
+          headerTitle: "Notifications",
           headerLeft: () => (
             <View>
               <TouchableOpacity onPress={() => props.navigation.toggleDrawer()}>
@@ -188,7 +249,8 @@ function EventNavigator(props) {
         name="EventScreen"
         component={EventScreen}
         options={{
-          headerTitle: " ",
+          headerTitle: "Event",
+          headerTintColor: "blue",
           headerStyle: {
             backgroundColor: "#8ebaff",
           },
@@ -226,7 +288,8 @@ function HelpNavigator(props) {
         name="HelpScreen"
         component={HelpScreen}
         options={{
-          headerTitle: " ",
+          headerTitle: "Help",
+          headerTintColor: "blue",
           headerStyle: {
             backgroundColor: "#8ebaff",
           },
