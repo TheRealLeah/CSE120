@@ -15,8 +15,8 @@ import rootReducer from "./redux/reducer";
 import thunk from "redux-thunk";
 import * as firebase from "firebase";
 
-import DrawerNavigator from './navigation/DrawerNavigator';
-import NotFoundScreen from './Screens/NotFoundScreen';
+import DrawerNavigator from "./navigation/DrawerNavigator";
+import NotFoundScreen from "./Screens/NotFoundScreen";
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 const firebaseConfig = {
@@ -94,16 +94,17 @@ export class App extends Component {
           </Stack.Navigator>
         </NavigationContainer>
       );
-    } 
+    }
 
-    return ( // if user is already logined in then load home page
+    return (
+      // if user is already logined in then load home page
       <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="root">
-            <Stack.Screen 
-              name="Root" 
+            <Stack.Screen
+              name="Root"
               component={MainScreen}
-              options={{ headerShown: false }} 
+              options={{ headerShown: false }}
             />
           </Stack.Navigator>
         </NavigationContainer>
