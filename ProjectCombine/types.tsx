@@ -23,28 +23,28 @@ export type DrawerParamList = {
   Event: undefined;
   Help: undefined;
   Logout: undefined;
-};
+}
 
 export type HomeParamList = {
   HomeScreen: undefined;
-};
+}
 
 export type ProfileParamList = {
   ProfileScreen: undefined;
-};
+}
 
 export type NotificationParamList = {
   NotificationScreen: undefined;
-};
+}
 
 export type EventParamList = {
   EventScreen: undefined;
-};
+}
 
 export type HelpParamList = {
   HelpScreen: undefined;
-};
+}
 
 export type LogoutParamList = {
   LogoutScreen: undefined;
-};
+}
