@@ -1,35 +1,22 @@
-import * as React from 'react';
-import { StyleSheet, Image } from 'react-native';
+import * as React from "react";
+import { StyleSheet, ImageBackground, Dimensions } from "react-native";
+import OrangeNotificationBanner from "../Components/OrangeNotificationBanner";
 
-import EditScreenInfo from '../Components/EditScreenInfo';
-import { Text, View } from '../Components/Themed';
+import { Text, View } from "../Components/Themed";
 
 export default function NotificationScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Notification</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      
-      {/* <EditScreenInfo path="/screens/NotificationScreen.tsx" /> */}
-      <Text style={styles.title}>THIS IS THE NOTIFICATION SCREEN</Text>
-      
-    </View>
+    <ImageBackground
+      source={require("../assets/background2.png")}
+      style={styles.background}
+    >
+      <OrangeNotificationBanner />
+    </ImageBackground>
   );
 }
-
 const styles = StyleSheet.create({
-  container: {
+  background: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+    alignItems: "center",
   },
 });
