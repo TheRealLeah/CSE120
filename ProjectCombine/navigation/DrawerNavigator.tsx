@@ -1,276 +1,336 @@
-import { createStackNavigator } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { useNavigation, NavigationContainer, DrawerActions } from '@react-navigation/native';
-import * as React from 'react';
+import { createStackNavigator, HeaderTitle } from "@react-navigation/stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
-import HomeScreen from '../Screens/HomeScreen';
-import ProfileScreen from '../Screens/ProfileScreen';
-import NotificationScreen from '../Screens/NotificationScreen';
-import EventScreen from '../Screens/EventScreen';
-import HelpScreen from '../Screens/HelpScreen';
-import LogoutScreen from '../Screens/LogoutScreen';
-import Landing from '../Screens/Landing';
-import EventCreation from '../Screens/EventCreation';
+import * as React from "react";
 
-import { DrawerParamList, EventParamList, HelpParamList, HomeParamList, LogoutParamList, NotificationParamList, ProfileParamList } from '../types';
-import { View, Text, Button, Image, TouchableOpacity, Dimensions } from 'react-native';
+import HomeScreen from "../Screens/HomeScreen";
+import ProfileScreen from "../Screens/ProfileScreen";
+import NotificationScreen from "../Screens/NotificationScreen";
+import EventScreen from "../Screens/EventScreen";
+import HelpScreen from "../Screens/HelpScreen";
+import LogoutScreen from "../Screens/LogoutScreen";
 
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
-import { Icon } from 'expo';
+import {
+  DrawerParamList,
+  EventParamList,
+  HelpParamList,
+  HomeParamList,
+  LogoutParamList,
+  NotificationParamList,
+  ProfileParamList,
+} from "../types";
+import { View, Image, TouchableOpacity, Dimensions } from "react-native";
 
-import firebase from 'firebase'
-import Navigation from '.';
+import { Ionicons } from "@expo/vector-icons";
 
-require('firebase/firestore')
+import firebase from "firebase";
+
+require("firebase/firestore");
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
+// const Drawer = createDrawerNavigator();
 
 export default function DrawerNavigator() {
   return (
-    <Drawer.Navigator>
-      
+    <Drawer.Navigator
+      drawerContentOptions={{
+        activeTintColor: "red",
+        labelStyle: { fontFamily: "Verdana", color: "#ff6623" },
+      }}
+      drawerStyle={{ backgroundColor: "#fbc956" }}
+    >
       <Drawer.Screen
         name="Home"
         component={HomeNavigator}
+        options={iconContainer.homeIcon}
       />
       <Drawer.Screen
         name="Profile"
         component={ProfileNavigator}
+        options={iconContainer.profileIcon}
       />
       <Drawer.Screen
         name="Notification"
         component={NotificationNavigator}
+        options={iconContainer.notificationIcon}
       />
       <Drawer.Screen
         name="Event"
         component={EventNavigator}
+        options={iconContainer.eventIcon}
       />
       <Drawer.Screen
         name="Help"
         component={HelpNavigator}
+        options={iconContainer.helpIcon}
       />
       <Drawer.Screen
         name="Logout"
         component={LogoutNavigator}
+        options={iconContainer.logoutIcon}
       />
     </Drawer.Navigator>
   );
 }
 
+const iconContainer = {
+  homeIcon: {
+    drawerIcon: ({ focused, size }) => (
+      <Ionicons name="md-home" size={size} color={focused ? "red" : "tomato"} />
+    ),
+  },
+  profileIcon: {
+    drawerIcon: ({ focused, size }) => (
+      <Ionicons
+        name="person-sharp"
+        size={size}
+        color={focused ? "red" : "tomato"}
+      />
+    ),
+  },
+  notificationIcon: {
+    drawerIcon: ({ focused, size }) => (
+      <Ionicons
+        name="notifications"
+        size={size}
+        color={focused ? "red" : "tomato"}
+      />
+    ),
+  },
+  eventIcon: {
+    drawerIcon: ({ focused, size }) => (
+      <Ionicons
+        name="calendar"
+        size={size}
+        color={focused ? "red" : "tomato"}
+      />
+    ),
+  },
+  helpIcon: {
+    drawerIcon: ({ focused, size }) => (
+      <Ionicons
+        name="help-circle"
+        size={size}
+        color={focused ? "red" : "tomato"}
+      />
+    ),
+  },
+  logoutIcon: {
+    drawerIcon: ({ focused, size }) => (
+      <Ionicons name="log-out" size={size} color={focused ? "red" : "tomato"} />
+    ),
+  },
+};
 
 const HomeStack = createStackNavigator<HomeParamList>();
-function HomeNavigator(props) { // if there is an error on 'props' it is fine and working correctly
+function HomeNavigator(props) {
+  // if there is an error on 'props' it is fine and working correctly
+  console.log(firebase.auth().currentUser);
   return (
-    
     <HomeStack.Navigator>
       <HomeStack.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={{ 
-          headerTitle: 'Home',
+        options={{
+          headerTintColor: "blue",
+          headerStyle: {
+            backgroundColor: "#8ebaff",
+          },
+          headerTitle: "Home",
+
           headerLeft: () => (
-	          <View>
-	          	<TouchableOpacity onPress={() => props.navigation.toggleDrawer() }> 
-                <Image 
-                  source = {require('../assets/menu-outline.png')} //.svg is invisable in ios
+            <View>
+              <TouchableOpacity onPress={() => props.navigation.toggleDrawer()}>
+                <Image
+                  source={require("../assets/menu-outline.png")} //.svg is invisable in ios
                   style={{
                     flex: 1,
-                    width: Dimensions.get('window').width*0.06,
-                    height: Dimensions.get('window').height*0.06,
+                    width: Dimensions.get("window").width * 0.06,
+                    height: Dimensions.get("window").height * 0.06,
                     marginLeft: 10,
-                    resizeMode: 'contain'
+                    resizeMode: "contain",
                   }}
                 />
-	          	</TouchableOpacity>
-	          </View>
+              </TouchableOpacity>
+            </View>
           ),
           headerTitleStyle: {
-            textAlign: 'center'
-          }
+            textAlign: "center",
+            fontSize: 25,
+          },
         }}
       />
     </HomeStack.Navigator>
-  )
+  );
 }
 
 const ProfileStack = createStackNavigator<ProfileParamList>();
-function ProfileNavigator(props) { // if there is an error on 'props' it is fine and working correctly
+function ProfileNavigator(props) {
+  // if there is an error on 'props' it is fine and working correctly
   return (
     <ProfileStack.Navigator>
       <ProfileStack.Screen
         name="ProfileScreen"
         component={ProfileScreen}
-        options={{ 
-          headerTitle: 'Profile',
+        options={{
+          headerTintColor: "blue",
+          headerStyle: {
+            backgroundColor: "#8ebaff",
+          },
+          headerTitle: "Profile",
           headerLeft: () => (
-	          <View>
-	          	<TouchableOpacity onPress={() => props.navigation.toggleDrawer() }> 
-                <Image 
-                  source = {require('../assets/menu-outline.png')} 
+            <View>
+              <TouchableOpacity onPress={() => props.navigation.toggleDrawer()}>
+                <Image
+                  source={require("../assets/menu-outline.png")}
                   style={{
                     flex: 1,
-                    width: Dimensions.get('window').width*0.06,
-                    height: Dimensions.get('window').height*0.06,
+                    width: Dimensions.get("window").width * 0.06,
+                    height: Dimensions.get("window").height * 0.06,
                     marginLeft: 10,
-                    resizeMode: 'contain'
+                    resizeMode: "contain",
                   }}
                 />
-	          	</TouchableOpacity>
-	          </View>
+              </TouchableOpacity>
+            </View>
           ),
           headerTitleStyle: {
-            textAlign: 'center'
-          }
+            textAlign: "center",
+          },
         }}
       />
     </ProfileStack.Navigator>
-  )
+  );
 }
 
 const NotificationStack = createStackNavigator<NotificationParamList>();
-function NotificationNavigator(props) { // if there is an error on 'props' it is fine and working correctly
+function NotificationNavigator(props) {
+  // if there is an error on 'props' it is fine and working correctly
   return (
-    
     <NotificationStack.Navigator>
       <NotificationStack.Screen
         name="NotificationScreen"
         component={NotificationScreen}
-        options={{ 
-          headerTitle: 'Notification',
+        options={{
+          headerTintColor: "blue",
+          headerStyle: {
+            backgroundColor: "#8ebaff",
+          },
+          headerTitle: "Notifications",
           headerLeft: () => (
-	          <View>
-	          	<TouchableOpacity onPress={() => props.navigation.toggleDrawer() }> 
-                <Image 
-                  source = {require('../assets/menu-outline.png')} //.svg is invisable in ios
+            <View>
+              <TouchableOpacity onPress={() => props.navigation.toggleDrawer()}>
+                <Image
+                  source={require("../assets/menu-outline.png")} //.svg is invisable in ios
                   style={{
                     flex: 1,
-                    width: Dimensions.get('window').width*0.06,
-                    height: Dimensions.get('window').height*0.06,
+                    width: Dimensions.get("window").width * 0.06,
+                    height: Dimensions.get("window").height * 0.06,
                     marginLeft: 10,
-                    resizeMode: 'contain'
+                    resizeMode: "contain",
                   }}
                 />
-	          	</TouchableOpacity>
-	          </View>
+              </TouchableOpacity>
+            </View>
           ),
           headerTitleStyle: {
-            textAlign: 'center'
-          }
+            textAlign: "center",
+            fontSize: 24,
+          },
         }}
       />
     </NotificationStack.Navigator>
-  )
+  );
 }
 
 const EventStack = createStackNavigator<EventParamList>();
-function EventNavigator(props) { // if there is an error on 'props' it is fine and working correctly
+function EventNavigator(props) {
+  // if there is an error on 'props' it is fine and working correctly
   return (
-    
     <EventStack.Navigator>
       <EventStack.Screen
         name="EventScreen"
         component={EventScreen}
-        options={{ 
-          headerTitle: 'Event',
+        options={{
+          headerTitle: "Event",
+          headerTintColor: "blue",
+          headerStyle: {
+            backgroundColor: "#8ebaff",
+          },
           headerLeft: () => (
-	          <View>
-	          	<TouchableOpacity onPress={() => props.navigation.toggleDrawer() }> 
-                <Image 
-                  source = {require('../assets/menu-outline.png')} //.svg is invisable in ios
+            <View>
+              <TouchableOpacity onPress={() => props.navigation.toggleDrawer()}>
+                <Image
+                  source={require("../assets/menu-outline.png")} //.svg is invisable in ios
                   style={{
                     flex: 1,
-                    width: Dimensions.get('window').width*0.06,
-                    height: Dimensions.get('window').height*0.06,
+                    width: Dimensions.get("window").width * 0.06,
+                    height: Dimensions.get("window").height * 0.06,
                     marginLeft: 10,
-                    resizeMode: 'contain'
+                    resizeMode: "contain",
                   }}
                 />
-	          	</TouchableOpacity>
-	          </View>
+              </TouchableOpacity>
+            </View>
           ),
-          headerRight: () => (
-            <Button
-              onPress={() => props.navigation.navigate(EventCreation)}
-              title="+"
-              color="black"
-            />),
           headerTitleStyle: {
-            textAlign: 'center'
-          }
+            textAlign: "center",
+          },
         }}
       />
     </EventStack.Navigator>
-  )
+  );
 }
 
 const HelpStack = createStackNavigator<HelpParamList>();
-function HelpNavigator(props) { // if there is an error on 'props' it is fine and working correctly
+function HelpNavigator(props) {
+  // if there is an error on 'props' it is fine and working correctly
   return (
-    
     <HelpStack.Navigator>
       <HelpStack.Screen
         name="HelpScreen"
         component={HelpScreen}
-        options={{ 
-          headerTitle: 'Help',
+        options={{
+          headerTitle: "Help",
+          headerTintColor: "blue",
+          headerStyle: {
+            backgroundColor: "#8ebaff",
+          },
           headerLeft: () => (
-	          <View>
-	          	<TouchableOpacity onPress={() => props.navigation.toggleDrawer() }> 
-                <Image 
-                  source = {require('../assets/menu-outline.png')} //.svg is invisable in ios
+            <View>
+              <TouchableOpacity onPress={() => props.navigation.toggleDrawer()}>
+                <Image
+                  source={require("../assets/menu-outline.png")} //.svg is invisable in ios
                   style={{
                     flex: 1,
-                    width: Dimensions.get('window').width*0.06,
-                    height: Dimensions.get('window').height*0.06,
+                    width: Dimensions.get("window").width * 0.06,
+                    height: Dimensions.get("window").height * 0.06,
                     marginLeft: 10,
-                    resizeMode: 'contain'
+                    resizeMode: "contain",
                   }}
                 />
-	          	</TouchableOpacity>
-	          </View>
+              </TouchableOpacity>
+            </View>
           ),
           headerTitleStyle: {
-            textAlign: 'center'
-          }
+            textAlign: "center",
+          },
         }}
       />
     </HelpStack.Navigator>
-  )
+  );
 }
 const LogoutStack = createStackNavigator<LogoutParamList>();
-function LogoutNavigator(props) { // if there is an error on 'props' it is fine and working correctly
+function LogoutNavigator(props) {
+  // if there is an error on 'props' it is fine and working correctly
   firebase.auth().signOut();
   return (
-    
     <LogoutStack.Navigator>
       <LogoutStack.Screen
         name="LogoutScreen"
-        component={Landing}
-        options={{ headerShown: false}} 
-        // options={{ 
-        //   headerTitle: 'Logout',
-        //   headerLeft: () => (
-	      //     <View>
-	      //     	<TouchableOpacity onPress={() => props.navigation.toggleDrawer() }> 
-        //         <Image 
-        //           source = {require('../assets/menu-outline.png')} //.svg is invisable in ios
-        //           style={{
-        //             flex: 1,
-        //             width: Dimensions.get('window').width*0.06,
-        //             height: Dimensions.get('window').height*0.06,
-        //             marginLeft: 10,
-        //             resizeMode: 'contain'
-        //           }}
-        //         />
-	      //     	</TouchableOpacity>
-	      //     </View>
-        //   ),
-        //   headerTitleStyle: {
-        //     textAlign: 'center'
-        //   }
-        // }}
+        component={LogoutScreen}
+        options={{ headerShown: false }}
       />
     </LogoutStack.Navigator>
-  )
+  );
 }
-
