@@ -48,7 +48,7 @@ export class Login extends Component {
         source={require("../assets/background2.png")}
         style={{ flex: 1 }}
       >
-        <DismissKeyboard>
+        {/* <DismissKeyboard> */}
           <SafeAreaView>
             <Logo></Logo>
             <Text style={styles.signupTextContainer}>Sign In</Text>
@@ -85,7 +85,7 @@ export class Login extends Component {
               style={{ paddingHorizontal: 20 }}
             />
           </SafeAreaView>
-        </DismissKeyboard>
+        {/* </DismissKeyboard> */}
       </ImageBackground>
     );
   }

@@ -1,7 +1,7 @@
 import * as React from "react";
-import { StyleSheet, Image, ImageBackground } from "react-native";
+import { StyleSheet, ImageBackground, Dimensions } from "react-native";
+import OrangeNotificationBanner from "../Components/OrangeNotificationBanner";
 
-import EditScreenInfo from "../Components/EditScreenInfo";
 import { Text, View } from "../Components/Themed";
 
 export default function NotificationScreen() {
@@ -10,19 +10,13 @@ export default function NotificationScreen() {
       source={require("../assets/background2.png")}
       style={styles.background}
     >
-      <View style={styles.orangeView} />
+      <OrangeNotificationBanner />
     </ImageBackground>
   );
 }
-
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-  },
-  orangeView: {
-    flex: 1,
-    width: 300,
-    height: 10,
-    backgroundColor: "#ff6623",
+    alignItems: "center",
   },
 });
