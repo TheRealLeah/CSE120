@@ -137,6 +137,7 @@ function HomeNavigator(props) {
             backgroundColor: "#8ebaff",
           },
           headerTitle: "Home",
+
           headerLeft: () => (
             <View>
               <TouchableOpacity onPress={() => props.navigation.toggleDrawer()}>
@@ -234,6 +235,7 @@ function NotificationNavigator(props) {
           ),
           headerTitleStyle: {
             textAlign: "center",
+            fontSize: 24,
           },
         }}
       />
