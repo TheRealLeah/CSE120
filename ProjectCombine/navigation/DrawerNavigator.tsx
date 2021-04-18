@@ -156,6 +156,7 @@ function HomeNavigator(props) {
           ),
           headerTitleStyle: {
             textAlign: "center",
+            fontSize: 25,
           },
         }}
       />
