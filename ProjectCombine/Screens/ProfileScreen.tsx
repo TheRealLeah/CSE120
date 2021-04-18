@@ -30,6 +30,10 @@ function ProfileScreen(props) {
       source={require("../assets/background2.png")}
       style={styles.container}
     >
+      <Text style={styles.box}>Email: {currentUser.email} </Text>
+      <TextInput style={styles.box} placeholder={currentUser.name} onChangeText={nameChange => setNameChange(nameChange)}/>
+      <Text style={styles.box}>Age: {currentUser.age}</Text>
+      <TextInput style={styles.descBox} placeholder={currentUser.bio} onChangeText={bioChange => setBioChange(bioChange)}/>
       <TouchableOpacity
           style={styles.appButtonContainer}
           activeOpacity={0.5}
@@ -37,10 +41,6 @@ function ProfileScreen(props) {
         >
           <Text style={styles.appButtonText}>Save Changes</Text>
       </TouchableOpacity>
-      <Text style={styles.box}>Email: {currentUser.email} </Text>
-      <TextInput style={styles.box} placeholder={currentUser.name} onChangeText={nameChange => setNameChange(nameChange)}/>
-      <Text style={styles.box}>Age: {currentUser.age}</Text>
-      <TextInput style={styles.descBox} placeholder={currentUser.bio} onChangeText={bioChange => setBioChange(bioChange)}/>
     </ImageBackground>
 
   );
@@ -98,6 +98,10 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     height: 1,
     width: "80%",
+  },
+  image: {
+    flex: 1,
+    aspectRatio: 1 / 1
   },
 });
 
