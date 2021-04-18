@@ -1,38 +1,104 @@
-import * as React from "react";
-import { StyleSheet, Image } from "react-native";
+import firebase from 'firebase';
+import * as React from 'react';
+import { StyleSheet, ImageBackground, Dimensions, Alert } from 'react-native';
 
-import EditScreenInfo from "../Components/EditScreenInfo";
-import { Text, View } from "../Components/Themed";
+import { Text, View } from '../Components/Themed';
+
+
+
+
+var data;
+var name;
 
 export default function HomeScreen() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Home</Text>
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
-      />
+  
 
-      {/* <EditScreenInfo path="/screens/HomeScreen.tsx" /> */}
-      <Text style={styles.title}>THIS IS THE HOME SCREEN</Text>
-    </View>
+  LoadData(function() {
+    name = data['name'];
+    console.log("After LoadData():", name);
+
+  })
+  
+  return (
+    <ImageBackground source={require("../assets/background2.png")} style={styles.container} >
+      <View style={styles.box}>
+        <Text style={styles.name} >Name: {name} </Text> 
+        <Text style={styles.desc} >Desc:  </Text> 
+      </View>
+      <View style={styles.separator} lightColor="#6F91CF" darkColor="#6F91CF" />
+    </ImageBackground>
+
   );
 }
+
+async function LoadData(_callback){
+
+  //console.log("Before Load:");
+  var db = firebase.firestore().collection('events');
+  await db.get().then(querySnapshot => {
+    // console.log("Event Size:", querySnapshot.size);
+
+    querySnapshot.forEach(documentSnapshot => {
+      //console.log("Event ID:",documentSnapshot.id, documentSnapshot.data());
+      data = documentSnapshot.data();
+
+      // console.log("Event Name:", data['name']);
+      // console.log("Event Desc:", data['desc']);
+      // console.log("Got Data:");
+    })
+  })
+  //name = data['name'];
+  // console.log("After Load:", name);
+  _callback();
+
+}
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  img: {
+    fontSize: 20,
+    fontWeight: 'bold',
   },
   title: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
+  },
+  name: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    paddingLeft: 100,
+    paddingTop: 10,
+  },
+  desc: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    paddingLeft: 100,
+    paddingTop: 10,
   },
   separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
+    marginVertical: 10,
+    height: 10,
+    width: '95%',
+    alignSelf: "center",
+  },
+  box: {
+    backgroundColor: "#E6FEFF",
+    shadowOpacity: 0.25,
+    borderRadius: 10,
+    // paddingVertical: 10,
+    // paddingHorizontal: 12,
+    //marginLeft: 50,
+    width: Dimensions.get('screen').width-(Dimensions.get('screen').width*.1),
+    height: Dimensions.get('screen').height-(Dimensions.get('screen').height*.88),
+    marginTop: 40,
+    alignSelf: "center",
+    //opacity: .5,
+    marginVertical: Dimensions.get('screen').height,
+    
   },
 });
