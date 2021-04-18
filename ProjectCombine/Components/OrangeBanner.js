@@ -1,13 +1,13 @@
 import * as React from "react";
 import { StyleSheet, Dimensions } from "react-native";
 
-import { Text, View } from "../Components/Themed";
+import { Text, View } from "./Themed";
 
-export default function OrangeNotificationBanner() {
+export default function OrangeBanner({ title }) {
   return (
     <View style={styles.orangeView}>
       <View style={styles.topLine}></View>
-      <Text style={styles.textContainer}>Activity</Text>
+      <Text style={styles.textContainer}>{title}</Text>
       <View style={styles.underLine}></View>
     </View>
   );
@@ -20,9 +20,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   orangeView: {
-    flex: 0.075,
     width: windowWidth,
-    height: 10,
+    height: 60,
     backgroundColor: "#ffc957",
     alignItems: "center",
   },
