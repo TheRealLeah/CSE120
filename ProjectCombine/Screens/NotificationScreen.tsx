@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import {
   StyleSheet,
   ImageBackground,
@@ -7,15 +7,16 @@ import {
   Text,
   Dimensions,
 } from "react-native";
+// import Divider from "react-native-elements";
 import OrangeBanner from "../Components/OrangeBanner";
-// import firestore from "@react-native-firebase/firestore";
+import firestore from "@react-native-firebase/firestore";
 
 const windowWidth = Dimensions.get("window").width;
 const notifications = [
   {
     id: 1,
     name: "You've been added to {name} event!",
-    time: "30 mins ago",
+    time: "31 mins ago",
   },
   {
     id: 2,
@@ -43,7 +44,7 @@ function Item({ name, time }) {
 }
 const x = StyleSheet.create({
   listItem: {
-    backgroundColor: "#d4e3fc",
+    backgroundColor: "cornflowerblue",
     flexDirection: "column",
     width: windowWidth,
     borderColor: "#a8c6fa",
@@ -52,7 +53,7 @@ const x = StyleSheet.create({
   listName: {
     marginLeft: 100,
     paddingTop: 20,
-    color: "dodgerblue",
+    color: "white",
     fontSize: 20,
   },
   listTime: {
