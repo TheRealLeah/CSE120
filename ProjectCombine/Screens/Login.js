@@ -9,6 +9,7 @@ import {
   Button,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from "react-native";
 
 import firebase from "firebase";
@@ -19,6 +20,7 @@ const DismissKeyboard = ({ children }) => (
     {children}
   </TouchableWithoutFeedback>
 );
+
 export class Login extends Component {
   constructor(props) {
     super(props);
@@ -40,8 +42,9 @@ export class Login extends Component {
       .catch((error) => {
         console.log(error);
       });
+      console.log(email)
   }
-
+  
   render() {
     return (
       <ImageBackground
@@ -83,6 +86,7 @@ export class Login extends Component {
               title="Forgot Password?"
               color="cornflowerblue"
               style={{ paddingHorizontal: 20 }}
+              onPress={() => Alert.prompt("Forgot Password", "Enter in an email address", (email) => this.setState({ email }))}
             />
           </SafeAreaView>
         {/* </DismissKeyboard> */}
