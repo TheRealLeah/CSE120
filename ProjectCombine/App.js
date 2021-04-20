@@ -8,6 +8,7 @@ import MainScreen from "./Components/main.js";
 import Register from "./Screens/Register.js";
 import LandingScreen from "./Screens/Landing.js";
 import Login from "./Screens/Login.js";
+import changePass from "./Screens/EditPassword.js"
 import EventCreation from "./Screens/EventCreation.js";
 
 import { Provider } from "react-redux";
@@ -90,6 +91,11 @@ export class App extends Component {
             <Stack.Screen
               name="Login"
               component={Login}
+              options={{ headerShown: false }}
+            ></Stack.Screen>
+            <Stack.Screen
+              name="changePass"
+              component={changePass}
               options={{ headerShown: false }}
             ></Stack.Screen>
           </Stack.Navigator>
