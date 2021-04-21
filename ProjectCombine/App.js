@@ -14,25 +14,26 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import rootReducer from "./redux/reducer";
 import thunk from "redux-thunk";
-import * as firebase from "firebase";
+// import * as firebase from "firebase";
+import firebase from "/Users/JoshGialis/Desktop/CSE LOCAL 120/CSE120/ProjectCombine/fb.js";
 
 import DrawerNavigator from "./navigation/DrawerNavigator";
 import NotFoundScreen from "./Screens/NotFoundScreen";
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
-const firebaseConfig = {
-  apiKey: "AIzaSyDja8e25c5qWuocnY2rS94o0PL4av7sbmY",
-  authDomain: "instagram-demo-da68b.firebaseapp.com",
-  projectId: "instagram-demo-da68b",
-  storageBucket: "instagram-demo-da68b.appspot.com",
-  messagingSenderId: "199629117787",
-  appId: "1:199629117787:web:e2b7ca0cff099ca117e27e",
-  measurementId: "G-WKQ071G99T",
-};
+// const firebaseConfig = {
+//   apiKey: "AIzaSyDja8e25c5qWuocnY2rS94o0PL4av7sbmY",
+//   authDomain: "instagram-demo-da68b.firebaseapp.com",
+//   projectId: "instagram-demo-da68b",
+//   storageBucket: "instagram-demo-da68b.appspot.com",
+//   messagingSenderId: "199629117787",
+//   appId: "1:199629117787:web:e2b7ca0cff099ca117e27e",
+//   measurementId: "G-WKQ071G99T",
+// };
 
-if (firebase.apps.length === 0) {
-  firebase.initializeApp(firebaseConfig);
-}
+// if (firebase.apps.length === 0) {
+//   firebase.initializeApp(firebaseConfig);
+// }
 const Stack = createStackNavigator();
 
 export class App extends Component {
