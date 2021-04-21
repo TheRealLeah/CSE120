@@ -19,6 +19,8 @@ export default class NotificationScreen extends React.Component {
   state = {
     notificationList: [],
     currentNotification: null,
+    backgroundColorNotification: "rgba(0,0,200,0.05)",
+    pressed: false,
   };
 
   // onNotificationAdded = (notification) => {
@@ -28,6 +30,20 @@ export default class NotificationScreen extends React.Component {
   //     notificationList: [...prevState.notificationList, notification],
   //   }));
   // };
+
+  changeColor() {
+    // if (!this.state.pressed) {
+    //   this.setState({
+    //     pressed: true,
+    //     backgroundColorNotification: "rgba(0,0,200,0.2)",
+    //   });
+    // } else {
+    //   this.setState({
+    //     pressed: false,
+    //     backgroundColorNotification: "rgba(0,0,200,0.05)",
+    //   });
+    // }
+  }
 
   renderSeparator = () => (
     <SafeAreaView
@@ -63,7 +79,12 @@ export default class NotificationScreen extends React.Component {
             console.log(item);
             return (
               <SafeAreaView style={styles.notificationContainer}>
-                <TouchableOpacity style={{ backgroundColor: "d4e3fc" }}>
+                <TouchableOpacity
+                  style={{
+                    backgroundColor: this.state.backgroundColorNotification,
+                  }}
+                  onPress={() => this.changeColor()}
+                >
                   <Text style={styles.messageContainer}>
                     You've signed up for {item.name}.
                   </Text>
