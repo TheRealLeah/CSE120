@@ -1,71 +1,65 @@
-import React, { useEffect } from "react";
-import {
-  StyleSheet,
-  ImageBackground,
-  FlatList,
-  SafeAreaView,
-  Text,
-  Dimensions,
-} from "react-native";
-// import Divider from "react-native-elements";
+import firebase from "/Users/JoshGialis/Desktop/CSE LOCAL 120/CSE120/ProjectCombine/fb.js";
+import React from "react";
+import { StyleSheet, ImageBackground, Text, SafeAreaView } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
+import { Divider } from "react-native-elements";
+import { ListItem } from "react-native-elements/dist/list/ListItem";
+import { getNotification } from "/Users/JoshGialis/Desktop/CSE LOCAL 120/CSE120/ProjectCombine/api/NotificationsAPI.js";
 import OrangeBanner from "../Components/OrangeBanner";
+// // import moment from "moment";
+export default class NotificationScreen extends React.Component {
+  state = {
+    notificationList: [],
+    currentNotification: null,
+  };
 
-import firebase from "firebase";
+  // onNotificationAdded = (notification) => {
+  //   // console.log("Notification added!");
+  //   // console.log(notification);
+  //   this.setState((prevState) => ({
+  //     notificationList: [...prevState.notificationList, notification],
+  //   }));
+  // };
 
-const windowWidth = Dimensions.get("window").width;
-let data;
-let name;
+  onNotificationReceived = (notificationList) => {
+    this.setState((prevState) => ({
+      notificationList: (prevState.notificationList = notificationList),
+    }));
+  };
 
-function Item({ name, time }) {
-  return (
-    <SafeAreaView style={x.listItem}>
-      <Text>{name}</Text>
-      <Text>{time}</Text>
-    </SafeAreaView>
-  );
+  componentDidMount() {
+    getNotification(this.onNotificationReceived);
+  }
+
+  render() {
+    return (
+      <ImageBackground
+        source={require("../assets/background2.png")}
+        style={styles.background}
+      >
+        <OrangeBanner title="Activity" />
+        <FlatList
+          data={this.state.notificationList}
+          ItemSeparatorComponent={() => (
+            <Divider style={{ backgroundColor: "red" }}></Divider>
+          )}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => {
+            console.log(item);
+            return (
+              <SafeAreaView>
+                <Text>
+                  You've signed up for {item.name} at {+new Date()}!
+                </Text>
+              </SafeAreaView>
+            );
+          }}
+        />
+      </ImageBackground>
+    );
+  }
 }
 
-const notifications = [
-  {
-    id: "1",
-    name: "You've been added to {name} event!",
-    time: "31 mins ago",
-  },
-  {
-    id: "2",
-    name: "You've been added to " + name + " event!",
-    time: "6 hrs ago",
-  },
-];
-const x = StyleSheet.create({
-  listItem: {
-    backgroundColor: "cornflowerblue",
-    flexDirection: "column",
-    width: windowWidth,
-    borderColor: "#a8c6fa",
-    borderWidth: 4,
-  },
-});
-
-export default function NotificationScreen() {
-  LoadData(function () {
-    name = data["name"];
-    // console.log("After LoadData():", name);
-  });
-
-  return (
-    <ImageBackground
-      source={require("../assets/background2.png")}
-      style={styles.background}
-    >
-      <OrangeBanner title="Activity" />
-      <FlatList
-        data={notifications}
-        renderItem={({ item }) => <Item name={item.name} time={item.time} />}
-      />
-    </ImageBackground>
-  );
-}
 const styles = StyleSheet.create({
   background: {
     flex: 1,
@@ -73,45 +67,10 @@ const styles = StyleSheet.create({
   },
 });
 
-async function LoadData(_callback) {
-  //console.log("Before Load:");
-  var db = firebase.firestore().collection("notifications");
-  await db.get().then((querySnapshot) => {
-    // console.log("Event Size:", querySnapshot.size);
+/*
 
-    querySnapshot.forEach((documentSnapshot) => {
-      // console.log("Event ID:", documentSnapshot.id, documentSnapshot.data());
-      data = documentSnapshot.data();
 
-      // console.log("Event Name:", data['name']);
-      // console.log("Event Desc:", data['desc']);
-      // console.log("Got Data:");
-      console.log("Got Data:", data);
-    });
-  });
-  // name = data["name"];
-  // console.log("After Load:", name);
-  _callback();
-}
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 // import React, { useState, useEffect } from "react";
 // import {
 //   StyleSheet,
@@ -230,3 +189,6 @@ async function LoadData(_callback) {
 //     />
 //   </ImageBackground>
 // );
+
+
+*/
