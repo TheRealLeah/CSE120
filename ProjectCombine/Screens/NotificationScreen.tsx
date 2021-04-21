@@ -1,12 +1,20 @@
 import firebase from "/Users/JoshGialis/Desktop/CSE LOCAL 120/CSE120/ProjectCombine/fb.js";
 import React from "react";
-import { StyleSheet, ImageBackground, Text, SafeAreaView } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import {
+  StyleSheet,
+  ImageBackground,
+  Text,
+  SafeAreaView,
+  Dimensions,
+} from "react-native";
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { Divider } from "react-native-elements";
-import { ListItem } from "react-native-elements/dist/list/ListItem";
 import { getNotification } from "/Users/JoshGialis/Desktop/CSE LOCAL 120/CSE120/ProjectCombine/api/NotificationsAPI.js";
 import OrangeBanner from "../Components/OrangeBanner";
-// // import moment from "moment";
+import moment from "moment";
+
+const windowWidth = Dimensions.get("window").width;
+
 export default class NotificationScreen extends React.Component {
   state = {
     notificationList: [],
@@ -21,6 +29,14 @@ export default class NotificationScreen extends React.Component {
   //   }));
   // };
 
+  renderSeparator = () => (
+    <SafeAreaView
+      style={{
+        backgroundColor: "dodgerblue",
+        height: 1,
+      }}
+    />
+  );
   onNotificationReceived = (notificationList) => {
     this.setState((prevState) => ({
       notificationList: (prevState.notificationList = notificationList),
@@ -40,17 +56,21 @@ export default class NotificationScreen extends React.Component {
         <OrangeBanner title="Activity" />
         <FlatList
           data={this.state.notificationList}
-          ItemSeparatorComponent={() => (
-            <Divider style={{ backgroundColor: "red" }}></Divider>
-          )}
+          ItemSeparatorComponent={this.renderSeparator}
+          ListFooterComponent={this.renderSeparator}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => {
             console.log(item);
             return (
-              <SafeAreaView>
-                <Text>
-                  You've signed up for {item.name} at {+new Date()}!
-                </Text>
+              <SafeAreaView style={styles.notificationContainer}>
+                <TouchableOpacity style={{ backgroundColor: "d4e3fc" }}>
+                  <Text style={styles.messageContainer}>
+                    You've signed up for {item.name}.
+                  </Text>
+                  <Text style={styles.timeContainer}>
+                    {moment(item.time).fromNow()}
+                  </Text>
+                </TouchableOpacity>
               </SafeAreaView>
             );
           }}
@@ -64,6 +84,21 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     alignItems: "center",
+  },
+  notificationContainer: { borderWidth: 0, borderColor: "dodgerblue" },
+  messageContainer: {
+    fontSize: 17,
+    marginTop: 10,
+    marginLeft: 120,
+    color: "#2468f6",
+    fontWeight: "600",
+  },
+  timeContainer: {
+    fontSize: 17,
+    marginLeft: 120,
+    marginTop: 20,
+    color: "#75a9f9",
+    marginBottom: 10,
   },
 });
 
