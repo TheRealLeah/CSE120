@@ -63,6 +63,20 @@ export class App extends Component {
   }
 
   render() {
+    // firebase
+    //   .firestore()
+    //   .collection("users")
+    //   .where("accountType", "==", "Volunteer")
+    //   .get()
+    //   .then((querySnapshot) => {
+    //     querySnapshot.forEach((doc) => {
+    //       // doc.data() is never undefined for query doc snapshots
+    //       console.log(doc.get("age"), " => ", doc.data());
+    //     });
+    //   })
+    //   .catch((error) => {
+    //     console.log("Error getting documents: ", error);
+    //   });
     const { loggedIn, loaded } = this.state;
     if (!loaded) {
       return (

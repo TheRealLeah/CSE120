@@ -13,7 +13,7 @@ import "firebase/firestore";
 import { TouchableHighlight } from "react-native-gesture-handler";
 import { View } from "../Components/Themed";
 // import CheckBox from "react-native-check-box";
-let color = 0.15;
+
 export class Register extends Component {
   constructor(props) {
     super(props);
@@ -91,6 +91,8 @@ export class Register extends Component {
       });
     }
   }
+
+  determineUser = accountType;
   render() {
     return (
       <ImageBackground
