@@ -1,73 +1,100 @@
 import React from "react";
 import {
-  ImageBackground,
   StyleSheet,
+  ImageBackground,
+  Button,
   TouchableOpacity,
-  Text,
-  } from 'react-native';
+  Alert,
+  SafeAreaView,
+} from "react-native";
 
-import EditScreenInfo from '../Components/EditScreenInfo';
-import { View } from '../Components/Themed';
+import { Text } from "../Components/Themed";
 
-import EventCreation from './EventCreation';
+import firebase from "firebase";
+require("firebase/firestore");
+import { connect } from "react-redux";
 
-export default function EventScreen({ navigation }) {
+function EventScreen(props) {
+  const { currentUser } = props;
+  const [nameChange, setNameChange] = React.useState(currentUser.events.name);
+  const [descChange, setDescChange] = React.useState(currentUser.events.description);
+  const [timeChange, setTimeChange] = React.useState(currentUser.events.time);
+  const [loChange, setLocationChange] = React.useState(currentUser.events.location);
+  const [contactChange, setContactChange] = React.useState(currentUser.events.contactinfo);
+  console.log({ currentUser });
+  console.log({ nameChange, descChange });
+
+  const updateEvents = () =>
+    firebase
+      .firestore()
+      .collection("events")
+      .doc(firebase.auth().currentUser.uid)
+      .update({
+        name: nameChange,
+        description: descChange,
+        location: loChange,
+        time: timeChange,
+        contactinfo: contactChange,
+      });
+
   return (
-    <ImageBackground source={require("../assets/background.png")}
-      style={{ flex: 1 }}
+    <ImageBackground
+      source={require("../assets/background2.png")}
+      style={styles.container}
     >
+      
+      <Text style={styles.box}>Name: {currentUser.name} </Text>
+
+      <SafeAreaView>
+        <Button
+          title="Add Event Name"
+          onPress={() =>
+            Alert.prompt("Add Event Name", "Enter Event Name", (nameChange) =>
+              setNameChange(nameChange)
+            )
+          }
+        />
+      </SafeAreaView>
+
+      <Text style={styles.box}>Description: {currentUser.description} </Text>
+
+      <SafeAreaView>
+        <Button
+          title="Add Event Description"
+          onPress={() =>
+            Alert.prompt("Add Event Description", "Enter Description", (descChange) =>
+              setDescChange(descChange)
+            )
+          }
+        />
+      </SafeAreaView>
+
       <TouchableOpacity
         style={styles.appButtonContainer}
         activeOpacity={0.5}
-        onPress={() => navigation.navigate(EventCreation)}
+        onPress={updateEvents}
       >
-        <Text style={styles.appButtonText}>Create Event</Text>
+        <Text style={styles.appButtonText}>Save Changes</Text>
       </TouchableOpacity>
-      
-      {/* <Stack.Navigator initialRouteName="root">
-        <Stack.Screen 
-          name="Root" 
-          component={EventCreation}
-          options={{ headerShown: false }} 
-        />
-      </Stack.Navigator> */}
     </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  textInputContainer: {
-    width: 300,
-    height: 35,
-    fontSize: 20,
-    color: "#02448d",
-    borderBottomWidth: 3,
-    borderColor: "rgba(255, 255, 255, 0.5)",
-    backgroundColor: "rgba(0, 0, 255, 0)",
-    marginLeft: 50,
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
-  textContainer: {
-    color: "#02448d",
-    fontSize: 13,
-    fontWeight: "500",
-    marginLeft: 50,
-    paddingTop: 40,
-  },
-  signupTextContainer: {
-    color: "#02448d",
-    fontSize: 30,
-    fontWeight: "900",
-    marginLeft: 50,
-    paddingTop: 40,
+  containerInfo: {
+    marginTop: 10,
   },
   appButtonContainer: {
     backgroundColor: "#ffb4b0",
     borderRadius: 10,
     paddingVertical: 10,
-    paddingHorizontal: 12,
-    marginLeft: 50,
     width: 300,
-    marginTop: 80,
+    marginTop: 30,
   },
   appButtonText: {
     fontSize: 20,
@@ -75,10 +102,40 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     alignSelf: "center",
   },
-  button: {
-    ...StyleSheet.absoluteFillObject,
-    alignSelf: 'flex-end',
-    marginTop: -5,
-    //position: 'absolute', // add if dont work with above
+  box: {
+    backgroundColor: "#ffb4b0",
+    shadowOpacity: 0.25,
+    borderRadius: 10,
+    paddingVertical: 10,
+
+    width: 300,
+    height: 50,
+    marginTop: 40,
+    alignSelf: "center",
+  },
+  descBox: {
+    backgroundColor: "#ffb4b0",
+    shadowOpacity: 0.25,
+    borderRadius: 10,
+    paddingVertical: 10,
+
+    width: 300,
+    height: 250,
+    marginTop: 40,
+    alignSelf: "center",
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  separator: {
+    marginVertical: 30,
+    height: 1,
+    width: "80%",
   },
 });
+
+const mapStateToProps = (store) => ({
+  currentUser: store.userState.currentUser.events,
+});
+export default connect(mapStateToProps, null)(EventScreen);
