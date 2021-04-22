@@ -3,6 +3,8 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import * as React from "react";
 
+import { connect } from "react-redux";
+
 import HomeScreen from "../Screens/HomeScreen";
 import ProfileScreen from "../Screens/ProfileScreen";
 import NotificationScreen from "../Screens/NotificationScreen";
@@ -30,7 +32,49 @@ require("firebase/firestore");
 const Drawer = createDrawerNavigator<DrawerParamList>();
 // const Drawer = createDrawerNavigator();
 
-export default function DrawerNavigator() {
+function DrawerNavigator(props) {
+  const { currentUser } = props;
+  console.log({ currentUser });
+
+  if (currentUser.accountType === "Volunteer") {
+    return (
+      <Drawer.Navigator
+        drawerContentOptions={{
+          activeTintColor: "red",
+          labelStyle: { fontFamily: "Verdana", color: "#ff6623" },
+        }}
+        drawerStyle={{ backgroundColor: "#fbc956" }}
+      >
+        <Drawer.Screen
+          name="Home"
+          component={HomeNavigator}
+          options={iconContainer.homeIcon}
+        />
+        <Drawer.Screen
+          name="Profile"
+          component={ProfileNavigator}
+          options={iconContainer.profileIcon}
+        />
+        <Drawer.Screen
+          name="Notification"
+          component={NotificationNavigator}
+          options={iconContainer.notificationIcon}
+        />
+        <Drawer.Screen
+          name="Help"
+          component={HelpNavigator}
+          options={iconContainer.helpIcon}
+        />
+        <Drawer.Screen
+          name="Logout"
+          component={LogoutNavigator}
+          options={iconContainer.logoutIcon}
+        />
+      </Drawer.Navigator>
+    );
+  }
+  else {
+
   return (
     <Drawer.Navigator
       drawerContentOptions={{
@@ -71,6 +115,7 @@ export default function DrawerNavigator() {
       />
     </Drawer.Navigator>
   );
+  }
 }
 
 const iconContainer = {
@@ -334,3 +379,8 @@ function LogoutNavigator(props) {
     </LogoutStack.Navigator>
   );
 }
+
+const mapStateToProps = (store) => ({
+  currentUser: store.userState.currentUser,
+});
+export default connect(mapStateToProps, null)(DrawerNavigator);

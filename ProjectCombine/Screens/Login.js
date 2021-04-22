@@ -14,6 +14,7 @@ import {
 
 import firebase from "firebase";
 import Logo from "../Components/Logo";
+import Forgot from "../Screens/ForgotPassword"
 
 const DismissKeyboard = ({ children }) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -44,6 +45,9 @@ export class Login extends Component {
       });
       console.log(email)
   }
+
+  goToForgotPassword = () => this.props.navigation.navigate(Forgot)
+
   
   render() {
     return (
@@ -86,7 +90,8 @@ export class Login extends Component {
               title="Forgot Password?"
               color="cornflowerblue"
               style={{ paddingHorizontal: 20 }}
-              onPress={() => Alert.prompt("Forgot Password", "Enter in an email address", (email) => this.setState({ email }))}
+              // onPress={() => Alert.prompt("Forgot Password", "Enter in an email address", (email) => this.setState({ email }))}
+              onPress={() => this.goToForgotPassword}
             />
           </SafeAreaView>
         {/* </DismissKeyboard> */}
