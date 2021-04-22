@@ -1,4 +1,4 @@
-import firebase from "/Users/JoshGialis/Desktop/CSE LOCAL 120/CSE120/ProjectCombine/fb.js";
+import firebase from "../fb.js";
 import React from "react";
 import {
   StyleSheet,
@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { Divider } from "react-native-elements";
-import { getNotification } from "/Users/JoshGialis/Desktop/CSE LOCAL 120/CSE120/ProjectCombine/api/NotificationsAPI.js";
+import { getNotification } from "../api/NotificationsAPI.js";
 import OrangeBanner from "../Components/OrangeBanner";
 import moment from "moment";
 
