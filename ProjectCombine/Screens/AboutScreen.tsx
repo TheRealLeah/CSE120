@@ -60,7 +60,7 @@ export default function AboutScreen() {
         <Text style={styles.missionText}>For more information</Text>
         <Image
           style={styles.logoContainer}
-          source={require("/Users/JoshGialis/Desktop/CSE LOCAL 120/CSE120/ProjectCombine/assets/UWMClogo.png")}
+          source={require("../assets/UWMClogo.png")}
         />
         <Text style={styles.uwmcText}>UNITED WAY OF MERCED COUNTY</Text>
       </SafeAreaView>
