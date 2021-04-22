@@ -25,52 +25,94 @@ import { Ionicons } from "@expo/vector-icons";
 
 import firebase from "firebase";
 
+import { connect } from "react-redux";
+
 require("firebase/firestore");
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
 // const Drawer = createDrawerNavigator();
 
-export default function DrawerNavigator() {
-  return (
-    <Drawer.Navigator
-      drawerContentOptions={{
-        activeTintColor: "red",
-        labelStyle: { fontFamily: "Verdana", color: "#ff6623" },
-      }}
-      drawerStyle={{ backgroundColor: "#fbc956" }}
-    >
-      <Drawer.Screen
-        name="Home"
-        component={HomeNavigator}
-        options={iconContainer.homeIcon}
-      />
-      <Drawer.Screen
-        name="Profile"
-        component={ProfileNavigator}
-        options={iconContainer.profileIcon}
-      />
-      <Drawer.Screen
-        name="Notification"
-        component={NotificationNavigator}
-        options={iconContainer.notificationIcon}
-      />
-      <Drawer.Screen
-        name="Event"
-        component={EventNavigator}
-        options={iconContainer.eventIcon}
-      />
-      <Drawer.Screen
-        name="About"
-        component={AboutNavigator}
-        options={iconContainer.aboutIcon}
-      />
-      <Drawer.Screen
-        name="Logout"
-        component={LogoutNavigator}
-        options={iconContainer.logoutIcon}
-      />
-    </Drawer.Navigator>
-  );
+function DrawerNavigator(props) {
+  const { currentUser } = props;
+  if (currentUser.accountType === "Volunteer") {
+    return (
+      <Drawer.Navigator
+        drawerContentOptions={{
+          activeTintColor: "red",
+          labelStyle: { fontFamily: "Verdana", color: "#ff6623" },
+        }}
+        drawerStyle={{ backgroundColor: "#fbc956" }}
+      >
+        <Drawer.Screen
+          name="Home"
+          component={HomeNavigator}
+          options={iconContainer.homeIcon}
+        />
+        <Drawer.Screen
+          name="Profile"
+          component={ProfileNavigator}
+          options={iconContainer.profileIcon}
+        />
+        <Drawer.Screen
+          name="Notification"
+          component={NotificationNavigator}
+          options={iconContainer.notificationIcon}
+        />
+
+        <Drawer.Screen
+          name="About"
+          component={AboutNavigator}
+          options={iconContainer.aboutIcon}
+        />
+        <Drawer.Screen
+          name="Logout"
+          component={LogoutNavigator}
+          options={iconContainer.logoutIcon}
+        />
+      </Drawer.Navigator>
+    );
+  } else {
+    return (
+      <Drawer.Navigator
+        drawerContentOptions={{
+          activeTintColor: "red",
+          labelStyle: { fontFamily: "Verdana", color: "#ff6623" },
+        }}
+        drawerStyle={{ backgroundColor: "#fbc956" }}
+      >
+        <Drawer.Screen
+          name="Home"
+          component={HomeNavigator}
+          options={iconContainer.homeIcon}
+        />
+        <Drawer.Screen
+          name="Profile"
+          component={ProfileNavigator}
+          options={iconContainer.profileIcon}
+        />
+        <Drawer.Screen
+          name="Notification"
+          component={NotificationNavigator}
+          options={iconContainer.notificationIcon}
+        />
+        <Drawer.Screen
+          name="Event"
+          component={EventNavigator}
+          options={iconContainer.eventIcon}
+        />
+        <Drawer.Screen
+          name="About"
+          component={AboutNavigator}
+          options={iconContainer.aboutIcon}
+        />
+        <Drawer.Screen
+          name="Logout"
+          component={LogoutNavigator}
+          options={iconContainer.logoutIcon}
+        />
+      </Drawer.Navigator>
+    );
+  }
 }
 
 const iconContainer = {
@@ -334,3 +376,7 @@ function LogoutNavigator(props) {
     </LogoutStack.Navigator>
   );
 }
+const mapStateToProps = (store) => ({
+  currentUser: store.userState.currentUser,
+});
+export default connect(mapStateToProps, null)(DrawerNavigator);

@@ -8,7 +8,6 @@ import MainScreen from "./Components/main.js";
 import Register from "./Screens/Register.js";
 import LandingScreen from "./Screens/Landing.js";
 import Login from "./Screens/Login.js";
-import EventCreation from "./Screens/EventCreation.js";
 
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
@@ -16,9 +15,6 @@ import rootReducer from "./redux/reducer";
 import thunk from "redux-thunk";
 // import * as firebase from "firebase";
 import firebase from "/Users/JoshGialis/Desktop/CSE LOCAL 120/CSE120/ProjectCombine/fb.js";
-
-import DrawerNavigator from "./navigation/DrawerNavigator";
-import NotFoundScreen from "./Screens/NotFoundScreen";
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 // const firebaseConfig = {
