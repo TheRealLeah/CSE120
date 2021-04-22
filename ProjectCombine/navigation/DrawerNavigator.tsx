@@ -29,14 +29,18 @@ import firebase from "firebase";
 
 require("firebase/firestore");
 
+import HomeData from "../Components/HomeData";
+HomeData();
+
 const Drawer = createDrawerNavigator<DrawerParamList>();
 // const Drawer = createDrawerNavigator();
 
 function DrawerNavigator(props) {
   const { currentUser } = props;
   console.log({ currentUser });
-
+  
   if (currentUser.accountType === "Volunteer") {
+    
     return (
       <Drawer.Navigator
         drawerContentOptions={{
@@ -199,6 +203,10 @@ function HomeNavigator(props) {
               </TouchableOpacity>
             </View>
           ),
+          headerRight: () => (
+            <View>
+            </View>
+          ),
           headerTitleStyle: {
             textAlign: "center",
             fontSize: 25,
@@ -237,6 +245,10 @@ function ProfileNavigator(props) {
                   }}
                 />
               </TouchableOpacity>
+            </View>
+          ),
+          headerRight: () => (
+            <View>
             </View>
           ),
           headerTitleStyle: {
@@ -278,6 +290,10 @@ function NotificationNavigator(props) {
               </TouchableOpacity>
             </View>
           ),
+          headerRight: () => (
+            <View>
+            </View>
+          ),
           headerTitleStyle: {
             textAlign: "center",
             fontSize: 24,
@@ -316,6 +332,10 @@ function EventNavigator(props) {
                   }}
                 />
               </TouchableOpacity>
+            </View>
+          ),
+          headerRight: () => (
+            <View>
             </View>
           ),
           headerTitleStyle: {
@@ -360,6 +380,10 @@ function HelpNavigator(props) {
           headerTitleStyle: {
             textAlign: "center",
           },
+          headerRight: () => (
+            <View>
+            </View>
+          ),
         }}
       />
     </HelpStack.Navigator>
