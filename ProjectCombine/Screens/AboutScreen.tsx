@@ -192,5 +192,4 @@ const styles = StyleSheet.create({
       >
         UNITED WAY OF MERCED COUNTY
       </Text>
-
 */
