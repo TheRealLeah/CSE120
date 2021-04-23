@@ -42,7 +42,7 @@ export default class HomeScreen extends React.Component {
           ListFooterComponent={this.renderSeparator}
           //keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => {
-            console.log(item);
+            //console.log(item);
             return (
               <SafeAreaView style={styles.Container}>
                 <TouchableOpacity
@@ -53,7 +53,10 @@ export default class HomeScreen extends React.Component {
                       Dimensions.get("screen").height -
                       Dimensions.get("screen").height * 0.88,
                   }}
-                  onPress={() => console.log("PRESSED")}
+                  //onPress={() => console.log("PRESSED")}
+                  onPress={() =>
+                    this.props.navigation.navigate("EventDetails", { item })
+                  }
                 >
                   <Text style={styles.name}>{item[0]} </Text>
                   <Text style={styles.desc}>{item[1]} </Text>
@@ -65,47 +68,7 @@ export default class HomeScreen extends React.Component {
       </ImageBackground>
     );
   }
-
-  //console.log("DATA TEST: ", data);
-
-  // LoadData(function() {
-  //   name = data['name'];
-  //   console.log("After LoadData():", name);
-
-  // })
-  // return (
-  //   <ImageBackground source={require("../assets/background2.png")} style={styles.container} >
-  //     <View style={styles.box}>
-  //       <Text style={styles.name} >Name: {data["name"]} </Text>
-  //       <Text style={styles.desc} >Desc: {data["desc"]} </Text>
-  //     </View>
-  //     <View style={styles.separator} lightColor="#6F91CF" darkColor="#6F91CF" />
-  //   </ImageBackground>
-
-  // );
 }
-
-// async function LoadData(_callback){
-
-//   //console.log("Before Load:");
-//   var db = firebase.firestore().collection('events');
-//   await db.get().then(querySnapshot => {
-//     // console.log("Event Size:", querySnapshot.size);
-
-//     querySnapshot.forEach(documentSnapshot => {
-//       //console.log("Event ID:",documentSnapshot.id, documentSnapshot.data());
-//       data = documentSnapshot.data();
-
-//       // console.log("Event Name:", data['name']);
-//       // console.log("Event Desc:", data['desc']);
-//       // console.log("Got Data:");
-//     })
-//   })
-//   //name = data['name'];
-//   // console.log("After Load:", name);
-//   _callback();
-
-// }
 
 const styles = StyleSheet.create({
   container: {
@@ -170,19 +133,5 @@ const styles = StyleSheet.create({
     width: Dimensions.get("screen").width,
     height:
       Dimensions.get("screen").height - Dimensions.get("screen").height * 0.88,
-  },
-  messageContainer: {
-    fontSize: 17,
-    marginTop: 10,
-    marginLeft: 120,
-    color: "#2468f6",
-    fontWeight: "600",
-  },
-  timeContainer: {
-    fontSize: 17,
-    marginLeft: 120,
-    marginTop: 20,
-    color: "#75a9f9",
-    marginBottom: 10,
   },
 });
