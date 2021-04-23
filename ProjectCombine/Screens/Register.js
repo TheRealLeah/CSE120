@@ -6,12 +6,10 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  CheckBox,
 } from "react-native";
 import firebase from "firebase";
 import "firebase/firestore";
-import { TouchableHighlight } from "react-native-gesture-handler";
-import { View } from "../Components/Themed";
+
 // import CheckBox from "react-native-check-box";
 export class Register extends Component {
   constructor(props) {
