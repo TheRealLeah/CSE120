@@ -11,6 +11,7 @@ import NotificationScreen from "../Screens/NotificationScreen";
 import EventScreen from "../Screens/EventScreen";
 import AboutScreen from "../Screens/AboutScreen";
 import LogoutScreen from "../Screens/LogoutScreen";
+import EventDetails from "../Screens/EventDetails";
 
 import {
   DrawerParamList,
@@ -205,6 +206,21 @@ function HomeNavigator(props) {
             textAlign: "center",
             fontSize: 25,
           },
+        }}
+      />
+      <HomeStack.Screen
+        name="EventDetails"
+        component={EventDetails}
+        options={{
+          headerTintColor: "blue",
+          headerStyle: {
+            backgroundColor: "#8ebaff",
+          },
+          headerTitleStyle: {
+            textAlign: "center",
+            fontSize: 25,
+          },
+          headerRight: () => <View></View>,
         }}
       />
     </HomeStack.Navigator>
