@@ -1,83 +1,81 @@
-import React from "react";
+import React, { Component } from "react";
 import {
   StyleSheet,
   ImageBackground,
   Button,
   TouchableOpacity,
-  Alert,
+  TextInput,
   SafeAreaView,
 } from "react-native";
+import { ListItem, Divider } from 'react-native-elements';
+import { addEvent } from "../api/EventAPI";
 
-import { Text } from "../Components/Themed";
+class Events extends Component{
 
-import firebase from "firebase";
-require("firebase/firestore");
-import { connect } from "react-redux";
+  state = {
+    name: null,
+    desc: null,
+    location: null,
+    time: null,
+    contactinfo: null,
+  }
 
-function EventScreen(props) {
-  const { currentUser } = props;
-  const [nameChange, setNameChange] = React.useState(currentUser.events.name);
-  const [descChange, setDescChange] = React.useState(currentUser.events.description);
-  const [timeChange, setTimeChange] = React.useState(currentUser.events.time);
-  const [loChange, setLocationChange] = React.useState(currentUser.events.location);
-  const [contactChange, setContactChange] = React.useState(currentUser.events.contactinfo);
-  console.log({ currentUser });
-  console.log({ nameChange, descChange });
+  onEventAdded = (event) => {
+    console.log("Event Added");
+    console.log(event);
+  }
 
-  const updateEvents = () =>
-    firebase
-      .firestore()
-      .collection("events")
-      .doc(firebase.auth().currentUser.uid)
-      .update({
-        name: nameChange,
-        description: descChange,
-        location: loChange,
-        time: timeChange,
-        contactinfo: contactChange,
-      });
-
-  return (
-    <ImageBackground
-      source={require("../assets/background2.png")}
-      style={styles.container}
-    >
-      
-      <Text style={styles.box}>Name: {currentUser.name} </Text>
-
-      <SafeAreaView>
-        <Button
-          title="Add Event Name"
-          onPress={() =>
-            Alert.prompt("Add Event Name", "Enter Event Name", (nameChange) =>
-              setNameChange(nameChange)
-            )
-          }
-        />
-      </SafeAreaView>
-
-      <Text style={styles.box}>Description: {currentUser.description} </Text>
-
-      <SafeAreaView>
-        <Button
-          title="Add Event Description"
-          onPress={() =>
-            Alert.prompt("Add Event Description", "Enter Description", (descChange) =>
-              setDescChange(descChange)
-            )
-          }
-        />
-      </SafeAreaView>
-
-      <TouchableOpacity
-        style={styles.appButtonContainer}
-        activeOpacity={0.5}
-        onPress={updateEvents}
+  render() {
+    return (
+      <ImageBackground
+        source={require("../assets/background2.png")}
+        style={styles.container}
       >
-        <Text style={styles.appButtonText}>Save Changes</Text>
-      </TouchableOpacity>
-    </ImageBackground>
-  );
+       
+        <SafeAreaView>
+          <TextInput
+            placeholder="Add Event Name"
+            value={this.state.name}
+            onChangeText={(text) => this.state.name = text}
+          />
+          <TextInput
+            placeholder="Add Event Description"
+            value={this.state.desc}
+            onChangeText={(text) => this.state.desc = text}
+          />
+          <TextInput
+            placeholder="Add Event Location"
+            value={this.state.location}
+            onChangeText={(text) => this.state.location = text}
+          />
+          <TextInput
+            placeholder="Add Event Time"
+            value={this.state.time}
+            onChangeText={(text) => this.state.time = text}
+          />
+          <TextInput
+            placeholder="Add Event Contact Information"
+            value={this.state.contactinfo}
+            onChangeText={(text) => this.state.contactinfo = text}
+          />
+          <Button
+            title='Submit'
+            onPress={() => 
+            addEvent({
+              name: this.state.name,
+              desc: this.state.desc,
+              location: this.state.location,
+              time: this.state.time,
+              contactinfo: this.state.contactinfo,
+            },
+            this.onEventAdded)
+            }
+          />
+        </SafeAreaView>
+
+      </ImageBackground>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -135,7 +133,4 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (store) => ({
-  currentUser: store.userState.currentUser.events,
-});
-export default connect(mapStateToProps, null)(EventScreen);
+export default Events;
