@@ -31,11 +31,11 @@ export default function AboutScreen() {
         <Text style={styles.visionText}>Our Vision</Text>
         <SafeAreaView
           style={{
-            borderLeftWidth: 5,
-            borderRightWidth: 5,
+            // borderLeftWidth: 5,
+            // borderRightWidth: 5,
             borderColor: "dodgerblue",
             width: windowWidth * 0.95,
-            borderRadius: 50,
+            // borderRadius: 50,
           }}
         >
           <Text style={styles.missionText}>
