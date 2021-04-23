@@ -7,13 +7,13 @@ import HomeScreen from "../Screens/HomeScreen";
 import ProfileScreen from "../Screens/ProfileScreen";
 import NotificationScreen from "../Screens/NotificationScreen";
 import EventScreen from "../Screens/EventScreen";
-import HelpScreen from "../Screens/HelpScreen";
+import AboutScreen from "../Screens/AboutScreen";
 import LogoutScreen from "../Screens/LogoutScreen";
 
 import {
   DrawerParamList,
   EventParamList,
-  HelpParamList,
+  AboutParamList,
   HomeParamList,
   LogoutParamList,
   NotificationParamList,
@@ -25,52 +25,94 @@ import { Ionicons } from "@expo/vector-icons";
 
 import firebase from "firebase";
 
+import { connect } from "react-redux";
+
 require("firebase/firestore");
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
 // const Drawer = createDrawerNavigator();
 
-export default function DrawerNavigator() {
-  return (
-    <Drawer.Navigator
-      drawerContentOptions={{
-        activeTintColor: "red",
-        labelStyle: { fontFamily: "Verdana", color: "#ff6623" },
-      }}
-      drawerStyle={{ backgroundColor: "#fbc956" }}
-    >
-      <Drawer.Screen
-        name="Home"
-        component={HomeNavigator}
-        options={iconContainer.homeIcon}
-      />
-      <Drawer.Screen
-        name="Profile"
-        component={ProfileNavigator}
-        options={iconContainer.profileIcon}
-      />
-      <Drawer.Screen
-        name="Notification"
-        component={NotificationNavigator}
-        options={iconContainer.notificationIcon}
-      />
-      <Drawer.Screen
-        name="Event"
-        component={EventNavigator}
-        options={iconContainer.eventIcon}
-      />
-      <Drawer.Screen
-        name="Help"
-        component={HelpNavigator}
-        options={iconContainer.helpIcon}
-      />
-      <Drawer.Screen
-        name="Logout"
-        component={LogoutNavigator}
-        options={iconContainer.logoutIcon}
-      />
-    </Drawer.Navigator>
-  );
+function DrawerNavigator(props) {
+  const { currentUser } = props;
+  if (currentUser.accountType === "Volunteer") {
+    return (
+      <Drawer.Navigator
+        drawerContentOptions={{
+          activeTintColor: "red",
+          labelStyle: { fontFamily: "Verdana", color: "#ff6623" },
+        }}
+        drawerStyle={{ backgroundColor: "#fbc956" }}
+      >
+        <Drawer.Screen
+          name="Home"
+          component={HomeNavigator}
+          options={iconContainer.homeIcon}
+        />
+        <Drawer.Screen
+          name="Profile"
+          component={ProfileNavigator}
+          options={iconContainer.profileIcon}
+        />
+        <Drawer.Screen
+          name="Notification"
+          component={NotificationNavigator}
+          options={iconContainer.notificationIcon}
+        />
+
+        <Drawer.Screen
+          name="About"
+          component={AboutNavigator}
+          options={iconContainer.aboutIcon}
+        />
+        <Drawer.Screen
+          name="Logout"
+          component={LogoutNavigator}
+          options={iconContainer.logoutIcon}
+        />
+      </Drawer.Navigator>
+    );
+  } else {
+    return (
+      <Drawer.Navigator
+        drawerContentOptions={{
+          activeTintColor: "red",
+          labelStyle: { fontFamily: "Verdana", color: "#ff6623" },
+        }}
+        drawerStyle={{ backgroundColor: "#fbc956" }}
+      >
+        <Drawer.Screen
+          name="Home"
+          component={HomeNavigator}
+          options={iconContainer.homeIcon}
+        />
+        <Drawer.Screen
+          name="Profile"
+          component={ProfileNavigator}
+          options={iconContainer.profileIcon}
+        />
+        <Drawer.Screen
+          name="Notification"
+          component={NotificationNavigator}
+          options={iconContainer.notificationIcon}
+        />
+        <Drawer.Screen
+          name="Event"
+          component={EventNavigator}
+          options={iconContainer.eventIcon}
+        />
+        <Drawer.Screen
+          name="About"
+          component={AboutNavigator}
+          options={iconContainer.aboutIcon}
+        />
+        <Drawer.Screen
+          name="Logout"
+          component={LogoutNavigator}
+          options={iconContainer.logoutIcon}
+        />
+      </Drawer.Navigator>
+    );
+  }
 }
 
 const iconContainer = {
@@ -106,10 +148,10 @@ const iconContainer = {
       />
     ),
   },
-  helpIcon: {
+  aboutIcon: {
     drawerIcon: ({ focused, size }) => (
       <Ionicons
-        name="help-circle"
+        name="information-circle-sharp"
         size={size}
         color={focused ? "red" : "tomato"}
       />
@@ -282,16 +324,16 @@ function EventNavigator(props) {
   );
 }
 
-const HelpStack = createStackNavigator<HelpParamList>();
-function HelpNavigator(props) {
+const AboutStack = createStackNavigator<AboutParamList>();
+function AboutNavigator(props) {
   // if there is an error on 'props' it is fine and working correctly
   return (
-    <HelpStack.Navigator>
-      <HelpStack.Screen
-        name="HelpScreen"
-        component={HelpScreen}
+    <AboutStack.Navigator>
+      <AboutStack.Screen
+        name="AboutScreen"
+        component={AboutScreen}
         options={{
-          headerTitle: "Help",
+          headerTitle: "About",
           headerTintColor: "blue",
           headerStyle: {
             backgroundColor: "#8ebaff",
@@ -317,7 +359,7 @@ function HelpNavigator(props) {
           },
         }}
       />
-    </HelpStack.Navigator>
+    </AboutStack.Navigator>
   );
 }
 const LogoutStack = createStackNavigator<LogoutParamList>();
@@ -334,3 +376,7 @@ function LogoutNavigator(props) {
     </LogoutStack.Navigator>
   );
 }
+const mapStateToProps = (store) => ({
+  currentUser: store.userState.currentUser,
+});
+export default connect(mapStateToProps, null)(DrawerNavigator);

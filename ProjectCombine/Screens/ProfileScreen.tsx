@@ -1,6 +1,14 @@
-// import * as React from 'react';
 import React, { useState, useEffect, Component } from "react";
-import { StyleSheet, Image, ImageBackground, Button, TouchableOpacity, TextInput } from "react-native";
+import {
+  StyleSheet,
+  Image,
+  ImageBackground,
+  Button,
+  TouchableOpacity,
+  TextInput,
+  Alert,
+  SafeAreaView,
+} from "react-native";
 import { fetchUser } from "../redux/actions/index";
 
 import EditScreenInfo from "../Components/EditScreenInfo";
@@ -20,10 +28,15 @@ function ProfileScreen(props) {
   console.log({ currentUser });
   console.log({ nameChange, bioChange });
 
-  const updateProfile = () => firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).update({
-    name: nameChange,
-    bio: bioChange,
-  });
+  const updateProfile = () =>
+    firebase
+      .firestore()
+      .collection("users")
+      .doc(firebase.auth().currentUser.uid)
+      .update({
+        name: nameChange,
+        bio: bioChange,
+      });
 
   return (
     <ImageBackground
@@ -31,18 +44,41 @@ function ProfileScreen(props) {
       style={styles.container}
     >
       <Text style={styles.box}>Email: {currentUser.email} </Text>
-      <TextInput style={styles.box} placeholder={currentUser.name} onChangeText={nameChange => setNameChange(nameChange)}/>
+      <Text style={styles.box}>Name: {currentUser.name} </Text>
+
+      <SafeAreaView>
+        <Button
+          title="Edit Name"
+          onPress={() =>
+            Alert.prompt("Edit Name", "Enter in new Name", (nameChange) =>
+              setNameChange(nameChange)
+            )
+          }
+        />
+      </SafeAreaView>
+
       <Text style={styles.box}>Age: {currentUser.age}</Text>
-      <TextInput style={styles.descBox} placeholder={currentUser.bio} onChangeText={bioChange => setBioChange(bioChange)}/>
+      <Text style={styles.descBox}>Bio: {currentUser.bio} </Text>
+
+      <SafeAreaView>
+        <Button
+          title="Edit Bio"
+          onPress={() =>
+            Alert.prompt("Edit Bio", "Enter in new Bio", (bioChange) =>
+              setBioChange(bioChange)
+            )
+          }
+        />
+      </SafeAreaView>
+
       <TouchableOpacity
-          style={styles.appButtonContainer}
-          activeOpacity={0.5}
-          onPress={ updateProfile }
-        >
-          <Text style={styles.appButtonText}>Save Changes</Text>
+        style={styles.appButtonContainer}
+        activeOpacity={0.5}
+        onPress={updateProfile}
+      >
+        <Text style={styles.appButtonText}>Save Changes</Text>
       </TouchableOpacity>
     </ImageBackground>
-
   );
 }
 
@@ -60,7 +96,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingVertical: 10,
     width: 300,
-    marginTop: 80,
+    marginTop: 30,
   },
   appButtonText: {
     fontSize: 20,
@@ -98,10 +134,6 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     height: 1,
     width: "80%",
-  },
-  image: {
-    flex: 1,
-    aspectRatio: 1 / 1
   },
 });
 
