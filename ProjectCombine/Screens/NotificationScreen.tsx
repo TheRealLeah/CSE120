@@ -32,17 +32,17 @@ export default class NotificationScreen extends React.Component {
   // };
 
   changeColor() {
-    // if (!this.state.pressed) {
-    //   this.setState({
-    //     pressed: true,
-    //     backgroundColorNotification: "rgba(0,0,200,0.2)",
-    //   });
-    // } else {
-    //   this.setState({
-    //     pressed: false,
-    //     backgroundColorNotification: "rgba(0,0,200,0.05)",
-    //   });
-    // }
+    if (!this.state.pressed) {
+      this.setState({
+        pressed: true,
+        backgroundColorNotification: "rgba(0,0,200,0.2)",
+      });
+    } else {
+      this.setState({
+        pressed: false,
+        backgroundColorNotification: "rgba(0,0,200,0.05)",
+      });
+    }
   }
 
   renderSeparator = () => (
@@ -53,6 +53,7 @@ export default class NotificationScreen extends React.Component {
       }}
     />
   );
+
   onNotificationReceived = (notificationList) => {
     this.setState((prevState) => ({
       notificationList: (prevState.notificationList = notificationList),
@@ -80,10 +81,10 @@ export default class NotificationScreen extends React.Component {
             return (
               <SafeAreaView style={styles.notificationContainer}>
                 <TouchableOpacity
+                  onPress={() => this.changeColor()}
                   style={{
                     backgroundColor: this.state.backgroundColorNotification,
                   }}
-                  onPress={() => this.changeColor()}
                 >
                   <Text style={styles.messageContainer}>
                     You've signed up for {item.name}.
