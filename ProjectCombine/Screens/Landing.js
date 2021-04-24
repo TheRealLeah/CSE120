@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   },
   appButtonContainer: {
     backgroundColor: "#ffb4b0",
-    shadowOpacity: 0.25,
+    shadowOpacity: 0.1,
     borderRadius: 10,
     paddingVertical: 10,
     width: 300,
