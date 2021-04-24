@@ -50,7 +50,7 @@ export default function EventDetails({route,navigation}) {
         paddingTop: 25,
         paddingLeft: 25,
         paddingRight: 25,
-        alignSelf: "center"
+        textAlign: "center",
       },
       separator: {
         marginVertical: 30,

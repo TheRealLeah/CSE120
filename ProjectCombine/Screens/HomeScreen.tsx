@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
+    textAlign: "center",
   },
   name: {
     fontSize: 20,
@@ -87,6 +88,9 @@ const styles = StyleSheet.create({
     paddingTop: 8,
     paddingBottom: 5,
     paddingRight: 5,
+    width: Dimensions.get('screen').width-(Dimensions.get('screen').width*.05),
+    height: Dimensions.get('screen').height-(Dimensions.get('screen').height*.96),
+    overflow: "hidden",
   },
   desc: {
     fontSize: 15,
