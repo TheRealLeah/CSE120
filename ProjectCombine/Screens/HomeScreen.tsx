@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     paddingLeft: 125,
     paddingTop: 8,
-    paddingBottom: 5,
+    paddingBottom: 20,
     paddingRight: 5,
     width: Dimensions.get('screen').width-(Dimensions.get('screen').width*.05),
     height: Dimensions.get('screen').height-(Dimensions.get('screen').height*.96),
