@@ -69,7 +69,7 @@ export default function EventDetails({route,navigation}) {
         //alignItems: "center",
       },
       button: {
-        backgroundColor: "#E6FEFF",
+        backgroundColor: "#ffb4b0",
         shadowOpacity: 0.1,
         borderRadius: 10,
         width: Dimensions.get('screen').width-(Dimensions.get('screen').width*.6),
