@@ -37,8 +37,15 @@ export default class HomeScreen extends React.Component {
           ItemSeparatorComponent={this.renderSeparator}
           ListFooterComponent={this.renderSeparator}
           //keyExtractor={(item, index) => index.toString()}
+          
           renderItem={({ item }) => {
             //console.log(item);
+            var desc;
+            if(item[1].length > 100){
+              desc = item[1].substring(0,100) + "...";
+            } else {
+              desc = item[1];
+            }
             return (
 
               <SafeAreaView style={styles.Container}>
@@ -52,7 +59,7 @@ export default class HomeScreen extends React.Component {
                   onPress={() => this.props.navigation.navigate("EventDetails",{item})}
                 >
                   <Text style={styles.name} >{item[0]} </Text>
-                  <Text style={styles.desc} >{item[1]} </Text> 
+                  <Text style={styles.desc} >{desc} </Text> 
                 </TouchableOpacity>
               </SafeAreaView>
             );
