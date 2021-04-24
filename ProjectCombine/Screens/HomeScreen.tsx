@@ -70,6 +70,26 @@ export default class HomeScreen extends React.Component {
   }
 }
 
+async function LoadData(_callback) {
+  //console.log("Before Load:");
+  var db = firebase.firestore().collection("events");
+  await db.get().then((querySnapshot) => {
+    // console.log("Event Size:", querySnapshot.size);
+
+    querySnapshot.forEach((documentSnapshot) => {
+      //console.log("Event ID:",documentSnapshot.id, documentSnapshot.data());
+      data = documentSnapshot.data();
+
+      // console.log("Event Name:", data['name']);
+      // console.log("Event Desc:", data['desc']);
+      // console.log("Got Data:");
+    });
+  });
+  //name = data['name'];
+  // console.log("After Load:", name);
+  _callback();
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

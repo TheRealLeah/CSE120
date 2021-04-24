@@ -14,7 +14,7 @@ import { createStore, applyMiddleware } from "redux";
 import rootReducer from "./redux/reducer";
 import thunk from "redux-thunk";
 // import * as firebase from "firebase";
-import firebase from "/Users/JoshGialis/Desktop/CSE LOCAL 120/CSE120/ProjectCombine/fb.js";
+import firebase from "./fb.js";
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 // const firebaseConfig = {
