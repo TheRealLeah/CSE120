@@ -28,6 +28,8 @@ import { Ionicons } from "@expo/vector-icons";
 
 import firebase from "firebase";
 
+import { connect } from "react-redux";
+
 require("firebase/firestore");
 
 import HomeData from "../Components/HomeData";
@@ -153,6 +155,7 @@ const iconContainer = {
       />
     ),
   },
+
   AboutIcon: {
     drawerIcon: ({ focused, size }) => (
       <Ionicons
