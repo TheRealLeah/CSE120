@@ -4,6 +4,7 @@ import { StyleSheet, ImageBackground, TouchableOpacity, Dimensions, Button } fro
 
 import EditScreenInfo from '../Components/EditScreenInfo';
 import { Text, View } from '../Components/Themed';
+import { ScrollView } from "react-native-gesture-handler";
 
 
 export default function EventDetails({route,navigation}) {
@@ -13,7 +14,7 @@ export default function EventDetails({route,navigation}) {
     var desc = item[1];
     var contactinfo = item[2];
     var location = item[3];
-    var time = item[4]
+    var time = item[4];
     //console.log("Name: ", name);
     return (
         <ImageBackground
@@ -28,11 +29,17 @@ export default function EventDetails({route,navigation}) {
             >
                 <Text style={styles.buttontext}>Volunteer</Text>
             </TouchableOpacity>
-
-            <Text style={styles.desc}>Desc: {desc} </Text>
-            <Text style={styles.contact}>Contact: {contactinfo} </Text>
-            <Text style={styles.Location}>Location: {location} </Text>
-            <Text style={styles.time}>Time: {time} </Text>
+            <View
+              style={styles.box}
+            >
+              <ScrollView>
+                <Text style={styles.time}>Time: {time} </Text>
+                <Text style={styles.Location}>Location: {location} </Text>
+                <Text style={styles.contact}>Contact: {contactinfo} </Text>
+                <Text style={styles.desc}>Description: {desc} </Text>
+              </ScrollView>
+            </View>
+            
 
         </ImageBackground>
       );
@@ -63,12 +70,22 @@ export default function EventDetails({route,navigation}) {
       },
       button: {
         backgroundColor: "#E6FEFF",
-        shadowOpacity: 0.25,
+        shadowOpacity: 0.1,
         borderRadius: 10,
         width: Dimensions.get('screen').width-(Dimensions.get('screen').width*.6),
         height: Dimensions.get('screen').height-(Dimensions.get('screen').height*.95),
         marginTop: Dimensions.get('screen').height-(Dimensions.get('screen').height*.75),
         alignSelf: "center",
+      },
+      box: {
+        backgroundColor: "#E6FEFF",
+        shadowOpacity: 0.1,
+        borderRadius: 10,
+        width: Dimensions.get('screen').width-(Dimensions.get('screen').width*.1),
+        height: Dimensions.get('screen').height-(Dimensions.get('screen').height*.6),
+        marginTop: 10,
+        alignSelf: "center",
+        overflow: "scroll",
       },
       desc: {
         fontSize: 20,
