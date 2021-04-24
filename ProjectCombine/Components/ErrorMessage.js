@@ -9,7 +9,9 @@ const ErrorMessage = ({ errorValue }) => (
 
 const styles = StyleSheet.create({
   container: {
-    marginLeft: 25
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 40,
   },
   errorText: {
     color: 'red'

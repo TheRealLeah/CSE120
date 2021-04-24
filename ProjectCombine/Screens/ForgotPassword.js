@@ -5,9 +5,11 @@ import {
   Text,
   SafeAreaView,
   Button,
+  Alert,
 } from "react-native";
 
 import firebase from "./../fb.js";
+import Logo from "../Components/Logo";
 
 import { Formik } from "formik";
 
@@ -24,6 +26,10 @@ export default class ForgotPassword extends Component {
       this.props.navigation.navigate("Login");
     } catch (error) {
       actions.setFieldError("general", error.message);
+      Alert.alert(
+        "ERROR",
+        "Please Enter a Valid Email Address."
+      );
     }
   };
 
@@ -38,6 +44,7 @@ export default class ForgotPassword extends Component {
         source={require("../assets/background2.png")}
       >
         <SafeAreaView style={styles.container}>
+        <Logo></Logo>
           <Formik initialValues={{ email: "" }} onSubmit={this.onSubmit}>
             {({ handleChange, values, handleSubmit, errors, touched }) => (
               <SafeAreaView>
@@ -50,7 +57,7 @@ export default class ForgotPassword extends Component {
                   iconColor="cornflowerblue"
                   color="#02448d"
                 />
-                <ErrorMessage errorValue={touched.email && errors.email} />
+                {/* <ErrorMessage errorValue={touched.email && errors.email} /> */}
                 <SafeAreaView style={styles.buttonContainer}>
                   <TouchableOpacity
                     style={styles.appButtonContainer}
@@ -60,7 +67,7 @@ export default class ForgotPassword extends Component {
                     <Text style={styles.appButtonText}>Send Email</Text>
                   </TouchableOpacity>
                 </SafeAreaView>
-                <ErrorMessage errorValue={errors.general} />
+                {/* <ErrorMessage errorValue={errors.general} /> */}
               </SafeAreaView>
             )}
           </Formik>
