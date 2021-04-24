@@ -1,30 +1,73 @@
 import firebase from "firebase";
 import * as React from "react";
-import { StyleSheet, ImageBackground, Dimensions, Alert } from "react-native";
+import {
+  StyleSheet,
+  ImageBackground,
+  Dimensions,
+  SafeAreaView,
+} from "react-native";
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 
 import { Text, View } from "../Components/Themed";
 
-var data;
-var name;
+import { homedata } from "../Components/HomeData";
 
-export default function HomeScreen() {
-  LoadData(function () {
-    name = data["name"];
-    console.log("After LoadData():", name);
-  });
+//var testdata = [{name: "Test Name", desc:"THIS IS THE DESCRIPTION"},{name: "SECOND", desc: "NEW TEST"}];
 
-  return (
-    <ImageBackground
-      source={require("../assets/background2.png")}
-      style={styles.container}
-    >
-      <View style={styles.box}>
-        <Text style={styles.name}>Name: {name} </Text>
-        <Text style={styles.desc}>Desc: </Text>
-      </View>
-      <View style={styles.separator} lightColor="#6F91CF" darkColor="#6F91CF" />
-    </ImageBackground>
+export default class HomeScreen extends React.Component {
+  state = {
+    backgroundColor: "rgba(0,0,200,0.05)",
+    pressed: false,
+  };
+  renderSeparator = () => (
+    <SafeAreaView
+      style={{
+        backgroundColor: "dodgerblue",
+        height: 1,
+      }}
+    />
   );
+
+  render() {
+    //console.log("HOMEDATA: ", homedata);
+    //console.log("TESTDATA:",testdata)
+    return (
+      <ImageBackground
+        source={require("../assets/background2.png")}
+        style={styles.background}
+      >
+        <FlatList
+          data={homedata}
+          ItemSeparatorComponent={this.renderSeparator}
+          ListFooterComponent={this.renderSeparator}
+          //keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => {
+            //console.log(item);
+            return (
+              <SafeAreaView style={styles.Container}>
+                <TouchableOpacity
+                  style={{
+                    backgroundColor: this.state.backgroundColor,
+                    width: Dimensions.get("screen").width,
+                    height:
+                      Dimensions.get("screen").height -
+                      Dimensions.get("screen").height * 0.88,
+                  }}
+                  //onPress={() => console.log("PRESSED")}
+                  onPress={() =>
+                    this.props.navigation.navigate("EventDetails", { item })
+                  }
+                >
+                  <Text style={styles.name}>{item[0]} </Text>
+                  <Text style={styles.desc}>{item[1]} </Text>
+                </TouchableOpacity>
+              </SafeAreaView>
+            );
+          }}
+        />
+      </ImageBackground>
+    );
+  }
 }
 
 async function LoadData(_callback) {
@@ -62,16 +105,20 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   name: {
-    fontSize: 15,
+    fontSize: 20,
     fontWeight: "bold",
-    paddingLeft: 100,
-    paddingTop: 10,
+    paddingLeft: 125,
+    paddingTop: 8,
+    paddingBottom: 5,
+    paddingRight: 5,
   },
   desc: {
     fontSize: 15,
-    fontWeight: "bold",
-    paddingLeft: 100,
-    paddingTop: 10,
+    fontWeight: "normal",
+    paddingLeft: 125,
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingRight: 5,
   },
   separator: {
     marginVertical: 10,
@@ -94,5 +141,17 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     //opacity: .5,
     marginVertical: Dimensions.get("screen").height,
+  },
+  background: {
+    flex: 1,
+    alignItems: "center",
+  },
+  Container: {
+    borderWidth: 0,
+    borderColor: "dodgerblue",
+    alignSelf: "center",
+    width: Dimensions.get("screen").width,
+    height:
+      Dimensions.get("screen").height - Dimensions.get("screen").height * 0.8,
   },
 });

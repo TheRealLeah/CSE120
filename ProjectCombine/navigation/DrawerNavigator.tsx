@@ -3,12 +3,15 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import * as React from "react";
 
+import { connect } from "react-redux";
+
 import HomeScreen from "../Screens/HomeScreen";
 import ProfileScreen from "../Screens/ProfileScreen";
 import NotificationScreen from "../Screens/NotificationScreen";
 import EventScreen from "../Screens/EventScreen";
 import AboutScreen from "../Screens/AboutScreen";
 import LogoutScreen from "../Screens/LogoutScreen";
+import EventDetails from "../Screens/EventDetails";
 
 import {
   DrawerParamList,
@@ -29,11 +32,16 @@ import { connect } from "react-redux";
 
 require("firebase/firestore");
 
+import HomeData from "../Components/HomeData";
+HomeData();
+
 const Drawer = createDrawerNavigator<DrawerParamList>();
 // const Drawer = createDrawerNavigator();
 
 function DrawerNavigator(props) {
   const { currentUser } = props;
+  console.log({ currentUser });
+
   if (currentUser.accountType === "Volunteer") {
     return (
       <Drawer.Navigator
@@ -58,11 +66,10 @@ function DrawerNavigator(props) {
           component={NotificationNavigator}
           options={iconContainer.notificationIcon}
         />
-
         <Drawer.Screen
           name="About"
           component={AboutNavigator}
-          options={iconContainer.aboutIcon}
+          options={iconContainer.AboutIcon}
         />
         <Drawer.Screen
           name="Logout"
@@ -103,7 +110,7 @@ function DrawerNavigator(props) {
         <Drawer.Screen
           name="About"
           component={AboutNavigator}
-          options={iconContainer.aboutIcon}
+          options={iconContainer.AboutIcon}
         />
         <Drawer.Screen
           name="Logout"
@@ -148,7 +155,8 @@ const iconContainer = {
       />
     ),
   },
-  aboutIcon: {
+
+  AboutIcon: {
     drawerIcon: ({ focused, size }) => (
       <Ionicons
         name="information-circle-sharp"
@@ -196,10 +204,26 @@ function HomeNavigator(props) {
               </TouchableOpacity>
             </View>
           ),
+          headerRight: () => <View></View>,
           headerTitleStyle: {
             textAlign: "center",
             fontSize: 25,
           },
+        }}
+      />
+      <HomeStack.Screen
+        name="EventDetails"
+        component={EventDetails}
+        options={{
+          headerTintColor: "blue",
+          headerStyle: {
+            backgroundColor: "#8ebaff",
+          },
+          headerTitleStyle: {
+            textAlign: "center",
+            fontSize: 25,
+          },
+          headerRight: () => <View></View>,
         }}
       />
     </HomeStack.Navigator>
@@ -236,6 +260,7 @@ function ProfileNavigator(props) {
               </TouchableOpacity>
             </View>
           ),
+          headerRight: () => <View></View>,
           headerTitleStyle: {
             textAlign: "center",
           },
@@ -275,6 +300,7 @@ function NotificationNavigator(props) {
               </TouchableOpacity>
             </View>
           ),
+          headerRight: () => <View></View>,
           headerTitleStyle: {
             textAlign: "center",
             fontSize: 24,
@@ -315,6 +341,7 @@ function EventNavigator(props) {
               </TouchableOpacity>
             </View>
           ),
+          headerRight: () => <View></View>,
           headerTitleStyle: {
             textAlign: "center",
           },
@@ -357,6 +384,7 @@ function AboutNavigator(props) {
           headerTitleStyle: {
             textAlign: "center",
           },
+          headerRight: () => <View></View>,
         }}
       />
     </AboutStack.Navigator>
@@ -376,6 +404,7 @@ function LogoutNavigator(props) {
     </LogoutStack.Navigator>
   );
 }
+
 const mapStateToProps = (store) => ({
   currentUser: store.userState.currentUser,
 });
