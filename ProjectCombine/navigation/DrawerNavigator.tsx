@@ -3,8 +3,6 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import * as React from "react";
 
-import { connect } from "react-redux";
-
 import HomeScreen from "../Screens/HomeScreen";
 import ProfileScreen from "../Screens/ProfileScreen";
 import NotificationScreen from "../Screens/NotificationScreen";
