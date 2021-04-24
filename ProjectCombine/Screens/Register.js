@@ -125,6 +125,7 @@ export class Register extends Component {
 
           <SafeAreaView style={{ flexDirection: "row" }}>
             <TouchableOpacity
+              activeOpacity={1}
               style={[
                 {
                   backgroundColor: this.state.backgroundColorVol,
@@ -137,6 +138,7 @@ export class Register extends Component {
             </TouchableOpacity>
 
             <TouchableOpacity
+              activeOpacity={1}
               style={[
                 {
                   backgroundColor: this.state.backgroundColorOrg,
@@ -198,6 +200,7 @@ const styles = StyleSheet.create({
     marginLeft: 50,
     width: 300,
     marginTop: 80,
+    shadowOpacity: 0.1,
   },
   appButtonContainer1: {
     borderRadius: 10,

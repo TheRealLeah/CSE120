@@ -76,7 +76,7 @@ export class Login extends Component {
 
           <TouchableOpacity
             style={styles.appButtonContainer}
-            activeOpacity={0.5}
+            activeOpacity={0.7}
             onPress={() => this.onSignIn()}
           >
             <Text style={styles.appButtonText}>Login</Text>
@@ -89,6 +89,9 @@ export class Login extends Component {
             title="Forgot Password?"
             color="cornflowerblue"
             style={{ paddingHorizontal: 20 }}
+            onPress={() => {
+              this.props.navigation.navigate("ForgotPassword");
+            }}
           />
         </SafeAreaView>
         {/* </DismissKeyboard> */}
@@ -138,6 +141,7 @@ const styles = StyleSheet.create({
     marginLeft: 50,
     width: 300,
     marginTop: 80,
+    shadowOpacity: 0.1,
   },
   appButtonText: {
     fontSize: 20,
