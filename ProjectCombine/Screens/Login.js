@@ -42,7 +42,7 @@ export class Login extends Component {
       .catch((error) => {
         Alert.alert(
           "ERROR",
-          "Inccorect username/password. \nPlease try again."
+          "Incorrect username/password. \nPlease try again."
         );
         console.log(error);
       });
