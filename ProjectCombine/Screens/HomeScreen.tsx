@@ -54,7 +54,10 @@ export default class HomeScreen extends React.Component {
                   onPress={() => this.props.navigation.navigate("EventDetails",{item})}
                 >
                   <Text style={styles.name} >{item[0]} </Text>
-                  <Text style={styles.desc} >{item[1]} </Text> 
+                  <ScrollView>
+                    <Text style={styles.desc} >{item[1]} </Text> 
+                  </ScrollView>
+                  
                 </TouchableOpacity>
               </SafeAreaView>
             );
