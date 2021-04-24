@@ -40,12 +40,6 @@ export default class HomeScreen extends React.Component {
           
           renderItem={({ item }) => {
             //console.log(item);
-            var desc;
-            if(item[1].length > 100){
-              desc = item[1].substring(0,100) + "...";
-            } else {
-              desc = item[1];
-            }
             return (
 
               <SafeAreaView style={styles.Container}>
@@ -59,7 +53,7 @@ export default class HomeScreen extends React.Component {
                   onPress={() => this.props.navigation.navigate("EventDetails",{item})}
                 >
                   <Text style={styles.name} >{item[0]} </Text>
-                  <Text style={styles.desc} >{desc} </Text> 
+                  <Text style={styles.desc} >{item[1]} </Text> 
                 </TouchableOpacity>
               </SafeAreaView>
             );
@@ -97,10 +91,13 @@ const styles = StyleSheet.create({
   desc: {
     fontSize: 15,
     fontWeight: 'normal',
+    width: Dimensions.get('screen').width-(Dimensions.get('screen').width*.05),
+    height: Dimensions.get('screen').height-(Dimensions.get('screen').height*.91),
     paddingLeft: 125,
     paddingTop: 5,
     paddingBottom: 5,
     paddingRight: 5,
+    overflow: "hidden",
   },
   separator: {
     marginVertical: 10,
@@ -116,7 +113,7 @@ const styles = StyleSheet.create({
     // paddingHorizontal: 12,
     //marginLeft: 50,
     width: Dimensions.get('screen').width-(Dimensions.get('screen').width*.1),
-    height: Dimensions.get('screen').height-(Dimensions.get('screen').height*.88),
+    height: 10,
     marginTop: 40,
     alignSelf: "center",
     //opacity: .5,
