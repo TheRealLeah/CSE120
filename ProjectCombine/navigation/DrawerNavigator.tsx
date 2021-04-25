@@ -19,6 +19,7 @@ import {
   LogoutParamList,
   NotificationParamList,
   ProfileParamList,
+  EventVolunteerParamList,
 } from "../types";
 import { View, Image, TouchableOpacity, Dimensions } from "react-native";
 
@@ -31,6 +32,7 @@ import { connect } from "react-redux";
 require("firebase/firestore");
 
 import HomeData from "../Components/HomeData";
+import EventVolunteerScreen from "../Screens/EventVolunteerScreen";
 HomeData();
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
@@ -63,6 +65,11 @@ function DrawerNavigator(props) {
           name="Notification"
           component={NotificationNavigator}
           options={iconContainer.notificationIcon}
+        />
+        <Drawer.Screen
+          name="Event"
+          component={EventVolunteerNavigator}
+          options={iconContainer.eventIcon}
         />
         <Drawer.Screen
           name="About"
@@ -400,6 +407,46 @@ function LogoutNavigator(props) {
         options={{ headerShown: false }}
       />
     </LogoutStack.Navigator>
+  );
+}
+
+const EventVolunteerStack = createStackNavigator<EventVolunteerParamList>();
+function EventVolunteerNavigator(props) {
+  // if there is an error on 'props' it is fine and working correctly
+  return (
+    <EventVolunteerStack.Navigator>
+      <EventVolunteerStack.Screen
+        name="EventScreen"
+        component={EventVolunteerScreen}
+        options={{
+          headerTitle: "Event",
+          headerTintColor: "blue",
+          headerStyle: {
+            backgroundColor: "#8ebaff",
+          },
+          headerLeft: () => (
+            <View>
+              <TouchableOpacity onPress={() => props.navigation.toggleDrawer()}>
+                <Image
+                  source={require("../assets/menu-outline.png")} //.svg is invisable in ios
+                  style={{
+                    flex: 1,
+                    width: Dimensions.get("window").width * 0.06,
+                    height: Dimensions.get("window").height * 0.06,
+                    marginLeft: 10,
+                    resizeMode: "contain",
+                  }}
+                />
+              </TouchableOpacity>
+            </View>
+          ),
+          headerRight: () => <View></View>,
+          headerTitleStyle: {
+            textAlign: "center",
+          },
+        }}
+      />
+    </EventVolunteerStack.Navigator>
   );
 }
 
