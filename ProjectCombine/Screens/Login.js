@@ -42,7 +42,7 @@ export class Login extends Component {
       .catch((error) => {
         Alert.alert(
           "ERROR",
-          "Incorrect username/password. \nPlease try again."
+          "Inccorect username/password. \nPlease try again."
         );
         console.log(error);
       });
@@ -74,13 +74,13 @@ export class Login extends Component {
               onChangeText={(password) => this.setState({ password })}
             ></TextInput>
 
-            <TouchableOpacity
-              style={styles.appButtonContainer}
-              activeOpacity={0.7}
-              onPress={() => this.onSignIn()}
-            >
-              <Text style={styles.appButtonText}>Login</Text>
-            </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.appButtonContainer}
+            activeOpacity={0.5}
+            onPress={() => this.onSignIn()}
+          >
+            <Text style={styles.appButtonText}>Login</Text>
+          </TouchableOpacity>
 
             {/* <Button onPress={() => this.onSignIn()} title="Sign In" /> */}
 
@@ -141,7 +141,6 @@ const styles = StyleSheet.create({
     marginLeft: 50,
     width: 300,
     marginTop: 80,
-    shadowOpacity: 0.1,
   },
   appButtonText: {
     fontSize: 20,
