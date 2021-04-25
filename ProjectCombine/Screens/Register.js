@@ -210,6 +210,7 @@ const styles = StyleSheet.create({
     marginLeft: 50,
     width: 300,
     marginTop: 80,
+    shadowOpacity: 0.1,
   },
   appButtonContainer1: {
     borderRadius: 10,

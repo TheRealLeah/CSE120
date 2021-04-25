@@ -15,6 +15,7 @@ import rootReducer from "./redux/reducer";
 import thunk from "redux-thunk";
 // import * as firebase from "firebase";
 import firebase from "./fb.js";
+import ForgotPassword from "./Screens/ForgotPassword.js";
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 // const firebaseConfig = {
@@ -101,6 +102,11 @@ export class App extends Component {
             <Stack.Screen
               name="Login"
               component={Login}
+              options={{ headerShown: false }}
+            ></Stack.Screen>
+            <Stack.Screen
+              name="ForgotPassword"
+              component={ForgotPassword}
               options={{ headerShown: false }}
             ></Stack.Screen>
           </Stack.Navigator>
