@@ -42,7 +42,7 @@ export class Login extends Component {
       .catch((error) => {
         Alert.alert(
           "ERROR",
-          "Inccorect username/password. \nPlease try again."
+          "Incorrect username/password. \nPlease try again."
         );
         console.log(error);
       });
@@ -54,44 +54,47 @@ export class Login extends Component {
         source={require("../assets/background2.png")}
         style={{ flex: 1 }}
       >
-        {/* <DismissKeyboard> */}
-        <SafeAreaView>
-          <Logo></Logo>
-          <Text style={styles.signupTextContainer}>Sign In</Text>
-          <Text style={styles.signupTextContainer1}>
-            Hi there! Nice to see you again.
-          </Text>
+        <DismissKeyboard>
+          <SafeAreaView>
+            <Logo></Logo>
+            <Text style={styles.signupTextContainer}>Sign In</Text>
+            <Text style={styles.signupTextContainer1}>
+              Hi there! Nice to see you again.
+            </Text>
 
-          <Text style={styles.textContainer}>Email</Text>
-          <TextInput
-            style={styles.textInputContainer}
-            onChangeText={(email) => this.setState({ email })}
-          ></TextInput>
-          <Text style={styles.textContainer}>Password</Text>
-          <TextInput
-            style={styles.textInputContainer}
-            secureTextEntry={true}
-            onChangeText={(password) => this.setState({ password })}
-          ></TextInput>
+            <Text style={styles.textContainer}>Email</Text>
+            <TextInput
+              style={styles.textInputContainer}
+              onChangeText={(email) => this.setState({ email })}
+            ></TextInput>
+            <Text style={styles.textContainer}>Password</Text>
+            <TextInput
+              style={styles.textInputContainer}
+              secureTextEntry={true}
+              onChangeText={(password) => this.setState({ password })}
+            ></TextInput>
 
-          <TouchableOpacity
-            style={styles.appButtonContainer}
-            activeOpacity={0.5}
-            onPress={() => this.onSignIn()}
-          >
-            <Text style={styles.appButtonText}>Login</Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.appButtonContainer}
+              activeOpacity={0.7}
+              onPress={() => this.onSignIn()}
+            >
+              <Text style={styles.appButtonText}>Login</Text>
+            </TouchableOpacity>
 
-          {/* <Button onPress={() => this.onSignIn()} title="Sign In" /> */}
+            {/* <Button onPress={() => this.onSignIn()} title="Sign In" /> */}
 
-          <SafeAreaView style={{ marginTop: 40 }} />
-          <Button
-            title="Forgot Password?"
-            color="cornflowerblue"
-            style={{ paddingHorizontal: 20 }}
-          />
-        </SafeAreaView>
-        {/* </DismissKeyboard> */}
+            <SafeAreaView style={{ marginTop: 40 }} />
+            <Button
+              title="Forgot Password?"
+              color="cornflowerblue"
+              style={{ paddingHorizontal: 20 }}
+              onPress={() => {
+                this.props.navigation.navigate("ForgotPassword");
+              }}
+            />
+          </SafeAreaView>
+        </DismissKeyboard>
       </ImageBackground>
     );
   }
@@ -138,6 +141,7 @@ const styles = StyleSheet.create({
     marginLeft: 50,
     width: 300,
     marginTop: 80,
+    shadowOpacity: 0.1,
   },
   appButtonText: {
     fontSize: 20,

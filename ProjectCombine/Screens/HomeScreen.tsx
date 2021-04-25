@@ -54,7 +54,10 @@ export default class HomeScreen extends React.Component {
                   onPress={() => this.props.navigation.navigate("EventDetails",{item})}
                 >
                   <Text style={styles.name} >{item[0]} </Text>
-                  <Text style={styles.desc} >{item[1]} </Text> 
+                  <ScrollView>
+                    <Text style={styles.desc} >{item[1]} </Text> 
+                  </ScrollView>
+                  
                 </TouchableOpacity>
               </SafeAreaView>
             );
@@ -86,7 +89,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     paddingLeft: 125,
     paddingTop: 8,
-    paddingBottom: 5,
+    paddingBottom: 20,
     paddingRight: 5,
     width: Dimensions.get('screen').width-(Dimensions.get('screen').width*.05),
     height: Dimensions.get('screen').height-(Dimensions.get('screen').height*.96),
