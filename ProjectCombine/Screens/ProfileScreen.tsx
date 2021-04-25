@@ -18,7 +18,7 @@ import firebase from "firebase";
 require("firebase/firestore");
 import { connect } from "react-redux";
 import { user } from "../redux/reducer/user";
-import EditScreen from "./EditProfile";
+// import EditScreen from "./EditProfile";
 import Navigation from "../navigation";
 
 function ProfileScreen(props) {
