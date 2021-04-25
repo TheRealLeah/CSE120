@@ -1,10 +1,16 @@
 import React, { Component } from "react";
-import {StyleSheet, ImageBackground, Button, TextInput, SafeAreaView, TouchableOpacity, Dimensions} from "react-native";
-import { FlatList } from "react-native-gesture-handler";
-import { addEvent, eventList, myEventList} from "../api/EventAPI";
-import { Text } from '../Components/Themed';
+import {
+  StyleSheet,
+  ImageBackground,
+  Button,
+  TouchableOpacity,
+  TextInput,
+  SafeAreaView,
+} from "react-native";
+import { ListItem, Divider } from 'react-native-elements';
+import { addEvent } from "../api/EventAPI";
 
-class Events extends Component<{}, any>{
+class Events extends Component{
 
   state = {
     name: null,
@@ -12,35 +18,11 @@ class Events extends Component<{}, any>{
     location: null,
     time: null,
     contactinfo: null,
-    //eventList: [],
-    backgroundColor: "rgba(0,0,200,0.05)",
   }
-
-  renderSeparator = () => (
-    <SafeAreaView
-      style={{
-        backgroundColor: "dodgerblue",
-        height: 1,
-      }}
-    />
-  )
 
   onEventAdded = (event) => {
     console.log("Event Added");
     console.log(event);
-    this.setState(prevState => ({
-      eventList: [... prevState.eventList, event]
-    }));
-  }
-
-  onEventReceived = (eventList) => {
-    this.setState(prevState => ({
-      eventList: prevState.eventList = eventList
-    }));
-  }
-
-  componentDidMount() {
-    myEventList(this.onEventReceived);
   }
 
   render() {
@@ -52,37 +34,32 @@ class Events extends Component<{}, any>{
        
         <SafeAreaView>
           <TextInput
-            style={styles.TextInput}
-            placeholder="Event Name:"
+            placeholder="Add Event Name"
             value={this.state.name}
             onChangeText={(text) => this.state.name = text}
           />
           <TextInput
-            style={styles.TextInput}
-            placeholder="Event Description:"
+            placeholder="Add Event Description"
             value={this.state.desc}
             onChangeText={(text) => this.state.desc = text}
           />
           <TextInput
-            style={styles.TextInput}
-            placeholder="Event Location:"
+            placeholder="Add Event Location"
             value={this.state.location}
             onChangeText={(text) => this.state.location = text}
           />
           <TextInput
-            style={styles.TextInput}
-            placeholder="Event Time:"
+            placeholder="Add Event Time"
             value={this.state.time}
             onChangeText={(text) => this.state.time = text}
           />
           <TextInput
-            style={styles.TextInput}
-            placeholder="Contact Information:"
+            placeholder="Add Event Contact Information"
             value={this.state.contactinfo}
             onChangeText={(text) => this.state.contactinfo = text}
           />
           <Button
-            title='Create Event'
+            title='Submit'
             onPress={() => 
             addEvent({
               name: this.state.name,
@@ -94,30 +71,6 @@ class Events extends Component<{}, any>{
             this.onEventAdded)
             }
           />
-
-          {/* <FlatList
-             data={eventList}
-             ItemSeparatorComponent={this.renderSeparator}
-             ListFooterComponent={this.renderSeparator}
-             renderItem={({ item }) => {
-              return (
-                <SafeAreaView style={styles.container}>
-                <TouchableOpacity
-                  style={{
-                    backgroundColor: this.state.backgroundColor,
-                    width: Dimensions.get('screen').width,
-                    height: Dimensions.get('screen').height-(Dimensions.get('screen').height*.88),
-                  }}
-                >
-                  <Text style={styles.name} >{item[0]} </Text>
-                  <Text style={styles.desc} >{item[1]} </Text> 
-                </TouchableOpacity>
-              </SafeAreaView>
-              );
-            }
-            }
-          /> */}
-            
         </SafeAreaView>
 
       </ImageBackground>
@@ -130,50 +83,53 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 15,
   },
   containerInfo: {
     marginTop: 10,
   },
-  TextInput: {
-    height: 40,
+  appButtonContainer: {
+    backgroundColor: "#ffb4b0",
+    borderRadius: 10,
+    paddingVertical: 10,
     width: 300,
-    paddingHorizontal: 5,
-    backgroundColor: 'white',
-    marginBottom: 5,
+    marginTop: 30,
   },
-  inputContainer: {
-    marginBottom: 20,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.23,
-    shadowRadius: 2.62,
-    elevation: 4,
-  },
-  name: {
+  appButtonText: {
     fontSize: 20,
-    fontWeight: 'bold',
-    paddingLeft: 125,
-    paddingTop: 8,
-    paddingBottom: 5,
-    paddingRight: 5,
-    width: Dimensions.get('screen').width-(Dimensions.get('screen').width*.05),
-    height: Dimensions.get('screen').height-(Dimensions.get('screen').height*.96),
-    overflow: "hidden",
+    color: "#ff5d55",
+    fontWeight: "800",
+    alignSelf: "center",
   },
-  desc: {
-    fontSize: 15,
-    fontWeight: 'normal',
-    width: Dimensions.get('screen').width-(Dimensions.get('screen').width*.05),
-    height: Dimensions.get('screen').height-(Dimensions.get('screen').height*.88),
-    paddingLeft: 125,
-    paddingTop: 5,
-    paddingBottom: 5,
-    paddingRight: 5,
-    overflow: "scroll",
+  box: {
+    backgroundColor: "#ffb4b0",
+    shadowOpacity: 0.25,
+    borderRadius: 10,
+    paddingVertical: 10,
+
+    width: 300,
+    height: 50,
+    marginTop: 40,
+    alignSelf: "center",
+  },
+  descBox: {
+    backgroundColor: "#ffb4b0",
+    shadowOpacity: 0.25,
+    borderRadius: 10,
+    paddingVertical: 10,
+
+    width: 300,
+    height: 250,
+    marginTop: 40,
+    alignSelf: "center",
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  separator: {
+    marginVertical: 30,
+    height: 1,
+    width: "80%",
   },
 });
 

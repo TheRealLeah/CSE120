@@ -6,9 +6,17 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  Keyboard,
+  TouchableWithoutFeedback
 } from "react-native";
 import firebase from "firebase";
 import "firebase/firestore";
+
+const DismissKeyboard = ({ children }) => (
+  <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    {children}
+  </TouchableWithoutFeedback>
+);
 
 // import CheckBox from "react-native-check-box";
 export class Register extends Component {
@@ -94,69 +102,73 @@ export class Register extends Component {
         source={require("../assets/background2.png")}
         style={{ flex: 1 }}
       >
+      <DismissKeyboard>
         <SafeAreaView>
-          <Text style={styles.signupTextContainer}>Sign Up</Text>
-          <Text style={styles.textContainer}>Email</Text>
-          <TextInput
-            style={styles.textInputContainer}
-            onChangeText={(email) => this.setState({ email })}
-          ></TextInput>
+            <Text style={styles.signupTextContainer}>Sign Up</Text>
+            <Text style={styles.textContainer}>Email</Text>
+            <TextInput
+              style={styles.textInputContainer}
+              onChangeText={(email) => this.setState({ email })}
+            ></TextInput>
 
-          <Text style={styles.textContainer}>Password</Text>
-          <TextInput
-            style={styles.textInputContainer}
-            secureTextEntry={true}
-            onChangeText={(password) => this.setState({ password })}
-          ></TextInput>
+            <Text style={styles.textContainer}>Password</Text>
+            <TextInput
+              style={styles.textInputContainer}
+              secureTextEntry={true}
+              onChangeText={(password) => this.setState({ password })}
+            ></TextInput>
 
-          <Text style={styles.textContainer}>Name</Text>
-          <TextInput
-            style={styles.textInputContainer}
-            onChangeText={(name) => this.setState({ name })}
-          ></TextInput>
+            <Text style={styles.textContainer}>Name</Text>
+            <TextInput
+              style={styles.textInputContainer}
+              onChangeText={(name) => this.setState({ name })}
+            ></TextInput>
 
-          <Text style={styles.textContainer}>Age</Text>
-          <TextInput
-            style={styles.textInputContainer}
-            onChangeText={(age) => this.setState({ age })}
-          ></TextInput>
+            <Text style={styles.textContainer}>Age</Text>
+            <TextInput
+              style={styles.textInputContainer}
+              onChangeText={(age) => this.setState({ age })}
+            ></TextInput>
 
-          <Text style={styles.textContainer}>Account Type</Text>
+            <Text style={styles.textContainer}>Account Type</Text>
 
-          <SafeAreaView style={{ flexDirection: "row" }}>
+            <SafeAreaView style={{ flexDirection: "row" }}>
+              <TouchableOpacity
+                activeOpacity={1}
+                style={[
+                  {
+                    backgroundColor: this.state.backgroundColorVol,
+                  },
+                  styles.appButtonContainer1,
+                ]}
+                onPress={() => this.changeColorV()}
+              >
+                <Text style={styles.appButtonText1}>Volunteer</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                activeOpacity={1}
+                style={[
+                  {
+                    backgroundColor: this.state.backgroundColorOrg,
+                  },
+                  styles.appButtonContainer1,
+                ]}
+                onPress={() => this.changeColorO()}
+              >
+                <Text style={styles.appButtonText1}>Organizer</Text>
+              </TouchableOpacity>
+            </SafeAreaView>
+
             <TouchableOpacity
-              style={[
-                {
-                  backgroundColor: this.state.backgroundColorVol,
-                },
-                styles.appButtonContainer1,
-              ]}
-              onPress={() => this.changeColorV()}
+              style={styles.appButtonContainer}
+              activeOpacity={0.5}
+              onPress={() => this.onSignUp()}
             >
-              <Text style={styles.appButtonText1}>Volunteer</Text>
+              <Text style={styles.appButtonText}>Sign Up</Text>
             </TouchableOpacity>
-
-            <TouchableOpacity
-              style={[
-                {
-                  backgroundColor: this.state.backgroundColorOrg,
-                },
-                styles.appButtonContainer1,
-              ]}
-              onPress={() => this.changeColorO()}
-            >
-              <Text style={styles.appButtonText1}>Organizer</Text>
-            </TouchableOpacity>
-          </SafeAreaView>
-
-          <TouchableOpacity
-            style={styles.appButtonContainer}
-            activeOpacity={0.5}
-            onPress={() => this.onSignUp()}
-          >
-            <Text style={styles.appButtonText}>Sign Up</Text>
-          </TouchableOpacity>
         </SafeAreaView>
+        </DismissKeyboard>
       </ImageBackground>
     );
   }
@@ -198,6 +210,7 @@ const styles = StyleSheet.create({
     marginLeft: 50,
     width: 300,
     marginTop: 80,
+    shadowOpacity: 0.1,
   },
   appButtonContainer1: {
     borderRadius: 10,
