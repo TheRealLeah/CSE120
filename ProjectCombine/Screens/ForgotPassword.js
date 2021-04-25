@@ -35,4 +35,92 @@ export default class ForgotPassword extends Component {
         "Please Check your Email to Reset your Password"
       );
       await firebase.auth().sendPasswordResetEmail(email);
-      this.props.navigation.na
+      this.props.navigation.navigate("Login");
+    } catch (error) {
+      actions.setFieldError("general", error.message);
+      Alert.alert(
+        "ERROR",
+        "Please Enter a Valid Email Address."
+      );
+    }
+  };
+
+  onSubmit = (values, actions) => {
+    this.handlePasswordReset(values, actions);
+  };
+
+  render() {
+    return (
+      <ImageBackground
+        style={{ flex: 1 }}
+        source={require("../assets/background2.png")}
+      >
+      <DismissKeyboard>
+        <SafeAreaView style={styles.container}>
+        <Logo></Logo>
+          <Formik initialValues={{ email: "" }} onSubmit={this.onSubmit}>
+            {({ handleChange, values, handleSubmit, errors, touched }) => (
+              <SafeAreaView>
+                <FormInput
+                  name="email"
+                  value={values.email}
+                  onChangeText={handleChange("email")}
+                  placeholder="Email"
+                  iconName="ios-mail"
+                  iconColor="cornflowerblue"
+                  color="#02448d"
+                />
+                {/* <ErrorMessage errorValue={touched.email && errors.email} /> */}
+                <SafeAreaView style={styles.buttonContainer}>
+                  <TouchableOpacity
+                    style={styles.appButtonContainer}
+                    activeOpacity={0.5}
+                    onPress={handleSubmit}
+                  >
+                    <Text style={styles.appButtonText}>Send Email</Text>
+                  </TouchableOpacity>
+                </SafeAreaView>
+                {/* <ErrorMessage errorValue={errors.general} /> */}
+              </SafeAreaView>
+            )}
+          </Formik>
+        </SafeAreaView>
+        </DismissKeyboard>
+      </ImageBackground>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  backgroundContainer: {
+    flex: 1,
+  },
+  appButtonContainer: {
+    backgroundColor: "#ffb4b0",
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    marginLeft: 50,
+    width: 300,
+  },
+  appButtonText: {
+    fontSize: 20,
+    color: "#ff5d55",
+    fontWeight: "800",
+    alignSelf: "center",
+  },
+});
+
+// <TouchableOpacity
+// style={styles.appButtonContainer}
+// activeOpacity={0.5}
+// onPress={() => this.onSignIn()}
+// >
+
+// <FormButton
+// buttonType="outline"
+// onPress={handleSubmit}
+// title="Send Email"
+// buttonColor="#ffb4b0"
+// // disabled={!isValid || isSubmitting}
+// />
