@@ -6,6 +6,8 @@ import {
   SafeAreaView,
   Button,
   Alert,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 
 import firebase from "./../fb.js";
@@ -17,6 +19,12 @@ import FormInput from "../Components/FormInput";
 import FormButton from "../Components/FormButton";
 import ErrorMessage from "../Components/ErrorMessage";
 import { TouchableOpacity } from "react-native-gesture-handler";
+
+const DismissKeyboard = ({ children }) => (
+  <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    {children}
+  </TouchableWithoutFeedback>
+);
 
 export default class ForgotPassword extends Component {
   handlePasswordReset = async (value, actions) => {
@@ -43,6 +51,7 @@ export default class ForgotPassword extends Component {
         style={{ flex: 1 }}
         source={require("../assets/background2.png")}
       >
+      <DismissKeyboard>
         <SafeAreaView style={styles.container}>
         <Logo></Logo>
           <Formik initialValues={{ email: "" }} onSubmit={this.onSubmit}>
@@ -72,6 +81,7 @@ export default class ForgotPassword extends Component {
             )}
           </Formik>
         </SafeAreaView>
+        </DismissKeyboard>
       </ImageBackground>
     );
   }
