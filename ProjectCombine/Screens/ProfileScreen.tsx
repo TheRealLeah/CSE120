@@ -8,6 +8,7 @@ import {
   TextInput,
   Alert,
   SafeAreaView,
+  Dimensions,
 } from "react-native";
 import { fetchUser } from "../redux/actions/index";
 
@@ -28,7 +29,7 @@ function ProfileScreen(props) {
   console.log({ currentUser });
   console.log({ nameChange, bioChange });
 
-  const updateProfile = () =>
+  const updateProfile = () => {
     firebase
       .firestore()
       .collection("users")
@@ -37,47 +38,90 @@ function ProfileScreen(props) {
         name: nameChange,
         bio: bioChange,
       });
+    Alert.alert("Changes saved!");
+  };
 
   return (
     <ImageBackground
       source={require("../assets/background2.png")}
       style={styles.container}
     >
-      <Text style={styles.box}>Email: {currentUser.email} </Text>
-      <Text style={styles.box}>Name: {currentUser.name} </Text>
-
-      <SafeAreaView>
-        <Button
-          title="Edit Name"
-          onPress={() =>
-            Alert.prompt("Edit Name", "Enter in new Name", (nameChange) =>
-              setNameChange(nameChange)
-            )
-          }
-        />
-      </SafeAreaView>
-
-      <Text style={styles.box}>Age: {currentUser.age}</Text>
-      <Text style={styles.descBox}>Bio: {currentUser.bio} </Text>
-
-      <SafeAreaView>
-        <Button
-          title="Edit Bio"
-          onPress={() =>
-            Alert.prompt("Edit Bio", "Enter in new Bio", (bioChange) =>
-              setBioChange(bioChange)
-            )
-          }
-        />
-      </SafeAreaView>
-
-      <TouchableOpacity
-        style={styles.appButtonContainer}
-        activeOpacity={0.5}
-        onPress={updateProfile}
+      <SafeAreaView
+        style={{ borderWidth: 5, borderRadius: 85, borderColor: "dodgerblue" }}
       >
-        <Text style={styles.appButtonText}>Save Changes</Text>
-      </TouchableOpacity>
+        <Image
+          style={{ borderRadius: 75, width: 150, height: 150 }}
+          source={require("../assets/santoshNew.jpeg")}
+        ></Image>
+      </SafeAreaView>
+
+      <SafeAreaView>
+        <SafeAreaView style={{ marginRight: 240 }}>
+          <Text style={{ fontSize: 22, color: "red" }}>Email</Text>
+        </SafeAreaView>
+
+        <SafeAreaView style={styles.box1}>
+          <Text style={{ fontSize: 18 }}>{currentUser.email} </Text>
+        </SafeAreaView>
+
+        <SafeAreaView style={{ marginRight: 240, marginTop: 20 }}>
+          <Text style={{ fontSize: 22, color: "red" }}>Name</Text>
+        </SafeAreaView>
+
+        <SafeAreaView style={styles.box1}>
+          <Text style={{ fontSize: 18 }}>{nameChange} </Text>
+        </SafeAreaView>
+
+        <SafeAreaView>
+          <Button
+            title="Edit Name"
+            onPress={() =>
+              Alert.prompt("Edit Name", "Enter in new Name", (nameChange) =>
+                setNameChange(nameChange)
+              )
+            }
+          />
+        </SafeAreaView>
+
+        <SafeAreaView style={{ marginRight: 260 }}>
+          <Text style={[{ fontSize: 22, color: "red" }]}>Age</Text>
+        </SafeAreaView>
+
+        <SafeAreaView style={styles.box1}>
+          <Text style={[{ fontSize: 18 }]}>{currentUser.age}</Text>
+        </SafeAreaView>
+
+        <SafeAreaView style={{ marginRight: 190 }}>
+          <Text style={[{ fontSize: 22, color: "red" }, { paddingTop: 20 }]}>
+            Information
+          </Text>
+        </SafeAreaView>
+
+        <SafeAreaView style={styles.descBox}>
+          <Text style={{ fontSize: 18 }}>{bioChange} </Text>
+        </SafeAreaView>
+
+        <SafeAreaView>
+          <Button
+            title="Edit Bio"
+            onPress={() =>
+              Alert.prompt("Edit Bio", "Enter in new Bio", (bioChange) =>
+                setBioChange(bioChange)
+              )
+            }
+          />
+        </SafeAreaView>
+
+        <SafeAreaView style={{ marginTop: 60 }}>
+          <TouchableOpacity
+            style={styles.appButtonContainer}
+            activeOpacity={0.5}
+            onPress={updateProfile}
+          >
+            <Text style={styles.appButtonText}>Save Changes</Text>
+          </TouchableOpacity>
+        </SafeAreaView>
+      </SafeAreaView>
     </ImageBackground>
   );
 }
@@ -96,7 +140,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingVertical: 10,
     width: 300,
-    marginTop: 30,
+    position: "absolute",
+    bottom: 0,
+    marginTop: 50,
   },
   appButtonText: {
     fontSize: 20,
@@ -106,24 +152,33 @@ const styles = StyleSheet.create({
   },
   box: {
     backgroundColor: "#ffb4b0",
-    shadowOpacity: 0.25,
+    shadowOpacity: 0.1,
     borderRadius: 10,
     paddingVertical: 10,
-
     width: 300,
     height: 50,
     marginTop: 40,
     alignSelf: "center",
+    justifyContent: "center",
+  },
+  box1: {
+    backgroundColor: "#ffb4b0",
+    shadowOpacity: 0.1,
+    borderRadius: 10,
+    paddingVertical: 10,
+    width: 300,
+    height: 50,
+    marginTop: 5,
+    alignItems: "center",
   },
   descBox: {
     backgroundColor: "#ffb4b0",
-    shadowOpacity: 0.25,
+    shadowOpacity: 0.1,
     borderRadius: 10,
     paddingVertical: 10,
-
     width: 300,
-    height: 250,
-    marginTop: 40,
+    height: 150,
+    // marginTop: 40,
     alignSelf: "center",
   },
   title: {

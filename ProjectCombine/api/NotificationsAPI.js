@@ -17,6 +17,7 @@ export async function getNotification(notificationsRetrieved) {
         .collection("users")
         .doc(firebase.auth().currentUser.uid).id
     )
+    .orderBy("time", "desc")
     .get();
 
   snapshot.forEach((doc) => {

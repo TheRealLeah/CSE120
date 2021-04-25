@@ -38,10 +38,7 @@ export default class ForgotPassword extends Component {
       this.props.navigation.navigate("Login");
     } catch (error) {
       actions.setFieldError("general", error.message);
-      Alert.alert(
-        "ERROR",
-        "Please Enter a Valid Email Address."
-      );
+      Alert.alert("ERROR", "Please Enter a Valid Email Address.");
     }
   };
 
@@ -55,36 +52,36 @@ export default class ForgotPassword extends Component {
         style={{ flex: 1 }}
         source={require("../assets/background2.png")}
       >
-      <DismissKeyboard>
-        <SafeAreaView style={styles.container}>
-        <Logo></Logo>
-          <Formik initialValues={{ email: "" }} onSubmit={this.onSubmit}>
-            {({ handleChange, values, handleSubmit, errors, touched }) => (
-              <SafeAreaView>
-                <FormInput
-                  name="email"
-                  value={values.email}
-                  onChangeText={handleChange("email")}
-                  placeholder="Email"
-                  iconName="ios-mail"
-                  iconColor="cornflowerblue"
-                  color="#02448d"
-                />
-                {/* <ErrorMessage errorValue={touched.email && errors.email} /> */}
-                <SafeAreaView style={styles.buttonContainer}>
-                  <TouchableOpacity
-                    style={styles.appButtonContainer}
-                    activeOpacity={0.5}
-                    onPress={handleSubmit}
-                  >
-                    <Text style={styles.appButtonText}>Send Email</Text>
-                  </TouchableOpacity>
+        <DismissKeyboard>
+          <SafeAreaView style={styles.container}>
+            <Logo></Logo>
+            <Formik initialValues={{ email: "" }} onSubmit={this.onSubmit}>
+              {({ handleChange, values, handleSubmit, errors, touched }) => (
+                <SafeAreaView>
+                  <FormInput
+                    name="email"
+                    value={values.email}
+                    onChangeText={handleChange("email")}
+                    placeholder="Email"
+                    iconName="ios-mail"
+                    iconColor="cornflowerblue"
+                    color="#02448d"
+                  />
+                  {/* <ErrorMessage errorValue={touched.email && errors.email} /> */}
+                  <SafeAreaView style={styles.buttonContainer}>
+                    <TouchableOpacity
+                      style={styles.appButtonContainer}
+                      activeOpacity={0.5}
+                      onPress={handleSubmit}
+                    >
+                      <Text style={styles.appButtonText}>Send Email</Text>
+                    </TouchableOpacity>
+                  </SafeAreaView>
+                  {/* <ErrorMessage errorValue={errors.general} /> */}
                 </SafeAreaView>
-                {/* <ErrorMessage errorValue={errors.general} /> */}
-              </SafeAreaView>
-            )}
-          </Formik>
-        </SafeAreaView>
+              )}
+            </Formik>
+          </SafeAreaView>
         </DismissKeyboard>
       </ImageBackground>
     );

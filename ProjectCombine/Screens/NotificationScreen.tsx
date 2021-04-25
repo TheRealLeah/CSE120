@@ -32,17 +32,17 @@ export default class NotificationScreen extends React.Component {
   // };
 
   changeColor() {
-    if (!this.state.pressed) {
-      this.setState({
-        pressed: true,
-        backgroundColorNotification: "rgba(0,0,200,0.2)",
-      });
-    } else {
-      this.setState({
-        pressed: false,
-        backgroundColorNotification: "rgba(0,0,200,0.05)",
-      });
-    }
+    // if (!this.state.pressed) {
+    //   this.setState({
+    //     pressed: true,
+    //     backgroundColorNotification: "rgba(0,0,200,0.2)",
+    //   });
+    // } else {
+    //   this.setState({
+    //     pressed: false,
+    //     backgroundColorNotification: "rgba(0,0,200,0.05)",
+    //   });
+    // }
   }
 
   renderSeparator = () => (
@@ -81,6 +81,7 @@ export default class NotificationScreen extends React.Component {
             return (
               <SafeAreaView style={styles.notificationContainer}>
                 <TouchableOpacity
+                  activeOpacity={0.6}
                   onPress={() => this.changeColor()}
                   style={{
                     backgroundColor: this.state.backgroundColorNotification,
@@ -107,9 +108,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
-  notificationContainer: { borderWidth: 0, borderColor: "dodgerblue" },
+  notificationContainer: {
+    width: windowWidth,
+    borderWidth: 0,
+    borderColor: "dodgerblue",
+  },
   messageContainer: {
-    fontSize: 17,
+    fontSize: 18,
     marginTop: 10,
     marginLeft: 120,
     color: "#2468f6",
