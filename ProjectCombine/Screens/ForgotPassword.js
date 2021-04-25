@@ -30,6 +30,10 @@ export default class ForgotPassword extends Component {
   handlePasswordReset = async (value, actions) => {
     const { email } = value;
     try {
+      Alert.alert(
+        "Confirmation!",
+        "Please Check your Email to Reset your Password"
+      );
       await firebase.auth().sendPasswordResetEmail(email);
       this.props.navigation.navigate("Login");
     } catch (error) {
