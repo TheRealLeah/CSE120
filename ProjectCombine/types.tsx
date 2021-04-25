@@ -29,6 +29,10 @@ export type EventParamList = {
   EventScreen: undefined;
 };
 
+export type EventVolunteerParamList = {
+  EventVolunteerScreen: undefined;
+};
+
 export type AboutParamList = {
   AboutScreen: undefined;
 };
