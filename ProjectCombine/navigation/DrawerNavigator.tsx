@@ -66,11 +66,11 @@ function DrawerNavigator(props) {
           component={NotificationNavigator}
           options={iconContainer.notificationIcon}
         />
-        {/* <Drawer.Screen
+        <Drawer.Screen
           name="Event"
           component={EventVolunteerNavigator}
           options={iconContainer.eventIcon}
-        /> */}
+        />
         <Drawer.Screen
           name="About"
           component={AboutNavigator}

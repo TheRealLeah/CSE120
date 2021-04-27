@@ -1,6 +1,14 @@
 import fb from "../fb";
 
-export var homedata: [string, string, string, string, string][] = [];
+export var homedata: [
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+][] = [];
 
 export default async function LoadData() {
   //homedata.push(["name:t","test"]);
@@ -19,6 +27,8 @@ export default async function LoadData() {
         data["contactinfo"],
         data["location"],
         data["time"],
+        documentSnapshot.id,
+        data["OrgID"],
       ]);
 
       //console.log("Event Name:", data['name']);
