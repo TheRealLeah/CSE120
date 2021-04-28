@@ -189,6 +189,11 @@ function addEvent() {
               message: "Someone has added themselves to " + name,
               time: + new Date,
             });
+            db.collection("notifications").add({
+              id: fb.auth().currentUser.uid,
+              message: "You've joined: " + name,
+              time: + new Date,
+            });
           });
       }
     });
