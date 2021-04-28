@@ -14,9 +14,11 @@ class EventVolunteerScreen extends Component {
         source={require("../assets/background2.png")}
         style={styles.container}
       >
+        <FlatList />
         <Text style={{ fontSize: 30 }}>
           This is the event page for volunteers
         </Text>
+       
       </ImageBackground>
     );
   }
