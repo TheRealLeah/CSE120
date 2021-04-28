@@ -21,7 +21,7 @@ var location;
 var time;
 var eventID;
 var OrgID;
-var buttonname;
+var buttonname = "Volunteer";
 export default function EventDetails({ route, navigation }) {
   LoadEventData();
   //console.log("Params: ", route.params);
@@ -34,7 +34,11 @@ export default function EventDetails({ route, navigation }) {
   eventID = item[5];
   OrgID = item[6];
   //console.log("Name: ", name);
-  contains();
+  if(eventdata.indexOf(eventID) > -1){
+    buttonname = "UnVolunteer";
+  } else {
+    buttonname = "Volunteer";
+  }
   return (
     <ImageBackground
       source={require("../assets/background2.png")}
@@ -47,8 +51,8 @@ export default function EventDetails({ route, navigation }) {
         //onPress={() => console.log("PRESSED ON VOLUNTEER")}
         onPress={() => addEvent()}
       >
-        {/* <Text style={styles.buttontext}>Volunteer</Text> */}
-        <Text style={styles.buttontext}>{buttonname}</Text>
+        <Text style={styles.buttontext}>Volunteer</Text>
+        {/* <Text style={styles.buttontext}>{buttonname}</Text> */}
       </TouchableOpacity>
       <View style={styles.box}>
         <ScrollView>
@@ -62,13 +66,6 @@ export default function EventDetails({ route, navigation }) {
   );
 }
 
-function contains(){
-  if(eventdata.indexOf(eventID) > -1){
-    buttonname = "UnVolunteer";
-  } else {
-    buttonname = "Volunteer";
-  }
-}
 
 const styles = StyleSheet.create({
   container: {
