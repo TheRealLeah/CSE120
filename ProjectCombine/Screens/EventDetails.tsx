@@ -172,14 +172,15 @@ function addEvent() {
       //console.log("TESTST",data);
 
       if (data.indexOf(eventID) > -1) { // check if user already had this event
-        // remove events from users myEvents    
+        // remove events from users myEvents   
+        Alert.alert("You have removed: ", name)
         db.collection("users")
           .doc(fb.auth().currentUser.uid)
           .update({
           myEvents: fb.firestore.FieldValue.arrayRemove(eventID),
           })
       } else {   // add this event to users myEvents
-        Alert.prompt("You have Signed Up For: ", name);
+        Alert.alert("You have Signed Up For: ", name)
         db.collection("users")
           .doc(fb.auth().currentUser.uid)
           .update({
