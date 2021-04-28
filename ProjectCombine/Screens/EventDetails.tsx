@@ -9,10 +9,10 @@ import {
   Alert,
 } from "react-native";
 
-import EditScreenInfo from "../Components/EditScreenInfo";
 import { Text, View } from "../Components/Themed";
 import { ScrollView } from "react-native-gesture-handler";
-import { notifications } from "react-native-firebase";
+import LoadEventData from "../Components/myEvents";
+import { eventdata } from "../Components/myEvents";
 
 var name;
 var desc;
@@ -21,7 +21,9 @@ var location;
 var time;
 var eventID;
 var OrgID;
+var buttonname = "Volunteer";
 export default function EventDetails({ route, navigation }) {
+  LoadEventData();
   //console.log("Params: ", route.params);
   const { item } = route.params;
   name = item[0];
@@ -32,6 +34,11 @@ export default function EventDetails({ route, navigation }) {
   eventID = item[5];
   OrgID = item[6];
   //console.log("Name: ", name);
+  if(eventdata.indexOf(eventID) > -1){
+    buttonname = "UnVolunteer";
+  } else {
+    buttonname = "Volunteer";
+  }
   return (
     <ImageBackground
       source={require("../assets/background2.png")}
@@ -45,6 +52,7 @@ export default function EventDetails({ route, navigation }) {
         onPress={() => addEvent()}
       >
         <Text style={styles.buttontext}>Volunteer</Text>
+        {/* <Text style={styles.buttontext}>{buttonname}</Text> */}
       </TouchableOpacity>
       <View style={styles.box}>
         <ScrollView>
@@ -57,6 +65,7 @@ export default function EventDetails({ route, navigation }) {
     </ImageBackground>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -148,9 +157,6 @@ const styles = StyleSheet.create({
   },
 });
 
-var getOptions = {
-  source: "myEvents",
-};
 
 function addEvent() {
   var db = fb.firestore();
@@ -162,11 +168,16 @@ function addEvent() {
       var data = temp["myEvents"];
       //console.log("TESTST",data);
 
-      if (data.indexOf(eventID) > -1) {
-        // check if user already had this event
-        //console.log("True");
-      } else {
-        //console.log("False");
+      if (data.indexOf(eventID) > -1) { // check if user already had this event
+        // remove events from users myEvents   
+        Alert.alert("You have removed: ", name)
+        db.collection("users")
+          .doc(fb.auth().currentUser.uid)
+          .update({
+          myEvents: fb.firestore.FieldValue.arrayRemove(eventID),
+          })
+      } else {   // add this event to users myEvents
+        Alert.alert("You have Signed Up For: ", name)
         db.collection("users")
           .doc(fb.auth().currentUser.uid)
           .update({
@@ -176,19 +187,9 @@ function addEvent() {
             db.collection("notifications").add({
               id: OrgID,
               message: "Someone has added themselves to " + name,
-              time: 1618993824167,
+              time: + new Date,
             });
           });
       }
     });
-
-  // db.collection("users").doc(fb.auth().currentUser.uid).update( {
-  //   myEvents: fb.firestore.FieldValue.arrayUnion(eventID)
-  // }).then(() => {
-  //   db.collection("notifications").add({
-  //   id: OrgID,
-  //   message: "Someone has added themselves to " + name,
-  //   time: 1618993824167,
-  //   })
-  // })
 }
