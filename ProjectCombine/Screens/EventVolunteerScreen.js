@@ -1,7 +1,9 @@
 //LEAHS PAGE
 import React, { Component } from "react";
+//needed to import safeareaview and dimensions
 import { StyleSheet, ImageBackground, Text, SafeAreaView, Dimensions} from "react-native";
 //importing flatlsist (I want to use a flatlist to store everything.)
+//importing scrollview
 import { FlatList, TouchableOpacity, ScrollView } from "react-native-gesture-handler";
 import { homedata } from "../Components/HomeData";
 class EventVolunteerScreen extends Component {
