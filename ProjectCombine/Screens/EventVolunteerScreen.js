@@ -14,7 +14,38 @@ class EventVolunteerScreen extends Component {
         source={require("../assets/background2.png")}
         style={styles.container}
       >
-        <FlatList />
+        <FlatList 
+         data={homedata}
+         ItemSeparatorComponent={this.renderSeparator}
+         ListFooterComponent={this.renderSeparator}
+         //keyExtractor={(item, index) => index.toString()}
+
+         renderItem={({ item }) => {
+           //console.log(item);
+           return (
+             <SafeAreaView style={styles.Container}>
+               <TouchableOpacity
+                 style={{
+                   backgroundColor: this.state.backgroundColor,
+                   width: Dimensions.get("screen").width,
+                   height:
+                     Dimensions.get("screen").height -
+                     Dimensions.get("screen").height * 0.88,
+                 }}
+                 //onPress={() => console.log("PRESSED")}
+                 onPress={() =>
+                   this.props.navigation.navigate("EventDetails", { item })
+                 }
+               >
+                 <Text style={styles.name}>{item[0]} </Text>
+                 <ScrollView>
+                   <Text style={styles.desc}>{item[1]} </Text>
+                 </ScrollView>
+               </TouchableOpacity>
+             </SafeAreaView>
+           );
+         }}
+        />
       
        
       </ImageBackground>
