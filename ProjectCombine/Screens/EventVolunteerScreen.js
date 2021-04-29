@@ -47,8 +47,6 @@ class EventVolunteerScreen extends Component {
            );
          }}
         />
-      
-       
       </ImageBackground>
     );
   }
