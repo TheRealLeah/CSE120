@@ -1,5 +1,5 @@
 import fb from "../fb";
-import * as React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   ImageBackground,
@@ -21,8 +21,9 @@ var location;
 var time;
 var eventID;
 var OrgID;
-var buttonname = "Volunteer";
+let volSwitch = true;
 export default function EventDetails({ route, navigation }) {
+  const [pressed, setVolunteer] = useState("Volunteer");
   LoadEventData();
   //console.log("Params: ", route.params);
   const { item } = route.params;
@@ -34,11 +35,11 @@ export default function EventDetails({ route, navigation }) {
   eventID = item[5];
   OrgID = item[6];
   //console.log("Name: ", name);
-  if(eventdata.indexOf(eventID) > -1){
-    buttonname = "UnVolunteer";
-  } else {
-    buttonname = "Volunteer";
-  }
+  // if (eventdata.indexOf(eventID) > -1) {
+  //   buttonname = "UnVolunteer";
+  // } else {
+  //   buttonname = "Volunteer";
+  // }
   return (
     <ImageBackground
       source={require("../assets/background2.png")}
@@ -49,9 +50,17 @@ export default function EventDetails({ route, navigation }) {
       <TouchableOpacity
         style={styles.button}
         //onPress={() => console.log("PRESSED ON VOLUNTEER")}
-        onPress={() => addEvent()}
+        onPress={() => {
+          volSwitch = !volSwitch;
+          addEvent();
+          if (volSwitch) {
+            setVolunteer("Unvolunteer");
+          } else {
+            setVolunteer("Volunteer");
+          }
+        }}
       >
-        <Text style={styles.buttontext}>Volunteer</Text>
+        <Text style={styles.buttontext}>{pressed}</Text>
         {/* <Text style={styles.buttontext}>{buttonname}</Text> */}
       </TouchableOpacity>
       <View style={styles.box}>
@@ -65,7 +74,6 @@ export default function EventDetails({ route, navigation }) {
     </ImageBackground>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
@@ -157,7 +165,6 @@ const styles = StyleSheet.create({
   },
 });
 
-
 function addEvent() {
   var db = fb.firestore();
   db.collection("users")
@@ -168,16 +175,18 @@ function addEvent() {
       var data = temp["myEvents"];
       //console.log("TESTST",data);
 
-      if (data.indexOf(eventID) > -1) { // check if user already had this event
-        // remove events from users myEvents   
-        Alert.alert("You have removed: ", name)
+      if (data.indexOf(eventID) > -1) {
+        // check if user already had this event
+        // remove events from users myEvents
+        Alert.alert("You have removed: ", name);
         db.collection("users")
           .doc(fb.auth().currentUser.uid)
           .update({
-          myEvents: fb.firestore.FieldValue.arrayRemove(eventID),
-          })
-      } else {   // add this event to users myEvents
-        Alert.alert("You have Signed Up For: ", name)
+            myEvents: fb.firestore.FieldValue.arrayRemove(eventID),
+          });
+      } else {
+        // add this event to users myEvents
+        Alert.alert("You have Signed Up For: ", name);
         db.collection("users")
           .doc(fb.auth().currentUser.uid)
           .update({
@@ -187,7 +196,7 @@ function addEvent() {
             db.collection("notifications").add({
               id: OrgID,
               message: "Someone has added themselves to " + name,
-              time: + new Date,
+              time: +new Date(),
             });
           });
       }
