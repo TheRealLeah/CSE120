@@ -15,9 +15,7 @@ class EventVolunteerScreen extends Component {
         style={styles.container}
       >
         <FlatList />
-        <Text style={{ fontSize: 30 }}>
-          This is the event page for volunteers
-        </Text>
+      
        
       </ImageBackground>
     );
@@ -33,3 +31,6 @@ const styles = StyleSheet.create({
 });
 
 export default EventVolunteerScreen;
+//<Text style={{ fontSize: 30 }}>
+         // This is the event page for volunteers
+       // </Text>
