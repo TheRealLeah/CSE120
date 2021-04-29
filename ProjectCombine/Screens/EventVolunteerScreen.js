@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { StyleSheet, ImageBackground, Text, SafeAreaView, Dimensions} from "react-native";
 //importing flatlsist (I want to use a flatlist to store everything.)
-import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
+import { FlatList, TouchableOpacity, ScrollView } from "react-native-gesture-handler";
 import { homedata } from "../Components/HomeData";
 class EventVolunteerScreen extends Component {
   state = {};
