@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { StyleSheet, ImageBackground, Text } from "react-native";
 //importing flatlsist (I want to use a flatlist to store everything.)
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
+import { homedata } from "../Components/HomeData";
 class EventVolunteerScreen extends Component {
   state = {};
 
