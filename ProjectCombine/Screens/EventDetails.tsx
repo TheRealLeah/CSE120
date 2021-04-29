@@ -5,7 +5,6 @@ import {
   ImageBackground,
   TouchableOpacity,
   Dimensions,
-  Button,
   Alert,
 } from "react-native";
 
@@ -21,9 +20,9 @@ var location;
 var time;
 var eventID;
 var OrgID;
-let volSwitch = true;
+var isVolunteering = false;
 export default function EventDetails({ route, navigation }) {
-  const [pressed, setVolunteer] = useState("Volunteer");
+  const [volunteer, setVolunteer] = useState("Volunteer");
   LoadEventData();
   //console.log("Params: ", route.params);
   const { item } = route.params;
@@ -51,16 +50,16 @@ export default function EventDetails({ route, navigation }) {
         style={styles.button}
         //onPress={() => console.log("PRESSED ON VOLUNTEER")}
         onPress={() => {
-          volSwitch = !volSwitch;
-          addEvent();
-          if (volSwitch) {
-            setVolunteer("Unvolunteer");
-          } else {
+          if (isVolunteering) {
             setVolunteer("Volunteer");
+            addEvent();
+          } else {
+            setVolunteer("Unvolunteer");
+            addEvent();
           }
         }}
       >
-        <Text style={styles.buttontext}>{pressed}</Text>
+        <Text style={styles.buttontext}>{volunteer}</Text>
         {/* <Text style={styles.buttontext}>{buttonname}</Text> */}
       </TouchableOpacity>
       <View style={styles.box}>
@@ -178,7 +177,8 @@ function addEvent() {
       if (data.indexOf(eventID) > -1) {
         // check if user already had this event
         // remove events from users myEvents
-        Alert.alert("You have removed: ", name);
+        isVolunteering = false;
+        // Alert.alert("You have removed: ", name);
         db.collection("users")
           .doc(fb.auth().currentUser.uid)
           .update({
@@ -186,7 +186,8 @@ function addEvent() {
           });
       } else {
         // add this event to users myEvents
-        Alert.alert("You have Signed Up For: ", name);
+        isVolunteering = true;
+        // Alert.alert("You have Signed Up For: ", name);
         db.collection("users")
           .doc(fb.auth().currentUser.uid)
           .update({

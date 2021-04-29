@@ -77,7 +77,6 @@ export default class NotificationScreen extends React.Component {
           ListFooterComponent={this.renderSeparator}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => {
-            console.log(item);
             return (
               <SafeAreaView style={styles.notificationContainer}>
                 <TouchableOpacity
