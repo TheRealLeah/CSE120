@@ -19,6 +19,7 @@ import { connect } from "react-redux";
 import { user } from "../redux/reducer/user";
 // import EditScreen from "./EditProfile";
 import Navigation from "../navigation";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const profilePic = "../assets/santoshNew.jpeg";
 
@@ -49,37 +50,53 @@ function ProfileScreen(props) {
       source={require("../assets/background2.png")}
       style={styles.container}
     >
-      <SafeAreaView style={styles.photoRing}>
-        <Image style={styles.profilePicStyles} source={require(profilePic)} />
+      <Image
+        style={{
+          borderWidth: 5,
+          borderColor: "dodgerblue",
+          width: 150,
+          height: 150,
+          borderRadius: 75,
+        }}
+        source={require(profilePic)}
+      />
+
+      <SafeAreaView style={{ width: windowWidth * 0.8 }}>
+        <Text style={{ fontSize: 22, color: "red" }}>Email</Text>
       </SafeAreaView>
 
       <SafeAreaView style={styles.boxContainer}>
         <Text style={styles.textContainer}>{currentUser.email} </Text>
       </SafeAreaView>
 
-      <SafeAreaView style={styles.boxContainer}>
+      <SafeAreaView style={{ width: windowWidth * 0.8, marginTop: 20 }}>
+        <Text style={{ fontSize: 22, color: "red" }}>Name</Text>
+      </SafeAreaView>
+
+      <SafeAreaView style={[styles.boxContainer, {}]}>
         <Text style={styles.textContainer}>{nameChange} </Text>
       </SafeAreaView>
 
-      <SafeAreaView>
-        <Button
-          title="Edit Name"
-          onPress={() =>
-            Alert.prompt("Edit Name", "Enter in new Name", (nameChange) =>
-              setNameChange(nameChange)
-            )
-          }
-        />
+      <Button
+        title="Edit Name"
+        onPress={() =>
+          Alert.prompt("Edit Name", "Enter in new Name", (nameChange) =>
+            setNameChange(nameChange)
+          )
+        }
+      />
+      <SafeAreaView style={{ width: windowWidth * 0.8 }}>
+        <Text style={[{ fontSize: 22, color: "red" }]}>Age</Text>
       </SafeAreaView>
-
-      <SafeAreaView style={styles.boxContainer}>
+      <TouchableOpacity style={styles.boxContainer} activeOpacity={1}>
         <Text style={styles.textContainer}>{currentUser.age}</Text>
+      </TouchableOpacity>
+      <SafeAreaView style={{ width: windowWidth * 0.8, marginTop: 20 }}>
+        <Text style={[{ fontSize: 22, color: "red" }]}>Bio</Text>
       </SafeAreaView>
-
-      {/*<SafeAreaView>
-        <Text>{bioChange} </Text>
+      <SafeAreaView style={styles.boxContainerBio}>
+        <Text style={styles.textContainerBio}>{bioChange} </Text>
       </SafeAreaView>
-
       <SafeAreaView>
         <Button
           title="Edit Bio"
@@ -91,11 +108,13 @@ function ProfileScreen(props) {
         />
       </SafeAreaView>
 
-      <SafeAreaView>
-        <TouchableOpacity onPress={updateProfile}>
-          <Text>Save Changes</Text>
-        </TouchableOpacity>
-      </SafeAreaView> */}
+      <TouchableOpacity
+        style={[styles.boxContainerSave, { marginTop: 20 }]}
+        activeOpacity={0.5}
+        onPress={updateProfile}
+      >
+        <Text style={styles.textContainerSave}>Save Changes</Text>
+      </TouchableOpacity>
     </ImageBackground>
   );
 }
@@ -111,23 +130,44 @@ const styles = StyleSheet.create({
     borderRadius: 85,
     borderColor: "dodgerblue",
   },
-  profilePicStyles: {
-    borderRadius: 75,
-    width: 150,
-    height: 150,
-  },
+
   textContainer: {
     fontSize: 20,
     color: "dodgerblue",
     fontWeight: "700",
   },
+  textContainerBio: {
+    fontSize: 20,
+    color: "dodgerblue",
+    fontWeight: "700",
+    padding: 5,
+  },
   boxContainer: {
-    width: windowWidth * 0.9,
+    width: windowWidth * 0.8,
     height: windowHeight * 0.03,
     backgroundColor: "pink",
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
+  },
+  boxContainerBio: {
+    width: windowWidth * 0.8,
+    height: windowHeight * 0.15,
+    backgroundColor: "pink",
+    borderRadius: 10,
+  },
+  boxContainerSave: {
+    width: windowWidth * 0.5,
+    height: windowHeight * 0.04,
+    backgroundColor: "dodgerblue",
+    borderRadius: 5,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  textContainerSave: {
+    fontSize: 25,
+    color: "white",
+    fontWeight: "700",
   },
 });
 
@@ -221,9 +261,9 @@ export default connect(mapStateToProps, null)(ProfileScreen);
 //           />
 //         </SafeAreaView>
 
-//         <SafeAreaView style={{ marginRight: 260 }}>
-//           <Text style={[{ fontSize: 22, color: "red" }]}>Age</Text>
-//         </SafeAreaView>
+// <SafeAreaView style={{ marginRight: 260 }}>
+//   <Text style={[{ fontSize: 22, color: "red" }]}>Age</Text>
+// </SafeAreaView>
 
 //         <SafeAreaView style={styles.box1}>
 //           <Text style={[{ fontSize: 18 }]}>{currentUser.age}</Text>
@@ -250,15 +290,16 @@ export default connect(mapStateToProps, null)(ProfileScreen);
 //           />
 //         </SafeAreaView>
 
-//         <SafeAreaView style={{ marginTop: 60 }}>
-//           <TouchableOpacity
-//             style={styles.appButtonContainer}
-//             activeOpacity={0.5}
-//             onPress={updateProfile}
-//           >
-//             <Text style={styles.appButtonText}>Save Changes</Text>
-//           </TouchableOpacity>
-//         </SafeAreaView>
+//    <SafeAreaView style={{ marginTop: 60 }}>
+//   <TouchableOpacity
+//     style={styles.appButtonContainer}
+//     activeOpacity={0.5}
+//     onPress={updateProfile}
+//   >
+//     <Text style={styles.appButtonText}>Save Changes</Text>
+//   </TouchableOpacity>
+// </SafeAreaView>;
+
 //       </SafeAreaView>
 //     </ImageBackground>
 //   );
