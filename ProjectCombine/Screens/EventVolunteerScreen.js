@@ -60,6 +60,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  img: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
 });
 
 export default EventVolunteerScreen;
