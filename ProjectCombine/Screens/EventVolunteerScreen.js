@@ -113,7 +113,10 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginVertical: Dimensions.get("screen").height,
   },
-  
+  background: {
+    flex: 1,
+    alignItems: "center",
+  },
 });
 
 export default EventVolunteerScreen;
