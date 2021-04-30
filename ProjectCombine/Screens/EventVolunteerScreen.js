@@ -88,6 +88,17 @@ const styles = StyleSheet.create({
     width: "95%",
     alignSelf: "center",
   },
+  box: {
+    backgroundColor: "#E6FEFF",
+    shadowOpacity: 0.25,
+    borderRadius: 10,
+    width:
+      Dimensions.get("screen").width - Dimensions.get("screen").width * 0.1,
+    height: 10,
+    marginTop: 40,
+    alignSelf: "center",
+    marginVertical: Dimensions.get("screen").height,
+  },
   
 });
 
