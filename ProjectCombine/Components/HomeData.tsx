@@ -1,3 +1,4 @@
+import { SegmentedControlIOSComponent } from "react-native";
 import fb from "../fb";
 
 export var homedata: [
@@ -7,7 +8,8 @@ export var homedata: [
   string,
   string,
   string,
-  string
+  string,
+  string[],
 ][] = [];
 
 export default async function LoadData() {
@@ -21,6 +23,26 @@ export default async function LoadData() {
     querySnapshot.forEach((documentSnapshot) => {
       //console.log("Event ID:",documentSnapshot.id, documentSnapshot.data());
       data = documentSnapshot.data();
+      
+      var voltemp = data["Volunteers"];
+      console.log("voltemp;", voltemp);
+      var dataref;
+      var name;
+      var contact;
+      var temp = [];
+      for(var i = 0; i < voltemp.length; i++){
+        dataref = fb.firestore().collection("users").doc(voltemp[i]);
+        dataref.get().then((doc) => {
+          var tempdata = doc.data();
+          name = tempdata["name"];
+          contact = tempdata["email"];
+          //console.log("doc data", doc.data());
+          temp.push(tempdata["name"],tempdata["email"])
+        })
+        
+      }
+      console.log("TTETEETT", data);
+
       homedata.push([
         data["name"],
         data["desc"],
@@ -29,6 +51,7 @@ export default async function LoadData() {
         data["time"],
         documentSnapshot.id,
         data["OrgID"],
+        temp,
       ]);
 
       //console.log("Event Name:", data['name']);

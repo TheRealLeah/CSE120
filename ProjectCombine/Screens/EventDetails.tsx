@@ -6,12 +6,11 @@ import {
   TouchableOpacity,
   Dimensions,
   Alert,
+  SafeAreaView
 } from "react-native";
 
 import { Text, View } from "../Components/Themed";
-import { ScrollView } from "react-native-gesture-handler";
-import LoadEventData from "../Components/myEvents";
-import { eventdata } from "../Components/myEvents";
+import { ScrollView, FlatList } from "react-native-gesture-handler";
 
 var name;
 var desc;
@@ -20,10 +19,10 @@ var location;
 var time;
 var eventID;
 var OrgID;
+var Volunteers = [];
 var isVolunteering = false;
 export default function EventDetails({ route, navigation }) {
   const [volunteer, setVolunteer] = useState("Volunteer");
-  LoadEventData();
   //console.log("Params: ", route.params);
   const { item } = route.params;
   name = item[0];
@@ -33,13 +32,89 @@ export default function EventDetails({ route, navigation }) {
   time = item[4];
   eventID = item[5];
   OrgID = item[6];
+  Volunteers = [];
+  Volunteers.push(item[7]);
+
+  //LoadEventData(eventID);
+
   //console.log("Name: ", name);
   // if (eventdata.indexOf(eventID) > -1) {
   //   buttonname = "UnVolunteer";
   // } else {
   //   buttonname = "Volunteer";
   // }
-  return (
+  const renderSeparator = () => (
+    <SafeAreaView
+      style={{
+        backgroundColor: "dodgerblue",
+        height: 1,
+      }}
+    />
+  );
+  if(OrgID == fb.auth().currentUser.uid){ // if this event belongs to the current user/orginization
+    return (
+      <ImageBackground
+        source={require("../assets/background2.png")}
+        style={styles.background}
+      >
+        <Text style={styles.title}> {name} </Text>
+        <ScrollView>
+          <View style={styles.box}>
+          <ScrollView>
+            <Text style={styles.time}>Time: {time} </Text>
+            <Text style={styles.Location}>Location: {location} </Text>
+            <Text style={styles.contact}>Contact: {contactinfo} </Text>
+            <Text style={styles.desc}>Description: {desc} </Text>
+          </ScrollView>
+        </View><View style={styles.box}>
+          <ScrollView>
+            <Text style={({
+              fontSize: 15,
+              fontWeight: "bold",
+              paddingTop: 10,
+              paddingLeft: 15,
+              paddingRight: 15,
+              textAlign: "left",})}>Current Volunteers:
+              </Text>
+            <FlatList
+              data={Volunteers}
+              // ItemSeparatorComponent={renderSeparator}
+              // ListFooterComponent={renderSeparator}
+              
+              renderItem={({ item }) => {
+                //console.log("ITEM:",item);
+                
+                return (
+                  <SafeAreaView>
+                    {/* <TouchableOpacity
+                      // style={{
+                      //   backgroundColor: this.state.backgroundColor,
+                      //   width: Dimensions.get("screen").width,
+                      //   height:
+                      //     Dimensions.get("screen").height -
+                      //     Dimensions.get("screen").height * 0.88,
+                      // }}
+                      onPress={() => console.log("PRESSED")}
+                    >
+                    </TouchableOpacity> */}
+
+                    <View style={styles.separator}/>
+                    <Text style={styles.name}>{item[0]} </Text>
+                    <Text style={styles.Vcontact}>{item[1]} </Text>
+                    <View style={styles.separator}/>
+                    
+                  </SafeAreaView>
+                );
+              }}
+            />
+          </ScrollView>
+        </View>
+        </ScrollView>
+        
+      </ImageBackground>
+      );
+  } else {  // when usertype is volunteer
+    return (
     <ImageBackground
       source={require("../assets/background2.png")}
       style={styles.background}
@@ -71,8 +146,11 @@ export default function EventDetails({ route, navigation }) {
         </ScrollView>
       </View>
     </ImageBackground>
-  );
+    );
+  }
+  
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -88,10 +166,27 @@ const styles = StyleSheet.create({
     paddingRight: 25,
     textAlign: "center",
   },
+  name: {
+    fontSize: 20,
+    fontWeight: "bold",
+    paddingTop: 10,
+    paddingLeft: 15,
+    paddingRight: 15,
+    textAlign: "left",
+  },
+  Vcontact: {
+    fontSize: 18,
+    fontWeight: "regular",
+    paddingTop: 10,
+    paddingLeft: 15,
+    paddingRight: 15,
+    textAlign: "left",
+  },
   separator: {
-    marginVertical: 30,
+    backgroundColor: "dodgerblue",
     height: 1,
-    width: "80%",
+    marginTop: 5,
+    marginBottom: 5,
   },
   background: {
     flex: 1,
@@ -184,6 +279,13 @@ function addEvent() {
           .update({
             myEvents: fb.firestore.FieldValue.arrayRemove(eventID),
           });
+          
+        // remove volunteer id from events list
+        db.collection("events")
+        .doc(eventID)
+        .update({
+          Volunteers: fb.firestore.FieldValue.arrayRemove(fb.auth().currentUser.uid)
+        })
       } else {
         // add this event to users myEvents
         isVolunteering = true;
@@ -199,6 +301,13 @@ function addEvent() {
               message: "Someone has added themselves to " + name,
               time: +new Date(),
             });
+
+            // add volunteer id to events list of people who volunteered
+            db.collection("events")
+            .doc(eventID)
+            .update({
+              Volunteers: fb.firestore.FieldValue.arrayUnion(fb.auth().currentUser.uid)
+            })
           });
       }
     });
