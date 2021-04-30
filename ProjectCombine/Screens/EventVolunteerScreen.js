@@ -82,6 +82,12 @@ const styles = StyleSheet.create({
       Dimensions.get("screen").height - Dimensions.get("screen").height * 0.96,
     overflow: "hidden",
   },
+  separator: {
+    marginVertical: 10,
+    height: 10,
+    width: "95%",
+    alignSelf: "center",
+  },
   
 });
 
