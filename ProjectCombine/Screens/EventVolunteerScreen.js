@@ -125,10 +125,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginVertical: Dimensions.get("screen").height,
   },
-  background: {
-    flex: 1,
-    alignItems: "center",
-  },
   Container: {
     borderWidth: 0,
     borderColor: "dodgerblue",
