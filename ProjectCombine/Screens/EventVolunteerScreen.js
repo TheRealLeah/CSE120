@@ -7,7 +7,11 @@ import { StyleSheet, ImageBackground, Text, SafeAreaView, Dimensions} from "reac
 import { FlatList, TouchableOpacity, ScrollView } from "react-native-gesture-handler";
 import { homedata } from "../Components/HomeData";
 class EventVolunteerScreen extends Component {
-  state = {};
+  state = {
+    //this stuff inside is what makes the shade of blue slightly different
+    backgroundColor: "rgba(0,0,200,0.05)",
+    pressed: false,
+  };
   //added a separator line 
   renderSeparator = () => (
     <SafeAreaView
