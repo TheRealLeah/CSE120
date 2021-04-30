@@ -8,7 +8,15 @@ import { FlatList, TouchableOpacity, ScrollView } from "react-native-gesture-han
 import { homedata } from "../Components/HomeData";
 class EventVolunteerScreen extends Component {
   state = {};
-
+  //added a separator line 
+  renderSeparator = () => (
+    <SafeAreaView
+      style={{
+        backgroundColor: "dodgerblue",
+        height: 1,
+      }}
+    />
+  );
   onEventAdded = (event) => {};
 
   render() {
