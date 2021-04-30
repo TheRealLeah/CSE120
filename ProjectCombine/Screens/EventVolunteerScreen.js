@@ -1,4 +1,5 @@
 //LEAHS PAGE
+//imports allow for the features of react native to be useable
 import React, { Component } from "react";
 //needed to import safeareaview and dimensions
 import { StyleSheet, ImageBackground, Text, SafeAreaView, Dimensions} from "react-native";
@@ -6,6 +7,7 @@ import { StyleSheet, ImageBackground, Text, SafeAreaView, Dimensions} from "reac
 //importing scrollview
 import { FlatList, TouchableOpacity, ScrollView } from "react-native-gesture-handler";
 import { homedata } from "../Components/HomeData";
+
 class EventVolunteerScreen extends Component {
   state = {
     //this stuff inside is what makes the shade of blue slightly different
@@ -65,7 +67,7 @@ class EventVolunteerScreen extends Component {
     );
   }
 }
-
+//const handles a lot of the frontend styling
 const styles = StyleSheet.create({
   //if removed the background will dissapear
   container: {
@@ -109,6 +111,3 @@ const styles = StyleSheet.create({
 });
 
 export default EventVolunteerScreen;
-//<Text style={{ fontSize: 30 }}>
-         // This is the event page for volunteers
-       // </Text>
