@@ -108,12 +108,6 @@ const styles = StyleSheet.create({
     paddingRight: 5,
     overflow: "scroll",
   },
-  separator: {
-    marginVertical: 10,
-    height: 10,
-    width: "95%",
-    alignSelf: "center",
-  }
 });
 
 export default EventVolunteerScreen;
