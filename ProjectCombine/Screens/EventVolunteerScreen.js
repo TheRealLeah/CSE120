@@ -69,6 +69,19 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
+  name: {
+    fontSize: 20,
+    fontWeight: "bold",
+    paddingLeft: 125,
+    paddingTop: 8,
+    paddingBottom: 20,
+    paddingRight: 5,
+    width:
+      Dimensions.get("screen").width - Dimensions.get("screen").width * 0.05,
+    height:
+      Dimensions.get("screen").height - Dimensions.get("screen").height * 0.96,
+    overflow: "hidden",
+  },
   
 });
 
