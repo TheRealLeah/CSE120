@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
       Dimensions.get("screen").height - Dimensions.get("screen").height * 0.96,
     overflow: "hidden",
   },
+  //added the scrolling features
   desc: {
     fontSize: 15,
     fontWeight: "normal",
