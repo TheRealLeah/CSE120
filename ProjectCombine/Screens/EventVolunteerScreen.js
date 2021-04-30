@@ -60,23 +60,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  img: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  Container: {
-    borderWidth: 0,
-    borderColor: "dodgerblue",
-    alignSelf: "center",
-    width: Dimensions.get("screen").width,
-    height:
-      Dimensions.get("screen").height - Dimensions.get("screen").height * 0.88,
-  },
 });
 
 export default EventVolunteerScreen;
