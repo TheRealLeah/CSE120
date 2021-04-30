@@ -82,6 +82,19 @@ const styles = StyleSheet.create({
       Dimensions.get("screen").height - Dimensions.get("screen").height * 0.96,
     overflow: "hidden",
   },
+  desc: {
+    fontSize: 15,
+    fontWeight: "normal",
+    width:
+      Dimensions.get("screen").width - Dimensions.get("screen").width * 0.05,
+    height:
+      Dimensions.get("screen").height - Dimensions.get("screen").height * 0.88,
+    paddingLeft: 125,
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingRight: 5,
+    overflow: "scroll",
+  },
   separator: {
     marginVertical: 10,
     height: 10,
