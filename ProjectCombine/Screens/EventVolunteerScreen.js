@@ -67,11 +67,13 @@ class EventVolunteerScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+  //if removed the background will dissapear
   container: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
+  //img is defs neccessary or the screen will crash
   img: {
     fontSize: 20,
     fontWeight: "bold",
@@ -81,6 +83,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
+  //name causes the titles of events to be bolded and centered
   name: {
     fontSize: 20,
     fontWeight: "bold",
