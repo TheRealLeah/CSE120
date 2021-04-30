@@ -78,11 +78,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
   },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
   //name causes the titles of events to be bolded and centered
   name: {
     fontSize: 20,
@@ -110,7 +105,7 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     paddingRight: 5,
     overflow: "scroll",
-  },
+  }
 });
 
 export default EventVolunteerScreen;
