@@ -125,14 +125,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginVertical: Dimensions.get("screen").height,
   },
-  Container: {
-    borderWidth: 0,
-    borderColor: "dodgerblue",
-    alignSelf: "center",
-    width: Dimensions.get("screen").width,
-    height:
-      Dimensions.get("screen").height - Dimensions.get("screen").height * 0.88,
-  },
 });
 
 export default EventVolunteerScreen;
