@@ -119,5 +119,15 @@ const styles = StyleSheet.create({
     overflow: "scroll",
   },
 });
-
+//trying to make the button only remove
+function removeEvent() {
+  var db = fb.firestore();
+  db.collection("users")
+    .doc(fb.auth().currentUser.uid)
+    .get()
+    .then((doc) => {
+      var temp = doc.data();
+      var data = temp["myEvents"];
+    });
+  }
 export default EventVolunteerScreen;
