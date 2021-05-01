@@ -8,7 +8,7 @@ import {
   Alert,
   SafeAreaView,
 } from "react-native";
-
+import * as ImagePicker from "expo-image-picker";
 import { Text, View } from "../Components/Themed";
 import { ScrollView, FlatList } from "react-native-gesture-handler";
 

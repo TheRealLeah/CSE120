@@ -7,8 +7,10 @@ import {
   Alert,
   SafeAreaView,
   Dimensions,
+  Platform,
 } from "react-native";
 import { fetchUser } from "../redux/actions/index";
+import * as ImagePicker from "expo-image-picker";
 
 import EditScreenInfo from "../Components/EditScreenInfo";
 import { Text, View } from "../Components/Themed";
@@ -32,6 +34,37 @@ function ProfileScreen(props) {
   const [bioChange, setBioChange] = React.useState(currentUser.bio);
   console.log({ currentUser });
   console.log({ nameChange, bioChange });
+  const [image, setImage] = useState(
+    "/Users/JoshGialis/Desktop/CSE Local 120/CSE120/ProjectCombine/assets/defaultpic.png"
+  );
+
+  useEffect(() => {
+    (async () => {
+      if (Platform.OS !== "web") {
+        const {
+          status,
+        } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== "granted") {
+          alert("Sorry, we need camera roll permissions to make this work!");
+        }
+      }
+    })();
+  }, []);
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      setImage(result.uri);
+    }
+  };
 
   const updateProfile = () => {
     firebase
@@ -50,7 +83,21 @@ function ProfileScreen(props) {
       source={require("../assets/background2.png")}
       style={styles.container}
     >
-      <Image
+      {image && (
+        <Image
+          source={{ uri: image }}
+          style={{
+            width: 150,
+            height: 150,
+            borderRadius: 75,
+            borderWidth: 5,
+            borderColor: "dodgerblue",
+          }}
+        />
+      )}
+      <Button title="Edit Image" onPress={pickImage} />
+
+      {/* <Image
         style={{
           borderWidth: 5,
           borderColor: "dodgerblue",
@@ -59,7 +106,7 @@ function ProfileScreen(props) {
           borderRadius: 75,
         }}
         source={require(profilePic)}
-      />
+      /> */}
 
       <SafeAreaView style={{ width: windowWidth * 0.8 }}>
         <Text style={{ fontSize: 22, color: "red" }}>Email</Text>
