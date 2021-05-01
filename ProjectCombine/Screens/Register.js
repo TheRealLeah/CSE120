@@ -7,7 +7,8 @@ import {
   Text,
   TouchableOpacity,
   Keyboard,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Image,
 } from "react-native";
 import firebase from "firebase";
 import "firebase/firestore";
@@ -52,6 +53,8 @@ export class Register extends Component {
             name: name,
             age: age,
             accountType: accountType,
+            picture: "../assets/Santosh.png",
+            myEvents: [],
           })
           .then()
           .catch((err) => console.log(err));
@@ -102,8 +105,8 @@ export class Register extends Component {
         source={require("../assets/background2.png")}
         style={{ flex: 1 }}
       >
-      <DismissKeyboard>
-        <SafeAreaView>
+        <DismissKeyboard>
+          <SafeAreaView>
             <Text style={styles.signupTextContainer}>Sign Up</Text>
             <Text style={styles.textContainer}>Email</Text>
             <TextInput
@@ -167,7 +170,7 @@ export class Register extends Component {
             >
               <Text style={styles.appButtonText}>Sign Up</Text>
             </TouchableOpacity>
-        </SafeAreaView>
+          </SafeAreaView>
         </DismissKeyboard>
       </ImageBackground>
     );

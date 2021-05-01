@@ -23,7 +23,8 @@ import { user } from "../redux/reducer/user";
 import Navigation from "../navigation";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-const profilePic = "../assets/santoshNew.jpeg";
+const profilePic =
+  "/Users/JoshGialis/Desktop/CSE Local 120/CSE120/ProjectCombine/assets/santoshNew.jpeg";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -34,9 +35,7 @@ function ProfileScreen(props) {
   const [bioChange, setBioChange] = React.useState(currentUser.bio);
   console.log({ currentUser });
   console.log({ nameChange, bioChange });
-  const [image, setImage] = useState(
-    "/Users/JoshGialis/Desktop/CSE Local 120/CSE120/ProjectCombine/assets/defaultpic.png"
-  );
+  const [image, setImage] = useState(currentUser.picture);
 
   useEffect(() => {
     (async () => {
@@ -74,6 +73,14 @@ function ProfileScreen(props) {
       .update({
         name: nameChange,
         bio: bioChange,
+      });
+
+    firebase
+      .firestore()
+      .collection("users")
+      .doc(firebase.auth().currentUser.uid)
+      .update({
+        picture: image,
       });
     Alert.alert("Changes saved!");
   };
