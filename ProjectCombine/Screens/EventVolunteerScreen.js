@@ -60,9 +60,9 @@ class EventVolunteerScreen extends Component {
                       Dimensions.get("screen").height * 0.88,
                   }}
                   //onPress={() => console.log("PRESSED")}
-                  onPress={() =>
-                    this.props.navigation.navigate("EventDetails", { item })
-                  }
+                  // onPress={() =>
+                  //   this.props.navigation.navigate("EventDetails", { item })
+                  // }
                 >
                   <Text style={styles.name}>{item[0]} </Text>
                   <ScrollView>
