@@ -62,6 +62,7 @@ class EventVolunteerScreen extends Component {
                   //onPress={() => console.log("PRESSED")}
                   onPress={() =>
                     this.props.navigation.navigate("EventDetails", { item })
+                    
                   }
                 >
                   <Text style={styles.name}>{item[0]} </Text>
@@ -128,6 +129,28 @@ function removeEvent() {
     .then((doc) => {
       var temp = doc.data();
       var data = temp["myEvents"];
-    });
-  }
+      //console.log("TESTST",data);
+
+      if (data.indexOf(eventID) > -1) {
+        // check if user already had this event
+        // remove events from users myEvents
+        isVolunteering = false;
+        // Alert.alert("You have removed: ", name);
+        db.collection("users")
+          .doc(fb.auth().currentUser.uid)
+          .update({
+            myEvents: fb.firestore.FieldValue.arrayRemove(eventID),
+          });
+
+        // remove volunteer id from events list
+        db.collection("events")
+          .doc(eventID)
+          .update({
+            Volunteers: fb.firestore.FieldValue.arrayRemove(
+              fb.auth().currentUser.uid
+            ),
+          });
+        }
+      });
+    }
 export default EventVolunteerScreen;
