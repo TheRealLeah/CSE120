@@ -61,7 +61,7 @@ class EventVolunteerScreen extends Component {
                   }}
                   //onPress={() => console.log("PRESSED")}
                   onPress={() =>
-                    this.props.navigation.navigate("EventDetails", { item })
+                    this.props.navigation.navigate("EventVolDetails", { item })
                     
                   }
                 >
