@@ -10,6 +10,7 @@ import EventScreen from "../Screens/EventScreen";
 import AboutScreen from "../Screens/AboutScreen";
 import LogoutScreen from "../Screens/LogoutScreen";
 import EventDetails from "../Screens/EventDetails";
+import EventVolDetails from "../Screens/EventVolDetails";
 
 import {
   DrawerParamList,
@@ -416,7 +417,7 @@ function EventVolunteerNavigator(props) {
   return (
     <EventVolunteerStack.Navigator>
       <EventVolunteerStack.Screen
-        name="EventScreen"
+        name="EventVolunteerScreen"
         component={EventVolunteerScreen}
         options={{
           headerTitle: "Event",
@@ -446,6 +447,21 @@ function EventVolunteerNavigator(props) {
           },
         }}
       />
+       <EventVolunteerStack.Screen
+        name="EventVolDetails"
+        component={EventVolDetails}
+        options={{
+          headerTintColor: "blue",
+          headerStyle: {
+            backgroundColor: "#8ebaff",
+          },
+          headerTitleStyle: {
+            textAlign: "center",
+            fontSize: 25,
+          },
+          headerRight: () => <View></View>,
+        }}
+      />
     </EventVolunteerStack.Navigator>
   );
 }
@@ -454,3 +470,4 @@ const mapStateToProps = (store) => ({
   currentUser: store.userState.currentUser,
 });
 export default connect(mapStateToProps, null)(DrawerNavigator);
+
