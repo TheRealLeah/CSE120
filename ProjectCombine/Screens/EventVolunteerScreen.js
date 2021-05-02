@@ -17,6 +17,7 @@ import {
   ScrollView,
 } from "react-native-gesture-handler";
 import { homedata } from "../Components/HomeData";
+import { eventdata, LoadEventData} from "../Components/myEvents";
 
 class EventVolunteerScreen extends Component {
   state = {
@@ -34,7 +35,7 @@ class EventVolunteerScreen extends Component {
     />
   );
   onEventAdded = (event) => {};
-
+  LoadEventData = () => {};
   render() {
     return (
       <ImageBackground
@@ -42,7 +43,7 @@ class EventVolunteerScreen extends Component {
         style={styles.container}
       >
         <FlatList
-          data={homedata}
+          data={eventdata}
           ItemSeparatorComponent={this.renderSeparator}
           ListFooterComponent={this.renderSeparator}
           //keyExtractor={(item, index) => index.toString()}
