@@ -4,7 +4,7 @@ export var eventdata: [string][] = [];
 
 export default async function LoadEventData() {
   var data;
-
+  eventdata = [];
   var db = fb.firestore().collection("users");
   await db.doc(fb.auth().currentUser.uid)
     .get()
