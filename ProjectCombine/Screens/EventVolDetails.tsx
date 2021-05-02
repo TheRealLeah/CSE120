@@ -262,60 +262,35 @@ const styles = StyleSheet.create({
   },
 });
 
-function addEvent() {
-  var db = fb.firestore();
-  db.collection("users")
-    .doc(fb.auth().currentUser.uid)
-    .get()
-    .then((doc) => {
-      var temp = doc.data();
-      var data = temp["myEvents"];
-      //console.log("TESTST",data);
-
-      if (data.indexOf(eventID) > -1) {
-        // check if user already had this event
-        // remove events from users myEvents
-        isVolunteering = false;
-        // Alert.alert("You have removed: ", name);
-        db.collection("users")
-          .doc(fb.auth().currentUser.uid)
-          .update({
-            myEvents: fb.firestore.FieldValue.arrayRemove(eventID),
-          });
-
-        // remove volunteer id from events list
-        db.collection("events")
-          .doc(eventID)
-          .update({
-            Volunteers: fb.firestore.FieldValue.arrayRemove(
-              fb.auth().currentUser.uid
-            ),
-          });
-      } else {
-        // add this event to users myEvents
-        isVolunteering = true;
-        // Alert.alert("You have Signed Up For: ", name);
-        db.collection("users")
-          .doc(fb.auth().currentUser.uid)
-          .update({
-            myEvents: fb.firestore.FieldValue.arrayUnion(eventID),
-          })
-          .then(() => {
-            db.collection("notifications").add({
-              id: OrgID,
-              message: "Someone has added themselves to " + name,
-              time: +new Date(),
+function removeEvent() {
+    var db = fb.firestore();
+    db.collection("users")
+      .doc(fb.auth().currentUser.uid)
+      .get()
+      .then((doc) => {
+        var temp = doc.data();
+        var data = temp["myEvents"];
+        //console.log("TESTST",data);
+  
+        if (data.indexOf(eventID) > -1) {
+          // check if user already had this event
+          // remove events from users myEvents
+          isVolunteering = false;
+          // Alert.alert("You have removed: ", name);
+          db.collection("users")
+            .doc(fb.auth().currentUser.uid)
+            .update({
+              myEvents: fb.firestore.FieldValue.arrayRemove(eventID),
             });
-
-            // add volunteer id to events list of people who volunteered
-            db.collection("events")
-              .doc(eventID)
-              .update({
-                Volunteers: fb.firestore.FieldValue.arrayUnion(
-                  fb.auth().currentUser.uid
-                ),
-              });
-          });
+  
+          // remove volunteer id from events list
+          db.collection("events")
+            .doc(eventID)
+            .update({
+              Volunteers: fb.firestore.FieldValue.arrayRemove(
+                fb.auth().currentUser.uid
+              ),
+            });
+          }
+        });
       }
-    });
-}
