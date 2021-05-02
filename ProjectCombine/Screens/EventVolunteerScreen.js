@@ -120,37 +120,5 @@ const styles = StyleSheet.create({
     overflow: "scroll",
   },
 });
-//trying to make the button only remove
-function removeEvent() {
-  var db = fb.firestore();
-  db.collection("users")
-    .doc(fb.auth().currentUser.uid)
-    .get()
-    .then((doc) => {
-      var temp = doc.data();
-      var data = temp["myEvents"];
-      //console.log("TESTST",data);
 
-      if (data.indexOf(eventID) > -1) {
-        // check if user already had this event
-        // remove events from users myEvents
-        isVolunteering = false;
-        // Alert.alert("You have removed: ", name);
-        db.collection("users")
-          .doc(fb.auth().currentUser.uid)
-          .update({
-            myEvents: fb.firestore.FieldValue.arrayRemove(eventID),
-          });
-
-        // remove volunteer id from events list
-        db.collection("events")
-          .doc(eventID)
-          .update({
-            Volunteers: fb.firestore.FieldValue.arrayRemove(
-              fb.auth().currentUser.uid
-            ),
-          });
-        }
-      });
-    }
 export default EventVolunteerScreen;
