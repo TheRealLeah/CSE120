@@ -51,73 +51,6 @@ export default function EventDetails({ route, navigation }) {
       }}
     />
   );
-  if (OrgID == fb.auth().currentUser.uid) {
-    // if this event belongs to the current user/orginization
-    return (
-      <ImageBackground
-        source={require("../assets/background2.png")}
-        style={styles.background}
-      >
-        <Text style={styles.title}> {name} </Text>
-        <ScrollView>
-          <View style={styles.box}>
-            <ScrollView>
-              <Text style={styles.time}>Time: {time} </Text>
-              <Text style={styles.Location}>Location: {location} </Text>
-              <Text style={styles.contact}>Contact: {contactinfo} </Text>
-              <Text style={styles.desc}>Description: {desc} </Text>
-            </ScrollView>
-          </View>
-          <View style={styles.box}>
-            <ScrollView>
-              <Text
-                style={{
-                  fontSize: 15,
-                  fontWeight: "bold",
-                  paddingTop: 10,
-                  paddingLeft: 15,
-                  paddingRight: 15,
-                  textAlign: "left",
-                }}
-              >
-                Current Volunteers:
-              </Text>
-              <FlatList
-                data={Volunteers}
-                // ItemSeparatorComponent={renderSeparator}
-                // ListFooterComponent={renderSeparator}
-
-                renderItem={({ item }) => {
-                  //console.log("ITEM:",item);
-
-                  return (
-                    <SafeAreaView>
-                      {/* <TouchableOpacity
-                      // style={{
-                      //   backgroundColor: this.state.backgroundColor,
-                      //   width: Dimensions.get("screen").width,
-                      //   height:
-                      //     Dimensions.get("screen").height -
-                      //     Dimensions.get("screen").height * 0.88,
-                      // }}
-                      onPress={() => console.log("PRESSED")}
-                    >
-                    </TouchableOpacity> */}
-
-                      <View style={styles.separator} />
-                      <Text style={styles.name}>{item[0]} </Text>
-                      <Text style={styles.Vcontact}>{item[1]} </Text>
-                      <View style={styles.separator} />
-                    </SafeAreaView>
-                  );
-                }}
-              />
-            </ScrollView>
-          </View>
-        </ScrollView>
-      </ImageBackground>
-    );
-  } else {
     // when usertype is volunteer
     return (
       <ImageBackground
@@ -130,16 +63,12 @@ export default function EventDetails({ route, navigation }) {
           style={styles.button}
           //onPress={() => console.log("PRESSED ON VOLUNTEER")}
           onPress={() => {
-            if (isVolunteering) {
-              setVolunteer("Volunteer");
-              addEvent();
-            } else {
-              setVolunteer("Unvolunteer");
-              addEvent();
-            }
+
+              removeEvent();
+            
           }}
         >
-          <Text style={styles.buttontext}>{volunteer}</Text>
+          <Text style={styles.buttontext}>unvolunteer</Text>
           {/* <Text style={styles.buttontext}>{buttonname}</Text> */}
         </TouchableOpacity>
         <View style={styles.box}>
@@ -153,7 +82,6 @@ export default function EventDetails({ route, navigation }) {
       </ImageBackground>
     );
   }
-}
 
 const styles = StyleSheet.create({
   container: {
