@@ -36,13 +36,16 @@ import HomeData from "../Components/HomeData";
 import EventVolunteerScreen from "../Screens/EventVolunteerScreen";
 HomeData();
 
+import LoadEventData from "../Components/myEvents";
+
+
 const Drawer = createDrawerNavigator<DrawerParamList>();
 // const Drawer = createDrawerNavigator();
 
 function DrawerNavigator(props) {
   const { currentUser } = props;
   console.log({ currentUser });
-
+LoadEventData();
   if (currentUser.accountType === "Volunteer") {
     return (
       <Drawer.Navigator
