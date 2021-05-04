@@ -22,7 +22,6 @@ var OrgID;
 var Volunteers = [];
 var isVolunteering = false;
 export default function EventDetails({ route, navigation }) {
-  const [volunteer, setVolunteer] = useState("Volunteer");
   //console.log("Params: ", route.params);
   const { item } = route.params;
   name = item[0];
@@ -35,6 +34,16 @@ export default function EventDetails({ route, navigation }) {
   Volunteers = [];
   Volunteers.push(item[7]);
 
+  var temp = "";
+  for(var i = 0; i < Volunteers.length; i++){
+    
+    if(Volunteers[i][2] == fb.auth().currentUser.uid){
+      temp = "Unvolunteer";
+    } else {
+      temp = "Volunteer";
+    }
+  }
+  const [volunteer, setVolunteer] = useState(temp);
   //LoadEventData(eventID);
 
   //console.log("Name: ", name);
@@ -43,6 +52,8 @@ export default function EventDetails({ route, navigation }) {
   // } else {
   //   buttonname = "Volunteer";
   // }
+
+
 
   if (OrgID == fb.auth().currentUser.uid) {
     // if this event belongs to the current user/orginization
@@ -113,16 +124,7 @@ export default function EventDetails({ route, navigation }) {
     );
   } else {
     // when usertype is volunteer
-    var isVolunteer = "";
-    //console.log(Volunteers);
-    for(var i = 0; i < Volunteers.length; i++){
-      
-      if(Volunteers[i][2] == fb.auth().currentUser.uid){
-        isVolunteer = "Unvolunteer";
-      } else {
-        isVolunteer = "Volunteer";
-      }
-    }
+    
     return (
       <ImageBackground
         source={require("../assets/background2.png")}
@@ -133,9 +135,17 @@ export default function EventDetails({ route, navigation }) {
         <TouchableOpacity
           style={styles.button}
           //onPress={() => console.log("PRESSED ON VOLUNTEER")}
-          onPress={() => {addEvent()}}
+          onPress={() => {
+            if (isVolunteering) {
+              setVolunteer("Volunteer");
+              addEvent();
+            } else {
+              setVolunteer("Unvolunteer");
+              addEvent();
+            }
+          }}
         >
-          <Text style={styles.buttontext}>{isVolunteer}</Text>
+          <Text style={styles.buttontext}>{volunteer}</Text>
           {/* <Text style={styles.buttontext}>{buttonname}</Text> */}
         </TouchableOpacity>
         <View style={styles.box}>

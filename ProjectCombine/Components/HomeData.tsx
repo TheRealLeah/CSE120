@@ -25,7 +25,7 @@ export default async function LoadData() {
       data = documentSnapshot.data();
 
       var voltemp = data["Volunteers"];
-      console.log("voltemp;", voltemp);
+      //console.log("voltemp;", voltemp);
       var dataref;
       var name;
       var contact;
@@ -41,7 +41,7 @@ export default async function LoadData() {
           temp.push(tempdata["name"], tempdata["email"],doc.id);
         });
       }
-      console.log("TTETEETT", data);
+      //console.log("TTETEETT", data);
 
       homedata.push([
         data["name"],
