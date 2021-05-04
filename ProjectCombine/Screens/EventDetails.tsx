@@ -43,16 +43,10 @@ export default function EventDetails({ route, navigation }) {
   // } else {
   //   buttonname = "Volunteer";
   // }
-  const renderSeparator = () => (
-    <SafeAreaView
-      style={{
-        backgroundColor: "dodgerblue",
-        height: 1,
-      }}
-    />
-  );
+
   if (OrgID == fb.auth().currentUser.uid) {
     // if this event belongs to the current user/orginization
+
     return (
       <ImageBackground
         source={require("../assets/background2.png")}
@@ -119,6 +113,16 @@ export default function EventDetails({ route, navigation }) {
     );
   } else {
     // when usertype is volunteer
+    var isVolunteer = "";
+    //console.log(Volunteers);
+    for(var i = 0; i < Volunteers.length; i++){
+      
+      if(Volunteers[i][2] == fb.auth().currentUser.uid){
+        isVolunteer = "Unvolunteer";
+      } else {
+        isVolunteer = "Volunteer";
+      }
+    }
     return (
       <ImageBackground
         source={require("../assets/background2.png")}
@@ -129,17 +133,9 @@ export default function EventDetails({ route, navigation }) {
         <TouchableOpacity
           style={styles.button}
           //onPress={() => console.log("PRESSED ON VOLUNTEER")}
-          onPress={() => {
-            if (isVolunteering) {
-              setVolunteer("Volunteer");
-              addEvent();
-            } else {
-              setVolunteer("Unvolunteer");
-              addEvent();
-            }
-          }}
+          onPress={() => {addEvent()}}
         >
-          <Text style={styles.buttontext}>{volunteer}</Text>
+          <Text style={styles.buttontext}>{isVolunteer}</Text>
           {/* <Text style={styles.buttontext}>{buttonname}</Text> */}
         </TouchableOpacity>
         <View style={styles.box}>

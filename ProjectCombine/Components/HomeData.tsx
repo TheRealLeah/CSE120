@@ -33,11 +33,12 @@ export default async function LoadData() {
       for (var i = 0; i < voltemp.length; i++) {
         dataref = fb.firestore().collection("users").doc(voltemp[i]);
         dataref.get().then((doc) => {
+          
           var tempdata = doc.data();
           name = tempdata["name"];
           contact = tempdata["email"];
           //console.log("doc data", doc.data());
-          temp.push(tempdata["name"], tempdata["email"]);
+          temp.push(tempdata["name"], tempdata["email"],doc.id);
         });
       }
       console.log("TTETEETT", data);
