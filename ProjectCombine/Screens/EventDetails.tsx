@@ -11,6 +11,7 @@ import {
 import * as ImagePicker from "expo-image-picker";
 import { Text, View } from "../Components/Themed";
 import { ScrollView, FlatList } from "react-native-gesture-handler";
+import { auth } from "react-native-firebase";
 
 var name;
 var desc;
@@ -310,6 +311,11 @@ function addEvent() {
             db.collection("notifications").add({
               id: OrgID,
               message: "Someone has added themselves to " + name,
+              time: +new Date(),
+            });
+            db.collection("notifications").add({
+              id: fb.auth().currentUser.uid,
+              message: "You have signed up for " + name,
               time: +new Date(),
             });
 
