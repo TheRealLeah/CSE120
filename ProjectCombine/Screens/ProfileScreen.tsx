@@ -9,22 +9,18 @@ import {
   Dimensions,
   Platform,
 } from "react-native";
-import { fetchUser } from "../redux/actions/index";
+require("firebase/firestore");
+require("firebase/firebase-storage");
+
 import * as ImagePicker from "expo-image-picker";
 
-import EditScreenInfo from "../Components/EditScreenInfo";
-import { Text, View } from "../Components/Themed";
+import { Text } from "../Components/Themed";
 
 import firebase from "firebase";
 require("firebase/firestore");
 import { connect } from "react-redux";
-import { user } from "../redux/reducer/user";
-// import EditScreen from "./EditProfile";
-import Navigation from "../navigation";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
-const profilePic =
-  "/Users/JoshGialis/Desktop/CSE Local 120/CSE120/ProjectCombine/assets/santoshNew.jpeg";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -35,7 +31,34 @@ function ProfileScreen(props) {
   const [bioChange, setBioChange] = React.useState(currentUser.bio);
   console.log({ currentUser });
   console.log({ nameChange, bioChange });
-  const [image, setImage] = useState(currentUser.picture);
+  const [image, setImage] = React.useState(currentUser.picture);
+
+  // const uploadImage = async () => {
+  //   const uri = image;
+  //   const childPath = "ProfilePictures/";
+
+  //   const response = await fetch(uri);
+  //   const blob = await response.blob();
+
+  //   const task = firebase.storage().ref().child(childPath).put(blob);
+
+  //   const taskProgress = (snapshot) => {
+  //     console.log(`transferred: ${snapshot.bytesTransferred}`);
+  //   };
+
+  //   const taskCompleted = () => {
+  //     task.snapshot.ref.getDownloadURL().then((snapshot) => {
+  //       savePostData(snapshot);
+  //       console.log(snapshot);
+  //     });
+  //   };
+
+  //   const taskError = (snapshot) => {
+  //     console.log(snapshot);
+  //   };
+
+  //   task.on("state_changed", taskProgress, taskError, taskCompleted);
+  // };
 
   useEffect(() => {
     (async () => {
@@ -44,7 +67,9 @@ function ProfileScreen(props) {
           status,
         } = await ImagePicker.requestMediaLibraryPermissionsAsync();
         if (status !== "granted") {
-          alert("Sorry, we need camera roll permissions to make this work!");
+          Alert.alert(
+            "Sorry, we need camera roll permissions to make this work!"
+          );
         }
       }
     })();
@@ -66,6 +91,7 @@ function ProfileScreen(props) {
   };
 
   const updateProfile = () => {
+    // uploadImage();
     firebase
       .firestore()
       .collection("users")
@@ -73,18 +99,12 @@ function ProfileScreen(props) {
       .update({
         name: nameChange,
         bio: bioChange,
-      });
-
-    firebase
-      .firestore()
-      .collection("users")
-      .doc(firebase.auth().currentUser.uid)
-      .update({
         picture: image,
       });
+
     Alert.alert("Changes saved!");
   };
-
+  console.log("Image ===> ", image);
   return (
     <ImageBackground
       source={require("../assets/background2.png")}
@@ -103,17 +123,6 @@ function ProfileScreen(props) {
         />
       )}
       <Button title="Edit Image" onPress={pickImage} />
-
-      {/* <Image
-        style={{
-          borderWidth: 5,
-          borderColor: "dodgerblue",
-          width: 150,
-          height: 150,
-          borderRadius: 75,
-        }}
-        source={require(profilePic)}
-      /> */}
 
       <SafeAreaView style={{ width: windowWidth * 0.8 }}>
         <Text style={{ fontSize: 22, color: "red" }}>Email</Text>

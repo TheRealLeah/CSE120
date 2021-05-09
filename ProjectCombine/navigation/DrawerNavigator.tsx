@@ -38,14 +38,13 @@ HomeData();
 
 import LoadEventData from "../Components/myEvents";
 
-
 const Drawer = createDrawerNavigator<DrawerParamList>();
 // const Drawer = createDrawerNavigator();
 
 function DrawerNavigator(props) {
   const { currentUser } = props;
   console.log({ currentUser });
-LoadEventData();
+  LoadEventData();
   if (currentUser.accountType === "Volunteer") {
     return (
       <Drawer.Navigator
@@ -69,11 +68,6 @@ LoadEventData();
           name="Notification"
           component={NotificationNavigator}
           options={iconContainer.notificationIcon}
-        />
-        <Drawer.Screen
-          name="Event"
-          component={EventVolunteerNavigator}
-          options={iconContainer.eventIcon}
         />
         <Drawer.Screen
           name="About"
@@ -450,7 +444,7 @@ function EventVolunteerNavigator(props) {
           },
         }}
       />
-       <EventVolunteerStack.Screen
+      <EventVolunteerStack.Screen
         name="EventVolDetails"
         component={EventVolDetails}
         options={{
@@ -473,4 +467,3 @@ const mapStateToProps = (store) => ({
   currentUser: store.userState.currentUser,
 });
 export default connect(mapStateToProps, null)(DrawerNavigator);
-

@@ -9,6 +9,7 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   Image,
+  Alert,
 } from "react-native";
 import firebase from "firebase";
 import "firebase/firestore";
@@ -33,35 +34,49 @@ export class Register extends Component {
       pressedO: false,
       pressedV: false,
       accountType: "",
+      age: "",
+      picture: " ",
+      bio: " ",
     };
     this.onSignUp = this.onSignUp.bind(this);
   }
 
   onSignUp() {
     const { email, password, name, age, accountType } = this.state;
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((result) => {
-        firebase
-          .firestore()
-          .collection("users")
-          .doc(firebase.auth().currentUser.uid)
-          .set({
-            email: email,
-            password: password,
-            name: name,
-            age: age,
-            accountType: accountType,
-            picture: "../assets/Santosh.png",
-            myEvents: [],
-          })
-          .then()
-          .catch((err) => console.log(err));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (
+      email != "" &&
+      password != "" &&
+      name != "" &&
+      accountType != "" &&
+      age != ""
+    ) {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then((result) => {
+          firebase
+            .firestore()
+            .collection("users")
+            .doc(firebase.auth().currentUser.uid)
+            .set({
+              email: email,
+              password: password,
+              name: name,
+              age: age,
+              accountType: accountType,
+              picture: " ",
+              myEvents: [],
+              bio: " ",
+            })
+            .then()
+            .catch((err) => console.log(err));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      Alert.alert("Error", "Please enter all remaining fields.");
+    }
   }
 
   // if (this.state.pressedV && this.state.pressedO) {
@@ -110,12 +125,14 @@ export class Register extends Component {
             <Text style={styles.signupTextContainer}>Sign Up</Text>
             <Text style={styles.textContainer}>Email</Text>
             <TextInput
+              autoCapitalize="none"
               style={styles.textInputContainer}
               onChangeText={(email) => this.setState({ email })}
             ></TextInput>
 
             <Text style={styles.textContainer}>Password</Text>
             <TextInput
+              autoCapitalize="none"
               style={styles.textInputContainer}
               secureTextEntry={true}
               onChangeText={(password) => this.setState({ password })}

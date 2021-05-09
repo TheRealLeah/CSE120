@@ -35,9 +35,8 @@ export default function EventDetails({ route, navigation }) {
   Volunteers.push(item[7]);
 
   var temp = "";
-  for(var i = 0; i < Volunteers.length; i++){
-    
-    if(Volunteers[i][2] == fb.auth().currentUser.uid){
+  for (var i = 0; i < Volunteers.length; i++) {
+    if (Volunteers[i][2] == fb.auth().currentUser.uid) {
       temp = "Unvolunteer";
     } else {
       temp = "Volunteer";
@@ -52,8 +51,6 @@ export default function EventDetails({ route, navigation }) {
   // } else {
   //   buttonname = "Volunteer";
   // }
-
-
 
   if (OrgID == fb.auth().currentUser.uid) {
     // if this event belongs to the current user/orginization
@@ -124,7 +121,7 @@ export default function EventDetails({ route, navigation }) {
     );
   } else {
     // when usertype is volunteer
-    
+
     return (
       <ImageBackground
         source={require("../assets/background2.png")}

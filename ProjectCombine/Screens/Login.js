@@ -64,11 +64,13 @@ export class Login extends Component {
 
             <Text style={styles.textContainer}>Email</Text>
             <TextInput
+              autoCapitalize="none"
               style={styles.textInputContainer}
               onChangeText={(email) => this.setState({ email })}
             ></TextInput>
             <Text style={styles.textContainer}>Password</Text>
             <TextInput
+              autoCapitalize="none"
               style={styles.textInputContainer}
               secureTextEntry={true}
               onChangeText={(password) => this.setState({ password })}
