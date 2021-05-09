@@ -1,4 +1,5 @@
-import firebase from "firebase";
+// import firebase from "firebase";
+import firebase from "../fb.js";
 
 export var eventList = [];
 
@@ -7,6 +8,11 @@ export function addEvent(event, addComplete) {
     .firestore()
     .collection("events")
     .add({
+      OrgID: firebase
+        .firestore()
+        .collection("users")
+        .doc(firebase.auth().currentUser.uid).id,
+      Volunteers: [],
       name: event.name,
       desc: event.desc,
       location: event.location,

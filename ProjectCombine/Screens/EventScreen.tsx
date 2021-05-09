@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Dimensions,
+  Alert,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { addEvent, eventList, myEventList } from "../api/EventAPI";
@@ -56,7 +57,46 @@ class Events extends Component<{}, any> {
         source={require("../assets/background2.png")}
         style={styles.container}
       >
-        <SafeAreaView>
+        <SafeAreaView style={{ position: "absolute", top: 0, marginTop: 20 }}>
+          <Text
+            style={{
+              fontWeight: "900",
+              fontSize: 100,
+              // position: "absolute",
+              // top: 0,
+              marginTop: 50,
+              color: "dodgerblue",
+              textAlign: "center",
+            }}
+          >
+            Add
+          </Text>
+          <Text
+            style={{
+              fontWeight: "900",
+              fontSize: 30,
+              // position: "absolute",
+              // top: 0,
+              textAlign: "center",
+              color: "dodgerblue",
+            }}
+          >
+            an event to your
+          </Text>
+          <Text
+            style={{
+              fontWeight: "900",
+              fontSize: 50,
+              // position: "absolute",
+              // top: 0,
+              textAlign: "center",
+              color: "dodgerblue",
+            }}
+          >
+            community.
+          </Text>
+        </SafeAreaView>
+        <SafeAreaView style={{ marginTop: 200 }}>
           <TextInput
             style={styles.TextInput}
             placeholder="Event Name:"
@@ -98,7 +138,8 @@ class Events extends Component<{}, any> {
                   time: this.state.time,
                   contactinfo: this.state.contactinfo,
                 },
-                this.onEventAdded
+                this.onEventAdded,
+                Alert.alert("Event added.")
               )
             }
           />

@@ -280,6 +280,24 @@ function addEvent() {
         // check if user already had this event
         // remove events from users myEvents
         isVolunteering = false;
+
+        db.collection("users")
+          .doc(fb.auth().currentUser.uid)
+          .update({
+            myEvents: fb.firestore.FieldValue.arrayUnion(eventID),
+          })
+          .then(() => {
+            db.collection("notifications").add({
+              id: OrgID,
+              message: "Someone has removed themselves from " + name,
+              time: +new Date(),
+            });
+            db.collection("notifications").add({
+              id: fb.auth().currentUser.uid,
+              message: "You have removed " + name,
+              time: +new Date(),
+            });
+          });
         // Alert.alert("You have removed: ", name);
         db.collection("users")
           .doc(fb.auth().currentUser.uid)
@@ -328,3 +346,22 @@ function addEvent() {
       }
     });
 }
+
+/*
+
+
+jgialis@gmail.com
+123456
+
+
+Volunteer@gmail.com
+123456
+
+
+Organizer@gmail.com
+123456
+
+
+
+
+*/

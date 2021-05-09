@@ -19,28 +19,10 @@ export class EventCreation extends Component {
       location: "",
       time: "",
       contactinfo: "",
+      OrgID: "",
+      Volunteers: [],
     };
-   // this.onCreation = this.onCreation.bind(this);
   }
-
-  /*onCreation() {
-    const { name, description, location, time, contactinfo } = this.state;
-    firebase
-      .auth()
-      .(name, description, location, time, contactinfo)
-      .then((result) => {
-        firebase
-          .firestore()
-          .collection("events")
-          .doc(firebase.auth().currentUser.uid)
-          .set({ name: name, description: description, location: location, time: time, contactinfo: contactinfo })
-          .then()
-          .catch((err) => console.log(err));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }*/
 
   render() {
     return (
@@ -88,7 +70,6 @@ export class EventCreation extends Component {
           >
             <Text style={styles.appButtonText}>Create Event</Text>
           </TouchableOpacity>
-          
         </SafeAreaView>
       </ImageBackground>
     );

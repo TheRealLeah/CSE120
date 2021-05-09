@@ -23,28 +23,6 @@ export default class NotificationScreen extends React.Component {
     pressed: false,
   };
 
-  // onNotificationAdded = (notification) => {
-  //   // console.log("Notification added!");
-  //   // console.log(notification);
-  //   this.setState((prevState) => ({
-  //     notificationList: [...prevState.notificationList, notification],
-  //   }));
-  // };
-
-  changeColor() {
-    // if (!this.state.pressed) {
-    //   this.setState({
-    //     pressed: true,
-    //     backgroundColorNotification: "rgba(0,0,200,0.2)",
-    //   });
-    // } else {
-    //   this.setState({
-    //     pressed: false,
-    //     backgroundColorNotification: "rgba(0,0,200,0.05)",
-    //   });
-    // }
-  }
-
   renderSeparator = () => (
     <SafeAreaView
       style={{

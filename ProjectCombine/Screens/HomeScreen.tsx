@@ -35,6 +35,7 @@ export default class HomeScreen extends React.Component {
   render() {
     //console.log("HOMEDATA: ", homedata);
     //console.log("TESTDATA:",testdata)
+    console.disableYellowBox = true; //Put this here to disable virtualizedList warnings and others as well.
     return (
       <ImageBackground
         source={require("../assets/background2.png")}
