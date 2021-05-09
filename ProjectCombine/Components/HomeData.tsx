@@ -16,10 +16,11 @@ export default async function LoadData() {
   //homedata.push(["name:t","test"]);
   var data;
   //console.log("Before Load:");
+  homedata = [];
   var db = fb.firestore().collection("events");
   await db.get().then((querySnapshot) => {
     // console.log("Event Size:", querySnapshot.size);
-
+    
     querySnapshot.forEach((documentSnapshot) => {
       //console.log("Event ID:",documentSnapshot.id, documentSnapshot.data());
       data = documentSnapshot.data();
