@@ -15,12 +15,12 @@
 ### Run on Device
 
 - run `expo start`
-- select run on iOS simulator or run on Android device/emulator
+- select `run on iOS simulator` or `run on Android device/emulator`
 
 ### Start the web version
 
 - run `expo start`
-- select in web browser
+- select `run in web browser`
 
 ### Helpful Troubleshooting Suggestions
 
