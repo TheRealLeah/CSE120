@@ -2,7 +2,7 @@
 
 ## Setup
 
-## Prerequisites
+### Prerequisites
 
 - Install git https://git-scm.com and set git.exe to system path if necessary
 - Install node.js https://nodejs.org/en/download/
