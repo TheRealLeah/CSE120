@@ -27,6 +27,6 @@
 - when installing git and node.js a command prompt restart will be necessary for changes to be taken into effect after installation
 - if making changes to app and there are issues with the changes being reflected in app make sure to run `expo start -c` to clear app cache
 
-### Project info
+## Project info
 
 The Volunteer Here App provides organizers a simple and efficient way of recruiting volunteers. Additionally, volunteers through the app, are given an easy way to find volunteering opportunities and establish connections with event organizers.
