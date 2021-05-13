@@ -10,7 +10,7 @@
 ### Installation
 
 - run `npm install expo-cli global`
-- git clone https://github.com/TheRealLeah/CSE120.git to desired location and navigate to `.\CSE120\ProjectCombine\`
+- git clone https://github.com/TheRealLeah/CSE120.git to desired location and navigate to `..\CSE120\ProjectCombine\`
 
 ### Run on Device
 
