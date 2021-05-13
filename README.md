@@ -4,8 +4,8 @@
 
 ### Prerequisites
 
-- Install git https://git-scm.com and set git.exe to system path if necessary
-- Install node.js https://nodejs.org/en/download/
+- install git https://git-scm.com and set git.exe to system path if necessary
+- install node.js https://nodejs.org/en/download/
 
 ### Installation
 
@@ -26,8 +26,8 @@
 
 - when installing git and node.js a command prompt restart will be necessary for changes to be taken into effect after installation
 - if making changes to app and there are issues with the changes being reflected in app, run `expo start -c` to clear app cache
-- official app support is iOS other ways of running the app should be used for development testing only
+- official app support is for iOS other ways of running the app should be used for development testing only
 
 ## Project info
 
-The Volunteer Here App provides organizers a simple and efficient way of recruiting volunteers. Additionally, volunteers through the app, are given an easy way to find volunteering opportunities and establish connections with event organizers.
+The Volunteer Here App provides organizers a simple and efficient way of recruiting volunteers.  Additionally, volunteers through the app, are given an easy way to find volunteering opportunities and establish connections with event organizers.
