@@ -26,7 +26,7 @@
 
 - when installing git and node.js a command prompt restart will be necessary for changes to be taken into effect after installation
 - if making changes to app and there are issues with the changes being reflected in app, run `expo start -c` to clear app cache
-- official app support is for iOS other ways of running the app should be used for development testing only
+- official app support is for iOS other methods of running the app should be used for development testing only
 
 ## Project info
 
